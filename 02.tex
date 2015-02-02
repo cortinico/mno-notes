@@ -707,8 +707,8 @@ alla luce della propriet\`a (\ref{richiamibigi:diffimpliesderivatives})
 
 \begin{defn}[Iperpiano tangente]
 $h = x - \overline{x}$, $h \approx 0  
-\rightarrow f(x) \approx f(\overline(x))
- + \nabla f(\overline(x)^{T}(x - \overline{x})$
+\rightarrow f(x) \approx f(\overline{x})
+ + \nabla f(\overline{x}^{T}(x - \overline{x})$
 \\
 Equazione iperpiano tangente al grafico di $f$ nel punto
  $(\overline{x}, f(\overline{x}))$
@@ -844,11 +844,11 @@ f(\overline{\mathbf{x}}) +
 \underbracket{ \mathbf{h}^T \nabla^{2} f(\overline{\mathbf{x}}) \mathbf{h}}_{}
 + r_{\overline{x}}(h)
 \qquad
-\text{con } \dfrac{r_{\overline{\mathbf{x}}}(\mathbf{h})}{||\mathbf{h}||_{2}}
+\text{con } \dfrac{r_{\overline{\mathbf{x}}}(\mathbf{h})}{||\mathbf{h}||_{2}^{2}}
 \xrightarrow{||\mathbf{h}||_{2} \to 0} 0
 $$
 
-$$\mathbf{h}^{T} \nabla^{2} f(\overline{\mathbf{x}}) =
+$$\mathbf{h}^{T} \nabla^{2} f(\overline{\mathbf{x}}) \mathbf{h} =
  \displaystyle \sum_{i=1}^{n} \displaystyle \sum_{j=1}^{n}
  = \frac{{\partial}^2 f}
 {{\partial} x_i {\partial} x_j}
@@ -881,8 +881,7 @@ Una forma quadratica \`e una funzione quadratica in cui
 sono presenti solo i termini di secondo grado, ossia
 $$f(x) =  \frac{1}{2} x^{T} Q x $$
 \end{notes}
-
-\begin{observation}[Q simmetrica in una funzione quadratica]
+et{=}_{\text{simmetrica}}
 \label{obs:gradiente-hessiana-funzione-quadratica}
 Cosa accade se $Q$ \`e simmetrica in una funzione lineare?
 Valgono le seguenti propriet\`a:
@@ -904,12 +903,12 @@ $$
 \left[\displaystyle \sum_{l=1}^{n} q_{jl}x_l 
 +
 \sum_{k=1}^{n} q_{kj}x_k
-\right] + b_j =
+\right] + b_j \underbracket{=}_{\text{simmetrica}}
 \dfrac{1}{2}
 \left[\displaystyle \sum_{l=1}^{n} q_{lj}x_l 
 +
 \sum_{k=1}^{n} q_{kj}x_k
-\right] + b_j \underbracket{=}_{\text{simmetrica}} \\
+\right] + b_j = \\
 \displaystyle \sum_{l=1}^{n} q_{jl}x_l + b_j =
 (Qx)_j + b_j  \qquad \Longrightarrow \qquad 
 \nabla f(x) = Qx + b
@@ -920,12 +919,12 @@ $$
 \dfrac{\partial f}{\partial x_i \partial x_j}(x) 
 = 
 \dfrac{\partial f}{\partial x_i}
-\left(\dfrac{\partial f}{\partial x_j \partial x_j}(x) 
+\left(\dfrac{\partial f}{\partial x_j}(x) 
 \right)
 =
 \dfrac{\partial f}{\partial x_i}
 \left(
-\displaystyle \sum_{l=1}^{n} q_{jl} + b_j 
+\displaystyle \sum_{l=1}^{n} q_{jl} x_{l} + b_j 
 \right) = q_{ji} = q_{ij}
 \qquad \Longrightarrow \qquad \nabla^{2}f(x) = Q
 $$
