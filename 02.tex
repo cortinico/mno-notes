@@ -41,19 +41,18 @@ Non tutte le successioni convergono
  Selezione degli elementi $k_j$ tale che l'indice vada a $+\infty$.
 \end{defn}
 \begin{example}
-Sottosuccessione $k_j = 2j-1$ ($k_j assume valori dispari$)\\
-Sottosuccessione  $k_j = 2j$  ($k_j assume valori pari$)
+Sottosuccessione $k_j = 2j-1$ ($k_j$ assume valori dispari)\\
+Sottosuccessione $k_j = 2j$ ($k_j$ assume valori pari)
 \end{example}
-Nel caso dell'esempio, le singole sottosuccessioni definite precedente
-le successioni convergono a
+Nel caso dell'esempio, le singole sottosuccessioni definite convergono a
 \begin{itemize}
  \item $(0,1)$
  \item $(0,-1)$
 \end{itemize}
 \begin{defn}[Punti di accumulazione della successione]
 $\overline{x}$ è un punto di accumulazione di una successione
- $\{x_k\}$  se esiste una sottosequenza infinita di indici $k_1,k_2,
-k_3, \ldots$ tale che
+ $\{x_k\}$  se esiste una sottosequenza infinita di indici $k_j$ $ (k_1,k_2,
+k_3, \ldots )$ tale che
 $$\overline{x} =   \lim_{j \to +\infty}x_{k_{j}}$$
 
 %$$ \lim_{n \to \infty}x_n	$$
@@ -68,21 +67,21 @@ Allora $\{x_k\}$ ammette una sottosuccessione convergente.
 \begin{defn}[Insieme di vicini di $x$]
  Dato un punto $x \in \mathbb{R}^{n}$, chiamiamo
 $\mathcal{N} \in \mathbb{R}^{n}$  \emph{insieme di vicini di x} se
-è un insieme aperto che contiene $x$
-Un insieme di vicini di $x$ molto utile è il seguente
+è un insieme aperto che ccontiene $x$.
 \end{defn}
+Un insieme di vicini di $x$ molto utile è il seguente
 
-\begin{defn}[Palla aperta di raggio $\epsilon$ attorno a $x$]
-Una palla aperta di raggio $\epsilon$ attorno a $x$ \`e
+\begin{defn}[Palla aperta di raggio $\varepsilon$ attorno a $x$]
+Una palla aperta di raggio $\varepsilon$ attorno a $x$ \`e
 definita come
-$$ B(x,\epsilon) = \{ y \; | \; ||y-x|| < \epsilon \}$$
+$$ B(x,\varepsilon) = \{ y \; | \; ||y-x|| < \varepsilon \}$$
 \end{defn}
 In un piano bidimensionale abbiamo un cerchio.
 
 
 \begin{defn}
  $A \subseteq \mathbb{R}^{n}$ si dice aperto se
-$$\forall x \in A \exists \varepsilon > 0 
+$$\forall x \in A \quad \exists \varepsilon > 0 
    \text { t.c. }
  B(x, \varepsilon) \subseteq A
 $$
@@ -96,6 +95,7 @@ $$
   \end{itemize}
 \end{example}
 
+%% FIXME
 \begin{property}
  unione di aperti è aperto
   $A_{\alpha} aperti \rightarrow \cup_{\alpha} A_{\alpha}$ è aperto
@@ -109,7 +109,7 @@ $$
 \end{itemize}
 
 \end{property}
-L'interezione infinita di $B(0, \frac{1}{k}) = \{0\}$ non è un aperto
+L'intersezione infinita di $B(0, \frac{1}{k}) = \{0\}$ non è un aperto
 
 \begin{defn}[Punto interno]
 Sia $ A \subseteq \mathbb{R}^n$, $x$ si dice punto interno di $A$ se
@@ -161,10 +161,11 @@ Gli insiemi vuoti e $\mathbb{R}^{n}$ sono sia aperti che chiusi.
 \begin{example}[Insieme di elementi che non sono né aperti né
  chiusi]
  Prendiamo un rettangolo ed una palla (figura!)
+ % FIXME aggiungere figura
 $$([-1,0] \times [-1,1]) \cup B(0,1) = A$$
 \begin{itemize}
 \item 
-   $(-1- \epsilon, 0) \in B((-1,0),\epsilon) \quad \forall \epsilon$
+   $(-1- \varepsilon, 0) \in B((-1,0),\varepsilon) \quad \forall \varepsilon$
    :  $A$ non è aperto
 \item 
    $x_k = (1 - \frac{1}{k},0) \in A \quad x_k \rightarrow (1,0) 
@@ -242,7 +243,7 @@ diciamo che $y$ è \emph{estremo superiore} di $E$, in simboli
 La definizione di estremo inferiore è simmetrica.
 
 \begin{defn}[Massimo]
-Si definisce \emph{elemento massimo} di $S$  un $M \in S$
+Si definisce \emph{elemento massimo} di $S$  un elemento $M \in S$
  tale che
 $$\forall a \in S,\ a\leq M$$
 \end{defn}
@@ -304,9 +305,9 @@ del tipo
 $$ e_i = (0,0,0,\ldots, 0,\underbracket{1}_{\text{i-esima}},0, \ldots, \ldots, 0) $$
 ecco una definizione più formale
 \begin{defn}[Derivata parziale]
-Si definisce derivata parziale di $f$ in $\vec{x}$ rispetto alla variabile
+Si definisce derivata parziale di $f$ in $x$ rispetto alla variabile
 $k-$esima $x_k$ il limite, se esiste finito
-$$\frac{\partial f}{\partial x_k} (\vec{x})=\lim_{h\to 0}\frac{f(x_1,x_2,\ldots,x_k+h,\ldots,x_n)-f(x_1,x_2,\ldots,x_n)}{h}$$
+$$\frac{\partial f}{\partial x_k} (x)=\lim_{h\to 0}\frac{f(x_1,x_2,\ldots,x_k+h,\ldots,x_n)-f(x_1,x_2,\ldots,x_n)}{h}$$
 \end{defn}
 
 \begin{example}[Derivata parziale di $sin(\pi x_1 x_2)$]
@@ -330,13 +331,13 @@ $\nabla f(\overline{x}) =
 \end{defn}
 Informalmente, il gradiente indica la direzione di massima pendenza.\\
 Nell'esempio (\ref{richiamibigi:example01}),  il vettore
-$$ \nabla f(x) = 
+$$ \nabla f(\overline{x}) = 
 \begin{pmatrix}
   \pi x_2 \cos(\pi x_1 x_2) \\
 \pi x_1 \cos(\pi x_1 x_2)
 \end{pmatrix}
 $$
-,i cui elementi sono le derivate parziali precedentemente calcolate,
+i cui elementi sono le derivate parziali precedentemente calcolate,
 è il \emph{gradiente di} $f$ \emph{in} $\overline{x}$.\\
 
 %% 10 novembre
@@ -467,7 +468,7 @@ lineare tale che
 $$\forall h \in \mathbb{R}^n 
 \quad 
  f(\overline{x}+h)=f(\overline{x}) + L(h) + r_{\overline{x}}(h)$$
-con $r_{\overline{x}}(h)$ un resto tale che  $\dfrac{r(h)}{\Vert h\Vert_2} \to 0 $ per  $ \Vert h\Vert_2 \to 0$
+con $r_{\overline{x}}(h)$ un resto tale che  $\dfrac{r_{\overline{x}}(h)}{\Vert h\Vert_2} \to 0 $ per  $ \Vert h\Vert_2 \to 0$
 \end{defn}
 
 \begin{openquestion}
@@ -604,8 +605,8 @@ lineare delle derivate perziali sulle direzioni della base canonica?
 \begin{theo}[Differenziale totale]
 \label{richiamibigi:differenzialetotale}
 Sia $f:\mathbb{R}^n \to \mathbb{R}$, tale da ammettere derivate
-parziali in ogni $x \in B(\overline{x},\epsilon)$ per qualche
-$\epsilon > 0$. Allora
+parziali in ogni $x \in B(\overline{x},\varepsilon)$ per qualche
+$\varepsilon > 0$. Allora
 $$
 \frac{\partial f}{\partial x_i}: B(\overline{x}, \varepsilon)
  \to \mathbb{R}  \text{  continua in  } \overline{x}
