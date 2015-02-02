@@ -184,7 +184,7 @@ $$\begin{pmatrix}
 \item Le matrici unitarie sono delle isometrie, o rispettano la norma
   2, ossia
   $$||Ux||_{2} = ||x||_{2}$$ 
-  Infatti $|| Ux ||_{2} = \sqrt{x^{h}\underbracket{U^{H}U}_{I}x} = ||x||_{2}$
+  Infatti $|| Ux ||_{2} = \sqrt{x^{H}\underbracket{U^{H}U}_{I}x} = ||x||_{2}$
 \item Le matrici unitarie danno garanzia di stabilità in tutti i
   calcoli in cui intervengono.
 \item Se $A$ \`e \emph{reale} unitaria, allora $A^{T}A = AA^{T} = I$ ed
@@ -335,7 +335,7 @@ Sono una sottoclasse delle hermitiane.
 \label{prop:def-pos}
 Una matrice $A^{H}A$ \`e semi-definita positiva.\\
 Infatti $x^{H}A^{H} Ax =(Ax)^{H} Ax = || Ax|| \geq 0$
-Se $A$ rango massimo allora $A^{H}A$ è definita positiva.
+Se $A$ ha rango massimo allora $A^{H}A$ è definita positiva.
 \end{property}
 
 
@@ -400,7 +400,7 @@ cio\`e con i blocchi diagonali $B_{11}$ e $B_{22}$ quadrati e $B_{21} = 0$.
 
 Questa proprieta \`e legata alla presenza di elementi nulli nella matrice di
  partenza $A$.\\
-Prentendere che gli zeri siano sotto o sopra \`e arbitrario.\\
+Pretendere che gli zeri siano sotto o sopra \`e arbitrario.\\
 
 \paragraph{Matrici riducibili nella risoluzione di sistemi lineari}
 Supponiamo $A$ riducibile: vogliamo risolvere il sistema di equazioni
@@ -483,7 +483,7 @@ degli autovalori di $A$
 Siano $\lambda_1, \ldots, \lambda_n \in \mathbb{C}$ gli autovalori di $A$. \\
 Il raggio spettrale di $A$, denotato con $\rho(A)$, \`e 
 definito come
-$$ \rho(A) = \max_{1, \ldots, n} | \lambda_i| $$ 
+$$ \rho(A) = \max_{i = 1, \ldots, n} | \lambda_i| $$ 
 \end{defn}
 
 \begin{defn}[Traccia di A]
@@ -613,9 +613,8 @@ Ma allora $\lambda$ deve essere necessariamente positivo
 Quindi definita positiva implica tutti gli autovalori positivi e vale
 anche il viceversa anche se dobbiamo dimostrarlo.\\
 
-\begin{theo}
- \ref{richiamibevilacqua:theo01}
- Una matrice hermitiana A \`e definita positiva se e solo se i
+\begin{theo}[Definite positive e loro principali di testa]
+Una matrice hermitiana A \`e definita positiva se e solo se i
 determinanti di tutte le sottomatrici principali di testa di A (e quindi anche
 il determinante di A) sono positivi.
 \end{theo}
@@ -661,7 +660,7 @@ $$ A^{-1} = \frac{1}{a_n}\cdot \left( \text{polinomio in A di grado n-1} \right)
 \begin{openquestion}
 Come \`e stata fatta questo accenno alla matrice inversa?
 Cosa si voleva fare vedere? Si voleva fare vedere per
-caso che $1/a_{n}$ \`e un autovaolre di $A^{-1}$
+caso che $1/a_{n}$ \`e un autovalore di $A^{-1}$
 \end{openquestion}
 Non serve considerarare polinomi in una matrice di grado troppo elevato
  (maggiore o uguale a $n$) \\
@@ -669,7 +668,7 @@ Sia $S$ un polinomo di grado $m \geq n$ dove $n$ \`e l'ordine della matrice.
 Allora 
 $$ \underbracket{S(x)}_{m}  = \underbracket{p(x)}_{n}\underbracket{q(x)}_{m-n} + \underbracket{r(x)}_{< n} \quad \text{divisione fra polinomi} $$
 $$S(A) = \underbracket{\cancel{p(A) q(A)}}_{=0 \;(\ref{eigenvalues:teo01})} + r(A) = 0$$
-Quindi abbiamo un poilinomio di grado $< n$ \\
+Quindi abbiamo un polinomio di grado $< n$ \\
 C'\`e un polinomio (polinomio minimo): \`E possibile che esistano altri
  polinomi $S(\lambda)$
 con $S(A) = 0$ e grado minore di $n$
@@ -833,7 +832,7 @@ $$A =
  1 &  1 & -1 &  2 \\
 \end{pmatrix}$$
 
-Il suo polinomio caratteristico \`e $$ (x-4)^2(x-2)(x-1) $$, quindi i suoi
+Il suo polinomio caratteristico \`e $$ (x-4)^2(x-2)(x-1) $$ Quindi i suoi
  autovalori sono 4, 4, 2 e 1. Ricordiamo che, se indichiamo con
  $m_{alg}(\lambda)$ e
 $m_{geo}(\lambda)$ le molteplicit\`a algebrica e geometrica di un autovalore
@@ -859,13 +858,17 @@ $$J=\begin{pmatrix}
 0 & 0 & 2 & 0 \\
 0 & 0 & 0 & 1 \end{pmatrix}$$
 \end{example}
-Se $B$ \`e  $\left\{
-\begin{array}{l}
- \text{diagonale (a blocchi)} \\
- \text{triangolare (a blocchi)}
-\end{array}
- \right.
-$
+
+%%%%%%%%%%%%%%
+% NICOLA: Commento perche' questa parte
+% e' scorrelata dal resto...
+%Se $B$ \`e  $\left\{
+%\begin{array}{l}
+% \text{diagonale (a blocchi)} \\
+% \text{triangolare (a blocchi)}
+%\end{array}
+% \right.
+%$
 
 Forma canonica di Jordan:
 Qualunque matrice A \`e riconducibile a forma canonica di Jordan
@@ -1007,8 +1010,6 @@ dove $c \in \mathbb{C}^{n-1}$ e $A_1 \in \mathbb{C}^{(n-1)\times (n-1)}$.
 Per l'ipotesi indutiva esiste una
  matrice unitaria $U_1 \in \mathbb{C}^{(n-1)\times (n-1)}$. tale che
 $$ A_1 = U_1 A_2 U_1^{H} $$
-dove $A_2 \in \mathbb{C}^{(n-1) \times (n-1)}$ tale che
-$$ A_1 = U_1 A_2 U_{1}^{H} $$
 dove $A_2 \in \mathbb{C}^{(n-1)\times (n-1)}$ \`e triangolare superiore.
 Allora risulta
 $$ A = QBQ^{H} = Q
@@ -1127,7 +1128,7 @@ Per il teorema \ref{eigenvalues:schur} si ha $T = U^{H}AU$, dove $T$ \`e
 una matrice triangolare superiore e $U$ \`e unitaria. Poich\'e $A =A^{H}$, si ha
 $$ T^{H} = (U^{H}AU)^{H} = U^{H}A^{H}U = U^{H}AU = T$$
 cio\`e la matrice triangolare $T$ risulta essere una matrice
-diagonale con gli elemnti principali reali e per il teorema
+diagonale con gli elementi principali reali e per il teorema
 \ref{eigenvalues:theo004} le colonne di $U$ , che sono ortonormali perch\'e $U$
 \`e unitaria, risultano essere gli autovettori di $A$
 \end{thproof}
@@ -1152,7 +1153,7 @@ $$ A = U
 U^{H}
 $$
  Le matrici normali  $(A^{H}A = AA^{H})$
- sono tute e sole quelle diagonalizzabili con $U$ unitaria 
+ sono tutte e sole quelle diagonalizzabili con $U$ unitaria 
  $$ A= UDU^{H}$$
 \end{theo}
 \begin{thproof}
@@ -1194,11 +1195,11 @@ $T$ risulta diagonale.
 Ricordiamo le propriet\`a:
 \begin{itemize}
  \item $A$ definita positiva $ \Longleftrightarrow $ tutti gli autovalori di $A$ sono reali positivi.
- \item $A$ definita positiva $ \Longleftrightarrow $  le sottomatrici prinicipali di testa
-hanno determinante positivo (ricordiamo che ci sono le $a_{ii}$)
+ \item $A$ definita positiva $ \Longleftrightarrow $  le sottomatrici principali di testa
+hanno determinante positivo.
 \end{itemize}
 \begin{notes}
- Qui il professore enunciato il seguente teorema, dimostrandone a
+ Qui il professore ha enunciato il seguente teorema, dimostrandone a
  lezione solo un verso.
 \end{notes}
 
@@ -1214,7 +1215,7 @@ autovalori reali positivi sono quelle definite positive
 e questo lo vediamo con Schur. (la freccia opposta del primo punto). \\
 Poich\'e $A$  \`e hermitiana, risulta
 $$ A = UDU^{H}$$ 
-con $U$ matrice unitaria e $D$ amtrice diagonale avente come elemnti principali
+con $U$ matrice unitaria e $D$ matrice diagonale avente come elementi principali
 gli autovalori $\lambda_i, i=1, \ldots,n$ di $A$. Se $x \in \mathbb{C}^{n}, x \neq 0$,
 si ha
 \begin{equation}
@@ -1265,8 +1266,8 @@ Di questa spiegazione va inserita la versione in italiano
 \section{Localizzazione degli autovalori}
 \begin{defn}[Cerchi di Gerschgorin]
 Sia $A \in \mathbb{C}^{m \times n}$. I cerchi del piano complesso
- $$K_i = \{ z \in \mathbb{C} :  \quad  |z -  a_{ii}| 
-\displaystyle \sum_{j=1 \quad j\neq i}^{n} |a_{ij}| \}, i = 1,2, \ldots, n
+ $$K_i = \{ z \in \mathbb{C} :  \quad  |z - a_{ii}| \leq 
+\displaystyle \sum_{j=1 \\ j\neq i}^{n} |a_{ij}| \}, i = 1,2, \ldots, n
 $$ 
 di centro $a_{ii}$ e raggio $r= \displaystyle\sum_{j=1 ~ j\neq i}^{n} |a_{ij}|$ 
 sono detti \emph{cerchi di Gershgorin}.
@@ -1321,8 +1322,8 @@ Una matrice $A \in \mathbb{C}^{n \times n}$ si dice
 $$ |a_{ii}|  > \displaystyle \sum_{j=1~ j \neq i}^n  | a_{ij} | $$
 \end{defn}
 
-Con la forte acchiappiamo anche le matrici irriducibili.
-Si dimostra che con la predominanza diagonale debole e irriducibilita
+Con la predominanza diagonale forte stiamo considerando anche le matrici irriducibili.
+Si dimostra che con la predominanza diagonale debole e irriducibilit\`a
 allora:
  $$det(A) \neq 0 $$
 
@@ -1333,7 +1334,7 @@ fatto uso in seguito
 
 \begin{theo}[equivalenza delle norme]
 \label{norme:equivalenzanorme}
-Siano $||.||'$ e $||.||'$ due norme vettoriali. Allora le due norme
+Siano $||.||'$ e $||.||''$ due norme vettoriali. Allora le due norme
 sono topologicamente equivalenti, nel senso che esistono due costanti
 $\alpha$ e $beta \in \mathbb{R}, 0 < \alpha \leq \beta$, tali che per ogni
 $x \in \mathbb{C}^{n}$
@@ -1351,7 +1352,7 @@ $$ x \rightarrow ||x||$$
 che verifica le seguenti propriet\`a
 \begin{enumerate}
  \item $||x|| \geq 0$ \qquad $||x||  = 0 $ se e solo se $x=0$
- \item $|\alpha x| = |\alpha| \; ||x||$
+ \item $||\alpha x|| = |\alpha| \; ||x||$
  \item $||x+y|| \leq ||x|| + ||y||$ 
 \end{enumerate}
 \begin{notes}
@@ -1436,7 +1437,6 @@ viene detta \emph{norma matriciale indotta} dalla norma vettoriale $||\; . \;||$
 \end{defn}
 
 \begin{theo}
-$\rho$ raggio spettrale  \\
 Dalle tre norme vettoriali definite precedentemente, si ottengono
 le corrispondenti norme matriciali indotte
 $$
@@ -1449,6 +1449,7 @@ $$
 & \text{ norma } \infty
 \end{array}
 $$
+Dove con $\rho(A)$ indichiamo il raggio spettrale della matrice $A$.
 \end{theo}
 \begin{notes}
  A lezione \`e stata vista solo la dimostrazione per la norma 2.
@@ -1476,18 +1477,18 @@ Bisogna fare vedere due cose:
 \end{itemize}
 Per il primo punto: poich\'e la matrice $A^{H}A$ \`e hermitiana,
 per il teorema (\ref{eigenvalues:theo005}) risulta
-$$ A^{H}A = UDU^{H}$$,
+$$ A^{H}A = UDU^{H}$$
 dove $U$ \`e unitaria e $D$ diagonale con gli autovalori di $A^{H}A$ come
-elementi principale. Se $A = 0$, allora $\rho(A^{H}A)=0$, e inversamente, se
+elementi principali. Se $A = 0$, allora $\rho(A^{H}A)=0$, e inversamente, se
 $\rho(A^{H}A)=0$, risulta $D=0$ e quindi $A=0$, Se $A \neq 0$, si ha
 $$ x^{H}A^{H}Ax \geq 0 \quad \text{ per } x \neq 0$$
 Procedendo in modo analogo a (\ref{eigenvalues:theo006}), risulta che
-gli auovalori di $A^{H}A$ sono non negativi e per almeno un di essi,
+gli autovalori di $A^{H}A$ sono non negativi e per almeno uno di essi,
 corrispondente al raggio spettrale di $A^{H}A$, si ha
 $$\lambda_1 = \rho(A^{H}A)> 0$$
 Sia $x$ tale che $||x||_{2}=1$ e $y=U^{H}x$, poich\'e $U$ \`e unitaria, 
-poich\'e per ogni matrice unitaria risulta
-$$ ||Ax||_{2} = ||x||_2 \quad \forall x \in \mathbb{C}^{n}$$
+poich\'e per ogni matrice $U$ unitaria risulta
+$$ ||Ux||_{2} = ||x||_2 \quad \forall x \in \mathbb{C}^{n}$$
 risulta $||y||_{2} = 1$ e quindi
 $$ 
 \begin{array}{c}
@@ -1505,7 +1506,7 @@ $$
 Per il secondo punto: dobbiamo verifiche che esiste un vettore
 $x, ||x||_{2} = 1$, per cui
 $$ ||Ax||_{2} = \sqrt{\rho(A^{H}A)}$$
-Questo vettore \`e $x_1$, autovettore di $A^{H}A$ relativol all'autovalore
+Questo vettore \`e $x_1$, autovettore di $A^{H}A$ relativo all'autovalore
 $\lambda_1$ normalizzato in modo che $||x_1||_{2}=1$. Infatti
 risulta 
 $$x_1^{H}A^{H}Ax_1 = \lambda_1 x_1^{H}x_1 = \lambda_1 = \rho(A^{H}A)$$
