@@ -1,0 +1,193 @@
+ %% Copyright (C) 2011, Andrea Cimino, All Rights Reserved.
+ %% This file is distributed under the terms of the Creative Commons
+ %% Licence Non-Commercial Share-Alike license
+
+
+% \chapter{Capitolo 1:Introduzione}
+% %%  22 Ottobre 2010
+% \section{Valutazione Riviste}
+% Due indici per riviste scientifiche: vogliamo stabilire se esiste una certa correlazione.
+% Problema dei minimi quadrati: trovare il valore di $p$ e $q$ tale per cui
+% riusciamo a minimizzare la quantità.  (Problema di ottimizzazione non vincolata). 
+% $$ \displaystyle \sum_{i=1}^{n}$$
+% 
+% Abbiamo ricondotto tale problema ad un problema di \emph{minimizzazione}.
+% 
+% \section{Decadimento esponenziale}
+%  $$ y(t) = \theta e^{-\lambda t} $$
+% Applicazioni in:
+% \begin{itemize}
+%  \item fisica
+%  \item chimica
+%  \item farmacologia
+%  \item economia
+%  \item informatica (BGP (\emph{border gateway protocol}): routing flapping mapping)
+% \end{itemize}
+% Nei primi 3 settori non si conoscono tali parametri. Nella fisica però è possibile
+% fare delle misurazioni (osservazioni sperimentali).
+% Per sapere quali sono i parametri $\lambda$ e $\theta$ procediamo risolvendo il
+%  problema dei minimi quadrati.  (Problema di ottimizzazione vincolato). 
+% $$ \displaystyle \sum_{i=1}^{n} \left( y_i - \theta e^{-\lambda t_i}\right)^{2} \quad : \quad \theta, \lambda > 0$$
+% 
+% 
+% \section{Compressione delle immagini}
+% Immagine rappresentata da una matrice $m \times n$ che contiene $m \cdot n$ valori, i quali codificano
+% i livelli di grigio. Costo dell'ingombro: $m \cdot n \cdot \cdot \underbar{c}$. $c$ è il numero di bit
+% che codifica il livello di grigio. Abbiamo due scelte per ridurre il costo:
+% \begin{itemize}
+%  \item Ridurre $m \cdot n$
+%  \item Ridurre $c$
+% \end{itemize}
+% Se la matrice $A$ avesse rango $1$ (le righe o le colonne sono proporzionale fra loro).
+% Tali matrici possono essere scritto come un prodotto di vettore riga per il prodotto di un
+% vettore colonna. In questo modo passiamo da un costo (per l'occupazione di spazio)
+% quadratico ad un costo lineare.
+% %%$$A =  \sum_{i=1)^{n} c_i$$ n matrici di rango 1.
+% Se invece di avere $n$ riuscissimo ad avere un numero basso di matrici di rango 1,
+% ridurremmo il costo a $k(2n)$.
+% 
+% 
+% SVD : Decomposizione a valori singolari
+% 
+% Una matrice (vedendola quadrata) puoò essere vista nel seguente modo:
+% $$ A =  U \Sigma V^{H} $$ 
+% dove
+% \begin{itemize}
+%  \item $U$ è la matrice unitaria
+%  \item $\Sigma$ contiene numeri positivi reali che sono i valori singlolari
+%  \item $V^{H}$: unitaria.
+% \end{itemize}
+% Ma
+% $$ A =  U \Sigma V^{H}  = \Sigma_{i=1}^{n} \sigma_i \mu_i v_i^{H}$$
+% Le Matrici unitarie hanno modulo $\geq 1$.
+% Riusciamo a prendere un $k$ abbastanza basso che all'occhio approssima la matrice originaria. \\ \\
+% Altri algoritmi (JPEG), agiscono su sottomatrici, localmente. 
+% 
+% \section{Classificazione supervisionata}
+% $\{ x_1, \ldots, x_n \}, \{ y_1, \ldots , y_m\} \subseteq R^n: x_i \text{dati positivi}, x_i \text{ dati negativi}$ \\
+% è possibili discriminare i due insiemi? \\ \\
+% Classificazione: trovare $f: R^n \rightarrow R $tale che 
+% \begin{itemize}
+%  \item $f(x_i) > 0 \quad i =1, \ldots, n$
+%  \item $f(y_j) < 0 \quad j =1, \ldots, m $
+% \end{itemize}
+% Spazio di ricerca : $f(x) = a^{T}x -b \quad a \in R^{n}, b \in R$ \\ \\
+% Classificazione lineare: torvare $a \in R^{n}, b \in R$ tali che
+% \begin{itemize}
+%  \item $a^{t} x_i > 0 \quad i =1, \ldots, n$
+%  \item $a^{t} y_j < 0 \quad j =1, \ldots, m$
+% \end{itemize}
+% In alcuni casi non è possibile separe i quadratini dalle crocette. \\
+% Obiettivo: trovare la migliore retta che classifichi i due insiemi (margine più grande). \\ \\
+% Vogliamo massimizzare quindi tale margine:
+%  \begin{itemize}
+%   \item $ a^T x_i \geq b+t \quad i = 1, \ldots, n$ 
+%  \item $ a^T y_j \leq b -t \quad j = 1, \ldots, m$
+%  \end{itemize}
+% Il Problema correspondente di programmazione (non lineare) è:
+%  \begin{itemize}
+%  \item max t
+%   \item $ a^T x_i - b \geq t \quad i = 1, \ldots, n$ 
+%  \item $ a^T y_j  -b \leq -t \quad j = 1, \ldots, m$
+%  \item $$ || a ||_{2} \leq 1 $$ (norma)
+%  \end{itemize}
+% Se il valore ottimo è positivo, ovvero i due insieme possono essere
+% discriminati, il problema è equivalente (con $a' = a/t$ e $b' = b/t$) a:
+%  \begin{itemize}
+%  \item $min ||a'||_{2}$
+%   \item $ a^T x_i -b' \geq 1 \quad i = 1, \ldots, n$ 
+%  \item $ a^T y_j -b'\leq 1 \quad j = 1, \ldots, m$
+%  \end{itemize}
+% Lo norma non è lineare.
+% 
+% \section{La matrice di Google (PageRank)}
+% Si devono ordinare tutte le pagine del web in base alla loro importanza.
+% Come definire l'importanza di una pagina?
+% Possibile scelta per un modello: \emph{l'importanza di una pagina 
+% dipende dall'importanza delle pagine che puntano alla pagina stessa}. \\ \\
+% Si numerano le pagine del web da $1$ a $n$.
+% Si definisce la matrice di connettivita H:
+% H = [h11......h_1n
+% 
+% 
+%     h_n1..     h_nn]
+% Ad esempio, per $n= 4$, si consideri il web descritto dal grafo e dalla matrice
+% di connettività seguenti
+% 
+%  0 1 1 1
+%  1 0 0 1
+%  0 0 0 1
+%  0 1 1 0
+% 
+% La pagina $i$ trasmette la sua importanza alle pagine da essa puntate
+% corrispondenti agli elementi non nulli della riga $i$-esima di $H$. \\
+% Per Ripartire tale importanza uniformemente tra le pagine
+% puntate: al generico link $ i \rightarrow j$ si associa il peso $1/r_i$.
+% \\
+% Nell'esempio si ottene dalla matrice H la matrice scalata er le righe:
+% 
+% diag (r_1 r_2 r_3 r_4) =
+%   [ 0    1/3  1/3 1/3
+%    1/2   0     0   1/2
+%    0     0     0     1
+%    0     1/2   1/2   0 ]
+% 
+% In generale, la matrice diag(r_1 \ldots r_n)H ha la proprietà di avere
+% le righe con somma 1 e si dice \emph{stocastica per righe}
+% 
+% Proprieta: una matrice stocastica (per righe o per colonne) ammette autovalore 1.
+% 
+% 
+% Se si indica con $x_j$ l'importanza della pagina $j$ deve essere
+%  $$ x_j = \frac{h_1j}{r_1}x_1 + \ldots +  \frac{h_nj}{r_n}x_n  \quad \text{per } j = 1,2, \ldots, n$$
+% ovvero 
+% $$ x^{T} = x^{T} DH $$
+% dove $D = diag(r1 \ldots r_n) $
+% Il sistema pu`\o essere riscritto nelle forme seguenti:
+% 
+%  $$ x = H^{t}Dx $$
+% $$ (H^{t}D = I) x = 0$$
+% La matrice $H^{T} D =I $ è singolare perchè $H^{T}D$ è stocastica per
+% colonne e quindi ammette autovalore 1. Si dimostra che: \\
+%  un autovalore di modulo massimo, cioè
+% 
+% 
+% per l'autovalore 1 esistono autovettori non negativi.
+% 
+% 
+% Tra le initie soluzioni del sistema $(H^{T}D -I) x = 0$ si 
+% considerino quelle non negative, 
+% 
+% 
+% 
+% 
+% Il modello matematico può essere migliorato. \\
+% Gli elementi di $DH$ posso essere visti come probabilità.
+% 
+% Si vuole permettere che, con un valore di probabilità piccolo\\
+% prestabilito, il navigatore salti dalla pagina dove si trova a una
+% qualunque altra. Nel modello:
+% Ciò significa sostituire tutti gli zeri.
+% 
+% La matrice G:
+% \begin{itemize}
+%  \item è stocastica per righe;
+%  \item è irriducibile;
+%  \item bla;
+% \end{itemize}
+% Per risolvere tala problema si può utiizzare col metodo delle potenze
+% applicato a $G^T$.
+% 
+% \section{Configurazione di molecole}
+% Potenziale di Lennard-Jones:
+%   $$ V(r) = 4 \varepsilon [ (\sigma/r)^{12} - (\sigma/r)^{6} ] $$
+% Molecola di $n$ atomi : $x_i \in R^3$ posizione nello spazio dell'atomo $i$
+%  $$ E[x_1, \ldots, x_n] = \sum_{i<j} 4 \varepsilon   [ (\sigma/r)^{12} - (\sigma/r)^{6} ] $$
+% dove $r_{ij} = || x_i - x_j ||_{2} $ la distanza tra gli atomi $i$ e $j$ \\
+% Configurazione di molecole ad energia potenziale minima:
+% $$  $$
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

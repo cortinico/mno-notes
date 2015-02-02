@@ -1,0 +1,62 @@
+ %% Copyright (C) 2011, Andrea Cimino, All Rights Reserved.
+ %% This file is distributed under the terms of the Creative Commons
+ %% Licence Non-Commercial Share-Alike license
+
+%%26 Ottobre
+\input{separatecompile}
+\inbpdocument 
+
+\chapter{Richiami da Wikipedia}
+\subsection{Teorema di Lagrange (o valor medio)} 
+\begin{theo}[Teorema di Lagrange (o valor medio)]
+ \label{teo-valor-medio}
+Sia $f: [a, b] \rightarrow \mathbb{R}$ una funzione continua in 
+$[a, b]$, e derivabile in $(a, b)$. Allora
+$$\exists \ c \ \in (a, b)\  : f'(c)=\frac{f(b)-f(a)}{b-a}$$
+\end{theo}
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=0.3\textwidth]{./imgs/teovalormedio.pdf}
+ \caption{Idea intuitiva del teorema}
+ % teovalormedio.svg: 744x657 pixel, 72dpi, 26.25x23.18 cm, bb=0 0 744 657
+\end{figure}
+
+Il teorema rimane valido considerando funzioni definite in $\mathbb{R}^n$
+
+\begin{theo}[Teorema di Lagrange (o valor medio) su $\mathbb{R}^{n}$]
+ \label{teo-valor-medio-rn}
+
+Sia $\, f$ una funzione reale derivabile su un aperto $U \subseteq \mathbb{R}^n$,
+ siano $\, \mathbf x, \mathbf y$ due punti di $\,U $ tali che il 
+segmento $[\mathbf x, \mathbf y]=\{t \mathbf x + (1-t) \mathbf y : t \in [0,1]\} \subseteq U $.
+\\
+Allora esiste $\, \mathbf \xi \in (\mathbf x, \mathbf y)$ tale che
+$$f(\mathbf y)-f(\mathbf x) = Df(\mathbf \xi)(\mathbf y -\mathbf x)$$
+dove con $ Df $ indichiamo il differenziale. 
+\end{theo}
+
+\subsection{Disuguaglianza triangolare}
+
+La \emph{disuguaglianza triangolare} \`e una propriet\`a matematica.
+ Essa \`e una delle proprietà caratterizzanti una 
+distanza in uno spazio metrico. Formalmente tale propriet\`a
+ afferma che, dato lo spazio metrico $(X,d)$, allora
+$$\forall x,y,z \in X: d(x,y) \leq d(x,z) + d(z,y)$$
+
+
+Se considerata in un qualsiasi spazio normato $V$ con la
+ metrica indotta e scegliendo come $z$ lo 0 di $V$, essa dunque ci porta a dire che:
+$$\|x+y\|= d(x,-y)\leq d(x,0) + d(-y,0)= \|x-0\| + \|-y-0\|= \|x\|
+ + \|-y\|=  \|x\| + \|y\|$$
+Cio\`e
+$$\forall x,y \in V: \|x+y\|\leq \|x\| + \|y\|$$
+
+Dunque, all'interno dei numeri reali con la norma euclidea, assume la nota forma:
+\begin{property}[Disguaglianza triangolare sui moduli]
+\label{disuguaglianza-triangolare-moduli}
+$$\forall x,y \in \Rset: |x+y| \leq |x| + |y|$$.
+ 
+\end{property}
+
+
+\outbpdocument

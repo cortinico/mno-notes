@@ -1,0 +1,135 @@
+\chapter{Ottimizzazione non vincolata}
+(P) $ \min \left\lbrace f(x) : x \in \mathbb{R}^n \right\rbrace \qquad f:\mathbb{R}^n \rightarrow \mathbb{R} $
+
+\section{Condizioni di minimo}
+\ftheo{$ \overline{x} $ minimo locale di (P) $ \Rightarrow $} $ \begin{array}{ll}
+\text{f differenziabile una volta} & \quad \nabla f(\overline{x}) = 0 \\
+\text{f differenziabile due volte} & \quad \nabla f(\overline{x}) = 0 \quad \nabla^2 f(\overline{x}) \text{ semidefinita positiva}
+\end{array} $
+
+\askip
+
+Con f differenziabile due volte in $ \overline{x} $, \ftheo{$ \overline{x} $ minimo locale stretto di (P) $ \Leftarrow $} $ \nabla^2 f(\overline{x}) $ definita positiva
+
+\askip
+
+Con f differenziabile e convessa in tutto $ \mathbb{R}^n $, \ftheo{$ \overline{x} $ minimo $ \Leftrightarrow $} $ \nabla f(x) = 0 $
+
+\section{\fdefn{Metodi del gradiente}}
+\begin{proc}[Metodo del gradiente]\label{proc:metodogradiente}
+\begin{enumerate}
+\item Scelgo $ x^{(0)} \in \mathbb{R}^n $, pongo k = 0
+\item Se $ \nabla f(x^{(k)} = 0 $ termino
+\item Scelgo $ d^{(k)} $ tale che $ \nabla f(x^{(k)} d^{(k)} < 0 $ (metodo di discesa)
+\item Scelgo $ t_k $ che soddisfi le seguenti \fdefn{Condizioni di Wolfe}
+\begin{itemize}
+\item (AJO) $ f(x^{(k)} + t d^{(k)}) \leq f(x^{(k)}) + c_1 t \nabla f(x^{(k)})^T d^{(k)} $ (\fdefn{condizione di Armijo})
+\item (CUR) $ \nabla f(x^{(k)} + t d^{(k)})^T d^{(k)} \geq c_2 \nabla f(x^{(k)})^T d^{(k)} $ (\fdefn{condizione di curvatura})
+\end{itemize}
+\item Pongo $ x^{(k+1)} = x^{(k)} + t_k d^{(k)} $ e $ k = k+1 $, e torno a 2
+\end{enumerate}
+\end{proc}
+
+\askip
+
+\ftheo{Il metodo \'e di discesa}
+
+\askip
+
+\ftheo{$ \exists a,b, b > a. \forall t \in [a,b]. $ t soddisfa le condizioni di Wolfe $ \Leftarrow $} f inferiormente limitata
+
+\askip
+
+Se $ \theta_k = d^{(k+1)} - d^{(k)} $, \\
+\ftheo{Il metodo converge $ \Leftarrow $} $ \nabla f $ \'e Lipschtziana, $ \exists \delta > 0. \forall k. \cos \theta_k \leq - \delta $
+
+\subsection{\fdefn{Metodo del gradiente esatto}}
+\positive{Converge sempre}
+
+\negative{ha difficolt\'a teoriche nel calcolo del passo, tranne quando applicato a funzioni quadratiche}
+
+\negative{$ d^{(k)}d^{(k+1)} = 0 $, cio\'e due direzioni successive sono ortogonali. Questo da noia vicino alla soluzione.}
+
+\begin{proc}[Metodo del gradiente esatto]
+\item come in \ref{proc:metodogradiente}
+\item come in \ref{proc:metodogradiente}
+\item Scelgo $ d^{(k)} = - \nabla f(x^{(k)} $
+\item Scelgo $ t_k \in argmin \left\lbrace f(x^{(k)} - t \nabla f(x^{(k)})), t \geq 0 \right\rbrace $
+\item come in \ref{proc:metodogradiente}
+\end{proc}
+
+\askip
+
+\ftheo{Il metodo converge per qualunque $ x^{(0)} $}
+
+\askip
+
+Calcolare $ t_k $ \'e difficile, tranne se f \'e quadratica: in quel caso, se $ f(x) = \frac{1}{2} x^T Q x + b^T x + c $ e Q \'e definita positiva, prendo $ t_k = \dfrac{\nabla f(x^{(k)})^T \nabla f(x^{(k)})}{\nabla f(x^{(k)})^T Q \nabla f(x^{(k)})} $
+
+\section{Metodo di Newton-Raphson}
+Descritto in \ref{proc:newtonraphson}
+
+Usato per risolvere $ \nabla f(x) = 0 $. Problemi con il fatto che trovo anche punti di massimo.
+
+\askip
+
+\ftheo{$ \exists \delta > 0. \forall x^{(0)} \in B(x^*, \delta). x^{(k)} \rightarrow x^*  \quad \Leftarrow $} $ F \in C^3(\mathbb{R}^n), x^* \in \mathbb{R} | \nabla f(x^*) = 0 $ e $ \nabla^2 f(x^*) $ definita positiva (quindi $ x^* $ minimo locale stretto)\\
+Inoltre $ \exists M > 0. ||x^{(k+1)}-x^*||_2 \leq M ||x^{(k)}-x^*||_2^{\phantom{2}2} $
+
+\askip
+
+\ftheo{Il metodo termina (teoricamente) in un passo $ \Leftarrow $} la funzione \'e \emph{quadratica} con matrice Q definita positiva
+
+\section{\fdefn{Metodo del Gradiente Coniugato}}
+Usato per minimizzare fz della forma $ \Phi(x) = \frac{1}{2}x^TAx - b^T x $ in cui A \'e definita positiva e simmetrica.
+
+\askip
+
+\ftheo{$ \Phi $ ha un solo punto stazionario di minimo}
+
+\askip
+
+\begin{proc}[Metodo del gradiente coniugato]\label{proc:gradienteconiugato}
+\begin{enumerate}
+\item Pongo $ k = 0 $ e scelgo un $ x^{(0)} $. Siano $ r_0 = b - Ax^{(0)} $, $ p_0 = r_0 $
+\item Se $ r_k = 0 $ termino con successo
+\item Calcolo il passo di spostamento $ \alpha_k = \dfrac{r_k^T r_k}{p_k^TAp_k} $
+\item Calcolo $ x^{(k+1)} = x^{(k)} + \alpha_k p_k $ e $ r_{k+1} = r_k + \alpha_k A p_k $
+\item Calcolo $ \beta_{k+1} = \dfrac{r_{k+1}^T r_{k+1}}{r_k^T r_k} $ e $ p_{k+1} = r_{k+1} + \beta_{k+1} p_k $
+\item Pongo $ k = k+1 $ e ricomincio da 2
+\end{enumerate}
+\end{proc}
+
+\askip
+
+\ftheo{Il metodo del gradiente coniugato termina al pi\'u in k passi, dove k \'e il numero di autovalori distinti di A}
+
+\askip
+
+\begin{proc}[Metodo del gradiente coniugato precondizionato]\label{proc:gradienteconiugatoprecondizionato}
+Dato il sistema $ Ax = b $, applico la procedura \ref{proc:gradienteconiugato} al sistema By = c con, data C invertibile
+\begin{itemize}
+\item $ B = C^{-1}AC^{-T} $
+\item $ y = C^{T}x $
+\item $ c = C^{-1}b $
+\end{itemize}
+\end{proc}
+
+\askip
+
+Il metodo del gr. con. precondiz. migliora il condizionamento di A per C tali che $ I \approx C^{-1} A C^{-T} $, ovvero $ A \approx CC^T $ calcolabile con la fattorizzazione di Cholesky, vista in \ref{proc:fattorizzazioneLLH}.
+
+\section{\fdefn{Metodo di ricerca a compasso}}
+\begin{proc}[Metodo di ricerca diretta a compasso]
+\begin{enumerate}
+\item Scelgo $ x^{(0)} \in \mathbb{R}^n $, $ t_0 > 0 $, $ k = 0 $, $ l_0 = 0 $
+\item Se $ \exists d \in D. f(x^{(k)} + t_k d) < f(x^{(k)}) $, allora $ x^{(k+1)} = x^{(k)} + t_k d^{(k)}, t_{k+1} = t_k, l_{k+1} = l_k $. Altrimenti $ x^{(k+1)} = x^{(k)} $, $ t_{k+1} = \dfrac{t_k}{2} $, $ l_{k+1} = l_k + 1 $, $ z^{l_k} = x^{(k)} $
+\item $ k = k+1 $, vado a 1
+\end{enumerate}
+\end{proc}
+
+Notare: l'insieme $ D $ contiene i versori.
+
+\askip
+
+\ftheo{$ \lim_{l \rightarrow \inf} || \nabla f(z^l) ||_2 = 0  \Leftarrow $} f differenziabile, $ L_f(x^{(0)}) $ compatto, $ \nabla f $ Lipschtziana

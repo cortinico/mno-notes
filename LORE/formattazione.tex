@@ -1,0 +1,329 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% PACKAGES %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% encoding
+\usepackage[utf8x]{inputenc}
+\usepackage[italian]{babel} % babel (suddivisione parole in sillabe)
+
+\usepackage{amsfonts} % matematica
+\usepackage{amsmath} % matematica
+\usepackage{amssymb} % simboli vari
+\usepackage{calrsfs}
+\usepackage{caption}
+\usepackage{enumerate}
+\usepackage{extarrows} % matematica
+\usepackage{keyval}
+\usepackage{manfnt} % Simboli curva
+\usepackage{mathtools} % matematica
+\usepackage{multirow} 
+\usepackage[usenames, dvipsnames]{color} % colori con nome
+\usepackage[pdftex]{graphicx}
+\usepackage{epstopdf} % gestione file EPS
+\usepackage{wrapfig} % per figure circondate da testo
+\usepackage{framed}	% teoremi framed
+\usepackage{fancyhdr} % header buffi
+\usepackage[T1]{fontenc} % gestione hbox e vbox
+\usepackage[a4paper]{geometry}
+\usepackage{microtype} % gestione hbox e vbox
+\usepackage[thref, amsthm, amsmath, framed, hyperref]{ntheorem} % teoremi (avanzata)
+%% \usepackage{prooftree} % gestione prof-tree
+\usepackage{rotating}
+\usepackage{stmaryrd}
+\usepackage{subfig}
+\usepackage{syntax} % syntattic stuff
+\usepackage{txfonts}
+\usepackage{verbatim} % migliorie al verbatim
+%\usepackage{hyperref}
+%% \usepackage{qtree}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage{cancel}
+\usepackage{tikz}
+
+\usepackage{bbding} %% Icons
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% GEOMETRY %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{verbose,tmargin=2cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2cm}
+\parindent0ex %% Remove paragraph indenting
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% CODE ENV %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% codice
+\newcounter{count}
+\setcounter{count}{0}
+\newenvironment{code}[1]
+{
+\color{lightgray}\hrulefill\color{code}
+\stepcounter{count} {\bf\small Listato di codice \arabic{count}: {#1} }
+\verbatim
+}
+{
+\endverbatim
+\color{lightgray}\hrulefill
+\color{black}
+\\
+}
+
+% codice semplice
+\newenvironment{simplecode}
+{
+\color{code} \tt
+}
+{
+\rm
+}
+
+ % Notation issues
+\input{macros}
+
+\makeatletter
+\g@addto@macro\@verbatim\footnotesize
+\makeatother
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% THEOREMS FORMAT %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% shaded theorems and proofs command
+\definecolor{lightgray}{RGB}{230,230,230}
+\def\theoremframecommand{\colorbox{lightgray}}
+
+%%% theorems
+\theoremstyle{break}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\itshape}
+\theoremsymbol{\ensuremath{\diamondsuit}}
+\theoremseparator{\newline}
+\newtheorem{theo}{\includegraphics[scale=0.11]{imgs/book.png}Teorema}[chapter]
+
+%%% propositions
+\theoremstyle{break}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\itshape}
+\theoremsymbol{\ensuremath{\diamondsuit}}
+\theoremseparator{\newline}
+\newshadedtheorem{proposition}{Proposizione}[chapter]
+
+%%% exercises
+\theoremstyle{break}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\itshape}
+\theoremsymbol{\ensuremath{\diamondsuit}}
+\theoremseparator{\newline}
+\newshadedtheorem{exercise}{Esercizio}[chapter]
+
+%%% propositions
+\theoremstyle{break}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\itshape}
+\theoremsymbol{\ensuremath{\diamondsuit}}
+\theoremseparator{\newline}
+\newshadedtheorem{property}{\PencilRightDown $\; $ Propriet\`a}[chapter]
+
+%%% lemmas
+\theoremstyle{break}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\itshape}
+\theoremsymbol{\ensuremath{\diamondsuit}}
+\theoremseparator{\newline}
+\newshadedtheorem{lemma}[theo]{Lemma}
+
+%%% definitions
+\theoremstyle{break}
+\theoremsymbol{\ensuremath{\clubsuit}}
+\theoremseparator{\newline}
+\newshadedtheorem{defn}[theo]{Definizione}
+
+%%% examples
+\theoremstyle{break}
+\theorembodyfont{\itshape}
+\theoremsymbol{\ensuremath{\ast}}
+\theoremseparator{\newline}
+\newshadedtheorem{example}[theo]{Esempio}
+
+%%% observations
+\theoremstyle{break}
+\theorembodyfont{\itshape}
+\theoremsymbol{\ensuremath{\ast}}
+\theoremseparator{\newline}
+\newshadedtheorem{observation}[theo]{
+\includegraphics[scale=0.06]{imgs/lens.png}
+Osservazione
+}
+
+%%% notations
+\newtheorem*{notaz}{Notazione}
+
+%%% proofs
+\newenvironment{thproof}
+{
+\vskip 0.03cm
+\begin{small}
+\textit{Dimostrazione. }
+\color{code}
+}
+{
+\color{black}
+\end{small}
+$ \square $
+\vskip 0.2cm
+}
+
+%Notes
+\newenvironment{notes}{%
+  \def\FrameCommand{\colorbox{yellow}}%
+  \MakeFramed {\FrameRestore}
+\includegraphics[scale=0.02]{imgs/bulb.png}
+ \textbf{Nota} \\
+ }%
+{\endMakeFramed}
+
+%Work in progress
+\newenvironment{workinprogress}{%
+  \def\FrameCommand{\colorbox{pink}}%
+  \MakeFramed {\FrameRestore}
+\lhdbend  \textbf{Work in progress} \\
+ }%
+{\endMakeFramed}
+
+%Openquestion
+\newenvironment{openquestion}{%
+  \def\FrameCommand{\colorbox{pink}}%
+  \MakeFramed {\FrameRestore}
+ \textbf{Domanda aperta} \\
+ }%
+{\endMakeFramed}
+
+%TODO
+\newenvironment{todo}{%
+  \def\FrameCommand{\colorbox{pink}}%
+  \MakeFramed {\FrameRestore}
+ \textbf{TODO} \\
+ }%
+{\endMakeFramed}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% HEADER %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+% i comandi seguenti impediscono la scrittura in maiuscolo
+% dei nomi dei capitoli e dei paragrafi nelle intestazioni
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} % rimuove l'attuale contenuto dell'intestazione
+% e del pi\`e di pagina
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[LO]{\bfseries\rightmark}
+\fancyhead[RE]{\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} % riserva spazio per la linea
+\fancypagestyle{plain}{%
+\fancyhead{} % ignora, nello stile plain, le intestazioni
+\renewcommand{\headrulewidth}{0pt} % e la linea
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% COLORS %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{code}{gray}{0.3}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% NUMBERS %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% DOC DATA %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Appunti di MNO}
+\author{Gruppo Informatici Rampanti}
+\date{ott 2010 - mag 2011}
+
+\pdfinfo{%
+  /Title    (Appunti di MNO)
+  /Author   (Andrea Cimino e Lorenzo Muti)
+  /Creator  (Andrea Cimino)
+  /Producer (Lorenzo Muti)
+  /Subject  (MNO)
+  /Keywords (MNO)
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% UTILS %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% binary symbols
+\newcommand{\modder}{\vdash _{R}}
+
+% vertical gaps
+\newcommand{\askip}{\vspace{0.5cm}}
+\newcommand{\bskip}{\vspace{1.0cm}}
+
+% various symbols
+\newcommand{\qedhere}{\ensuremath{\Box}}
+\newcommand{\qed}{\hfill \ensuremath{\Box}}
+
+% substitution
+\newcommand{\subst}[2]{^{#1} / _{#2}}
+
+% denotational semantics function names
+\newcommand{\bbracket}[1]{\left\llbracket #1 \right\rrbracket}
+
+\newcommand{\aexpr}{\mathcal{A}}
+\newcommand{\bexpr}{\mathcal{B}}
+\newcommand{\cexpr}{\mathcal{C}}
+\newcommand{\Aexpr}[1]{\mathcal{A} \bbracket{#1}}
+\newcommand{\Bexpr}[1]{\mathcal{B} \bbracket{#1}}
+\newcommand{\Cexpr}[1]{\mathcal{C} \bbracket{#1}}
+
+\newcommand{\semdomset}[1]{(V_{#1})_{\bot}}
+
+% semantic evaluations
+\newcommand{\opereval}[3]{\left\langle #1, #2 \right\rangle \rightarrow #3}
+\newcommand{\denaeval}[3]{\Aexpr{#1} #2 = #3}
+\newcommand{\denbeval}[3]{\Bexpr{#1} #2 = #3}
+\newcommand{\denceval}[3]{\Cexpr{#1} #2 = #3}
+
+% rotated sqsubseteqs
+\newcommand{\upsqsubseteq}{ $\begin{rotate}{90} $\sqsubseteq$ \end{rotate}$ }
+\newcommand{\downsqsubseteq}{ $\begin{rotate}{270} $\sqsubseteq$ \end{rotate}$ }
+
+% Space after paragraph declaration
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
+
+
+% fast theorem and definition
+\newcommand{\ftheo}[1]{\colorbox{YellowGreen}{#1}}
+\newcommand{\fdefn}[1]{\colorbox{SkyBlue}{#1}}
+
+\theoremstyle{break}
+\theoremsymbol{\ensuremath{\clubsuit}}
+\theoremseparator{\newline}
+\newshadedtheorem{proc}[theo]{Procedura}
+
+% bold math!
+\newcommand{\bm}[1]{\mbox{\boldmath{$#1$}}}
+
+\newcommand{\positive}[1]{\textbf{\color{green} +} #1}
+\newcommand{\negative}[1]{\textbf{\color{red} -} #1}
+
+
+\newtheoremlisttype{tab}%
+{\begin{tabular*}{\linewidth}{@{}lrl@{\extracolsep{\fill}}r@{}}}%
+{##1&##2&##3&##4\\}%
+{\end{tabular*}}

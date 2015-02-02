@@ -1,0 +1,108 @@
+\chapter{Problema dei minimi quadrati}
+\section{Minimi quadrati lineari}
+$ \min \left\lbrace || A x - b ||_2 | x \in \mathbb{R}^n \right\rbrace  \quad  \begin{array}{l}
+A \in \mathbb{R}^{m \times n}, m >> n \\
+x \in \mathbb{R}^n \\
+b \in \mathbb{R}^m
+\end{array} $
+
+\subsection{\fdefn{Metodo delle equazioni normali}}
+\begin{proc}[Metodo delle equazioni normali]
+Risolvo il sistema $ A^H A x = A^H b $ utilizzando
+\begin{itemize}
+\item Cholesky se $ A^H A $ \'e definita positiva ($ \Leftrightarrow ran(A) = n $)
+\item Gauss altrimenti
+\end{itemize}
+\end{proc}
+
+\askip
+
+\ftheo{costa $ O \left( \frac{n^2 m}{2} \right) $}, e \ftheo{molto mal condizionato se A mal condizionata}
+
+\subsection{\fdefn{Metodo QR}}
+\begin{proc}[Metodo QR]
+\begin{enumerate}
+\item Applico la procedura \ref{proc:fattorizzazioneQR} alla matrice A, ottenendo $ A = QR $
+\item Data $ R_n $ matrice contenente le prime n righe di R (quindi matrice \emph{quadrata)}, risolvo il sistema $ Rx = Q^H b $
+\end{enumerate}
+\end{proc}
+
+\askip
+
+\ftheo{costa $ O \left( n^2 m \right) $}
+
+\subsection{\fdefn{Metodo SVD}}
+\begin{proc}[Metodo SVD]\label{proc:svdminquadlin}
+\begin{enumerate}
+\item Calcolo $ A = U \Sigma V^H $ decomposizione SVD con la procedura \ref{proc:svd}
+\item Calcolo la matrice $ A^+ = V \Sigma^+ U^H $, dove $ \left[ \Sigma^+ \right]_{ij} = \left\lbrace \begin{array}{ll}
+\dfrac{1}{\sigma_{ij}} & \;\text{ se } i = j \\
+0 & \; \text{ altrimenti}
+\end{array} \right. $
+\item La soluzione \'e $ x = A^+ b $
+\end{enumerate}
+\end{proc}
+
+\subsubsection{Decomposizione SVD}
+\begin{proc}[Decomposizione SVD]\label{proc:svd}
+\begin{enumerate}
+\item Diagonalizzo $ A^H A $ (possibilmente usando la procedura \ref{proc:golub}) ottenendo $ A^H A = Q D Q^H $
+\item Applico il metodo QR con pivotaggio alla matrice $ AQ $ ottenendo $ A Q \Pi = U R $, e quindi $ A = U R \Pi^T Q^H $, che \'e una decomposizione SVD (R \'e la matrice $ \Sigma $ e $ V = Q \Pi $
+\end{enumerate}
+\end{proc}
+
+\askip
+
+\ftheo{esiste sempre}, con \ftheo{$ \Sigma $ unica}
+
+\askip
+
+Se k \'e il numero di valori singolari non nulli, \ftheo{$ ran A = k $, $ Ker(A) $ \'e generato da $ \left\lbrace v_{k+1}, \ldots, v_n \right\rbrace $ e $ Imm(A) $ \'e generato da $ \left\lbrace u_{1}, \ldots, u_k \right\rbrace $}
+
+\askip
+
+\begin{proc}[Metodo di Golub]\label{proc:golub}
+\begin{enumerate}
+\item Ottengo $ A = P^H B H^H $ dove $ B $ \'e bidiagonale superiore reale, P e H unitarie
+\item Calcolo $ A^H A = H B^H P P^H B H^H = H B^T B H $ che \'e tridiagonale e ha gli stessi autovalori di $ A^H A $ (calcolare gli autovalori di una tridiagonale \'e semplice)
+\end{enumerate}
+\end{proc}
+
+\section{Minimi quadrati non lineari}
+$ \min \left\lbrace \frac{1}{2} \sum_{j=1}^{m}r_j^{\phantom{j}2}(x) | x \in \mathbb{R}^n \right\rbrace  \quad  \begin{array}{l}
+f: \mathbb{R}^n \rightarrow \mathbb{R} \\
+g_i: \mathbb{R}^n \rightarrow \mathbb{R} \quad i \in [1,n]
+\end{array} $
+
+Chiamiamo $ R(x): \mathbb{R}^n \rightarrow \mathbb{R}^m = (r_1(x), \ldots, r_m(x)) $ e $ J_R(x) $ la sua matrice jacobiana.
+
+Alcune quantit\'a:
+\begin{itemize}
+\item $ \nabla f(x) = \sum_{j = 1}^{m}r_j(x) \nabla r_j(x) $
+\item $ \nabla^2 f(x) = J_R(x)^T J_R(x) + \sum_{j = 1}^{m}r_j(x) \nabla^2 r_j(x) $
+\end{itemize}
+
+\subsection{\fdefn{Metodo di Gauss-Newton}}
+Siano $ J_k = J_R(x^{(k)}) $ e $ r_k = R(x^{(k)}) $. Ho $ \nabla f(x^{(k)}) = J_k^T r_k $ e $ \nabla^2 f(x^{(k)}) \approx J_k^T J_k $
+
+\askip
+
+\begin{proc}[Metodo di Gauss-Newton]
+\begin{enumerate}
+\item Scelgo $ x^{(0)} \in \mathbb{R}^n $ e pongo $ k = 0 $
+\item Se $ \nabla f(x^{(k)}) = 0 $ termino
+\item Calcolo $ d^{(k)} \in \mathbb{R}^n $ soluzione del sistema delle equazioni normali $ J_k^T J_k d = - J_k r_k $
+\item Calcolo $ t_k > 0 $ che soddisfi le condizioni di Wolfe (non ci va bene passo uguale a 1 in quanto il calcolo della direzione \'e approssimato)
+\item $ x^{(k+1)} = x^{(k)} + t_k d^{(k)} $, $ k = k+1 $, vai a 2
+\end{enumerate}
+\end{proc}
+
+\askip
+
+\ftheo{$ \lim_{k \rightarrow 0} || \nabla f(x^{(k)}) ||_2 = 0 $ (ovvero: il metodo converge) $ \Leftarrow $}
+\begin{itemize}
+\item $ L_f(x^{(0)} = \left\lbrace x \in \mathbb{R}^n : f(x) \leq f(x^{(0)}) \right\rbrace $ \'e compatto
+\item $ \forall j. r_j \in C^1(\mathbb{R}) $
+\item $ \nabla f $ continua e Lipschtziana
+\item $ \exists \gamma > 0. \forall z \in \mathbb{R}^n, k \in \mathbb{N}. || J_k z ||_2 \geq \gamma || z ||_2 $
+\end{itemize}

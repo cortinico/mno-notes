@@ -1,0 +1,61 @@
+ %% Copyright (C) 2011, Andrea Cimino, All Rights Reserved.
+ %% This file is distributed under the terms of the Creative Commons
+ %% Licence Non-Commercial Share-Alike license
+
+\documentclass[11pt,a4paper,twoside,titlepage]{scrbook}
+
+\usepackage[pdftex]{graphicx}
+
+\include{formattazione}
+%% This is the main doc.
+\def \ismaindoc {}
+
+\title{Appunti del corso di \\
+\emph{Metodi numerici e ottimizzazione}}
+\vfill\vfill
+
+\author{\LaTeX \; Ninjas \\ \\ Andrea Cimino \\
+  Marco Cornolti \\
+ Emanuel Marzini \\
+ Davide Mascitti \\
+ Lorenzo Muti\\
+ Marco Stronati \\
+ \texttt{\{cimino,cornolti,marzini,mascitti,muti,stronati\}@cli.di.unipi.it}
+ \thanks{Questo testo \`e sotto \href{http://creativecommons.org/licenses/by-nc-sa/2.5/it/}{Creative Commons Attribution-NonCommercial-ShareAlike License 2.5 Italy} }
+}
+
+\date{set 2010-set 2011}
+
+
+
+
+\pdfinfo{%
+  /Title    (Appunti del corso di Metodi numerici e ottimizzazione)
+  /Author   (Andrea Cimino, Marco Cornolti, Emanuel Marzini, Davide Mascitti, Lorenzo Muti, Marco Stronati)
+  /Subject  (Appunti del corso di Metodi numerici e ottimizzazione 2010/2011)
+  /Keywords (Pisa Bevilacqua Bigi Metodi Numerici Ottimizzazione)
+}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\include{prologo}
+\include{00} %% Introduzione corso
+\include{01} %% Bevi: richiami algebra lineare
+\include{02} %% Bigi: richiami analisi e ottimizzazione
+\include{03} %% Bevi: risoluzione sistemi lineari
+\include{04} %% Bevi: risoluzione sistemi non lineari
+\include{05} %% Bigi: ottimizzazione non vincolata
+\include{06} %% Bevi: gradiente coniugato
+\include{07} %% Bevi: minimi quadrati
+\include{08} %% Bigi: minimi quadrati
+\include{09} %% Bigi: ottimizzazione vincolata
+\include{10} %% Bigi: ottimizzazione vincolata cont.
+\include{11} %% Bevi: calcolo autovalori autovettori
+\include{12} %% Bevi: trasformata fourier
+\include{wikipedia-appendix}
+
+\end{document}

@@ -1,0 +1,526 @@
+ %% Copyright (C) 2011, Andrea Cimino, All Rights Reserved.
+ %% This file is distributed under the terms of the Creative Commons
+ %% Licence Non-Commercial Share-Alike license
+
+
+\input{separatecompile}
+\inbpdocument 
+
+\chapter{Metodi di risoluzione per sistemi non lineari}
+Andremo adesso a vedere come si possono risolvere i sistemi non
+lineari. Per prima cosa caratterizziamoli.
+
+Possiamo definire un sistema non lineare in due maniere: dato $ \Omega
+\subseteq \Rset^n $, con $\Omega$ sotto insieme aperto di $\mathbb{R}^{n}$:
+
+\begin{itemize}
+\item $ F(\mathbf{x}) = \mathbf{0} \qquad \text{dove } F:\Omega \rightarrow \Rset^n $,
+  dove
+\[ F(\mathbf{x}) = \left\lbrace \begin{array}{c}
+f_1(\mathbf{x}) = 0 \\ f_2(\mathbf{x}) = 0 \\ \vdots \\ f_n(\mathbf{x}) = 0
+\end{array}  \right. \]
+Le $f_i$ sono quindi funzioni del tipo $\Omega \rightarrow \mathbb{R}$.
+\item $ \mathbf{x} = G(\mathbf{x}) \qquad \text{dove } G:\Omega \rightarrow \Rset^n $,
+  ovvero
+\[ \left\lbrace \begin{array}{c}
+x_1 = g_1(\mathbf{x}) \\ 
+x_2 = g_2(\mathbf{x}) \\ 
+\vdots \\ 
+x_n = g_n(\mathbf{x})
+\end{array}  \right. \]
+Anche le $g_i$ sono quindi funzioni del tipo $\Omega \rightarrow \mathbb{R}$.
+
+\end{itemize}
+
+Inoltre, se $ F(\mathbf{x}),G(\mathbf{x}) \in C^1(\Omega) $, le due funzioni generano le matrici Jacobiane, che chiameremo rispettivamente $ J(\mathbf{x}) $ ed $ H(\mathbf{x})$.
+
+Per arricchire le possibilit\`a di personalizzare il metodo
+risolutivo, possiamo porre
+ $$ \mathbf{x} = G(\mathbf{x}) = \mathbf{x} - A(\mathbf{x})F(\mathbf{x})$$
+per qualche $A(x)$.
+
+Tale relazione si verifica in quanto $F(\mathbf{x}) = \mathbf{0}$ nella soluzione.
+
+
+\section{Generalit\`a sui metodi iterativi per sistemi non lineari}
+Possiamo dunque studiare le propriet\`a generali della famiglia dei
+metodi iterativi che seguono lo schema
+
+$$ x^{(i+1)} = G(x^{(i)}) = x^{(i)} - A(x^{(i)})F(x^{(i)}) $$
+
+e che definiscono una successione di $ \mathbf{x}^{(i)} \in \Rset^n $ che
+converge ad $ \alpha $ se $ \lim_{i \to \infty} || \mathbf{x}^{(i)}-\alpha
+|| = 0 $
+
+Vediamo adesso di capire se e quando questo schema iterativo pu\`o
+convergere alla soluzione. Enunciamo un teorema che ci da una
+condizione sufficiente per lo schema iterativo $ \mathbf{x}^{(i+1)} =
+G(\mathbf{x}^{(i)}) $.
+
+\begin{theo}[Teorema del punto fisso (sufficiente)]
+Sia $ \mathbf{x} = G(\mathbf{x}) $ un sistema non lineare, e $ \alpha $ una soluzione di
+tale sistema (tale dunque che $ \alpha = G(\mathbf{\alpha}) $). Sia $S$ un
+intorno di $ \mathbf{\alpha} $, tale cio\'e che per un certo valore di $ \rho >
+0 $ vale
+\[ S = \left\lbrace x \in \Rset^n. || \mathbf{x} - \mathbf{\alpha} ||_{\infty} \leq \rho \right\rbrace \]
+Sia inoltre
+\[ \forall \mathbf{x} \in S.||H(\mathbf{x})||_{\infty} < 1 \]
+
+Allora si ha convergenza per $ \mathbf{x}^{(0)} \in S $.
+\end{theo}
+\begin{thproof}
+Per induzione si dimostra che
+$$ || \mathbf{x}^{(i)} - \mathbf{\alpha} ||_{\infty} \leq \lambda^{i}\rho \quad
+\text{dove } \lambda = \max_{S}||H(\mathbf{x})||_{\infty} $$
+
+\begin{description}
+\item[$ P(0) $] banalmente $ || \mathbf{x}^{(0)} - \alpha ||_{\infty} \leq 1
+  \cdot \rho $ \`e  vera per ipotesi
+\item[$ P(i) \Rightarrow P(i+1) $] So che $ \mathbf{x}^{(i)} - \mathbf{\alpha} =
+  G(\mathbf{x}^{(i-1)}) - G(\alpha) $. Si tratta di un vettore: possiamo
+  descrivere la $r$-esima componente, utilizzando il teorema del valor
+  medio (\ref{teo-valor-medio-rn}), come
+$$ \mathbf{x}^{(i)}_{r} - \alpha_{r} = g_r(\mathbf{x}^{(i-1)}) - g_r(\mathbf{\alpha}) =
+ \nabla g_r (\mathbf{\xi}_r) ( \mathbf{x}^{(i-1)} - \mathbf{\alpha} )
+ = \displaystyle \sum_{s=1}^{n} \dfrac{\partial g_r}{\partial x_s}(\xi_r)  (x_s^{(i-1)} - \alpha_s)
+$$
+e
+$ \triangledown g_r (\mathbf{\xi}_r) $ \`e la riga $r$-esima della matrice
+jacobiana di $G$ calcolata in $ \mathbf{\xi}_r $. Passiamo al modulo:
+$$| x_r^{(i)} - \alpha_r | = \left| \displaystyle \sum_{s=1}^{n} \dfrac{\partial g_r}{\partial x_s}(\xi_r)  (x_s^{(i-1)} - \alpha_s) \right| $$
+Per la disuguaglianza triangolare tra moduli (\ref{disuguaglianza-triangolare-moduli} a pag. \pageref{disuguaglianza-triangolare-moduli}) si ha:
+$$ \left| \displaystyle \sum_{s=1}^{n} \dfrac{\partial g_r}{\partial x_s}(\xi_r)  (x_s^{(i-1)} - \alpha_s) \right| \leq 
+\displaystyle \sum_{s=1}^{n} \left|\dfrac{\partial g_r}{\partial x_s}(\xi_r) (x_s^{(i-1)} - \alpha_s) \right| $$
+Ricordando che $|ab|=|a|\cdot|b|$, si ha infine
+$$| x_r^{(i)} - \alpha_r | \leq \sum^{n}_{s = 1} \left| \dfrac{\partial g_r}{\partial x_s}(\xi_r) \right| \left| x^{(i-1)}_s - \alpha_s \right| $$
+Considerando che la norma infinito di un vettore è $|| y ||_{\infty} = \displaystyle \max_{i=1 \cdots n}|y_i|$, si ha
+$$\sum^{n}_{s = 1} \left(\left| \dfrac{\partial g_r}{\partial x_s}(\xi_r) \right| \left| x^{(i-1)}_s - \alpha_s \right|\right)
+\leq \sum^{n}_{s = 1} \left(\left| \dfrac{\partial g_r}{\partial x_s}(\xi_r) \right| || x^{(i-1)} - \alpha ||_{\infty} \right)
+= \sum^{n}_{s = 1} \left(\left| \dfrac{\partial g_r}{\partial x_s}(\xi_r) \right| \right) || x^{(i-1)} - \alpha ||_{\infty}$$
+
+Inoltre, considerando che la norma infinito di una matrice è $|| A ||_{\infty} = \displaystyle \max_{i=1 \cdots n}\sum_{j=1}^n|A_{ij}|$, e quindi $$|| H(x) ||_{\infty}  = \displaystyle \max_{i=1 \cdots n}\displaystyle \sum_{s=1}^{n}\left|\frac{\partial g_i(x)}{\partial x_s}\right|$$ si ha
+\[
+ \sum^{n}_{s = 1} \left(\left| \dfrac{\partial g_r}{\partial x_s}(\xi_r) \right| \right) || x^{(i-1)} - \alpha ||_{\infty} \leq || H(\xi_r) ||_{\infty}  || \mathbf{x}^{(i-1)} - \mathbf{\alpha} ||_{\infty} \leq \lambda || \mathbf{x}^{(i-1)} - \mathbf{\alpha} ||_{\infty} \]
+In definitiva sappiamo che
+\[ | x_r^{(i)} - \alpha_r | \leq \lambda || \mathbf{x}^{(i-1)} - 
+\mathbf{\alpha} ||_{\infty} \quad r=1 \ldots n \]
+questo vale in particolare per $r$ che massimizza  $| x_r^{(i)} - \alpha_r | $
+\[ || \mathbf{x}^{(i)} - \mathbf{\alpha} ||_{\infty} \leq \lambda || \mathbf{x}^{(i-1)} - \mathbf{\alpha} ||_{\infty} \]
+Possiamo quindi scrivere
+\[ || \mathbf{x}^{(i)} - \mathbf{\alpha} ||_{\infty} \leq \lambda || \mathbf{x}^{(i-1)} - \alpha ||_{\infty} \leq \lambda^2 || \mathbf{x}^{(i-2)} - \mathbf{\alpha} ||_{\infty} \leq \ldots \leq \lambda^{(i)} || \mathbf{x}^{(0)} - \mathbf{\alpha} ||_{\infty} \leq \lambda^i \rho \]
+in quanto $ \mathbf{x}^{(0)} \in S \Rightarrow ||\mathbf{x}^{(0)} - \mathbf{\alpha} ||_{\infty}
+\leq \rho $.
+\end{description}
+
+Detto questo, \`e facile vedere che, essendo $ \lambda < 1 $, $
+\lambda^i \rho \xrightarrow{i \rightarrow \infty} 0 $ e che quindi $
+|| \mathbf{x}^{(i)} - \mathbf{\alpha} ||_{\infty} \xrightarrow{i \rightarrow \infty} 0 $
+\end{thproof}
+
+Questo teorema fornisce una condizione sufficiente per la
+convergenza. Se quindi si verificano le ipotesi, possiamo affermare
+con certezza che il metodo converge. Ma il metodo pu\`o convergere
+anche se le condizioni non si verificano!
+
+Vediamo un esempio.
+
+\begin{example}
+Consideriamo il sistema non lineare
+ $$ \left\{
+\begin{array}{l}
+ x_1 = g_1(x) = \frac{1}{4}(x_{1}^{2} + x_{2}^{2}) \\ x_2 = g_2(x) =
+ \sin(x_1 + 1)
+\end{array}
+\right. \qquad x= \begin{pmatrix} x_1 \\ x_2
+    \end{pmatrix}
+$$
+
+Vogliamo
+
+\begin{itemize}
+ \item Verificare l'esistenza di punti fissi
+ \item Applicare il teorema del punto fisso
+\end{itemize}
+
+Tracciamo il grafico delle due funzioni. La prima delle due \`e una
+circonferenza, la seconda un seno.
+
+\includegraphics[width=350px]{imgs/121701.jpg}
+
+Come possiamo vedere, ci sono due punti di incontro, che chiameremo $
+\alpha $ (quello pi\`u vicino all'asse delle ordinate) e $ \beta
+$. Ora devo trovare un intorno S di uno dei due punti tale che $
+\forall x \in S.||H(x)||_{\infty} < 1 $. Calcoliamo $ H(x) $, che
+ricordiamo essere la matrice la quale, sulle righe, ha i gradienti
+delle funzioni che compongono $G$.
+
+$$ H(x) = \left[\begin{array}{cc} \frac{x_1}{2} & \frac{x_2}{2}
+    \\ \cos(x_1 +1)& 0
+\end{array}          
+\right]
+$$
+
+Devo ora calcolare la norma infinito della matrice, lasciando $x$
+parametrico. La norma infinito \`e la massima somma degli elementi
+delle righe di
+
+$$ ||H(x) ||_{\infty} = \max(\frac{1}{2} (|x_{1}| + |x_{2}|), |
+cos(x_1 + 1)|) $$
+
+Voglio che $ || H(x) ||_{\infty} $ sia minore di 1: ovviamente $ |
+cos(x_1 + 1)| < 1 $, quindi rimane da vedere che $ \frac{1}{2}
+(|x_{1}| + |x_{2}|) < 1 $. Questo accade quando $ x_1 + x_2 < 2
+$. Possiamo dunque tracciare l'equazione della retta $ y = - x + 2 $
+sotto la quale vale sempre $ || H(x) || _{\infty} < 1 $. Possiamo
+vedere il grafico di questa retta nella pagina successiva.
+
+Se prendiamo $ \alpha $, appare evidente che possiamo costruirne un
+intorno S non vuoto tale che $ \forall x \in S.H(x) < 1 $: basta che
+tale intorno non oltrepassi la retta $ x_1 + x_2 < 2 $. Non possiamo
+dire la stessa cosa per $ \beta $: infatti $ H(\beta) > 1 $ ed \`e
+quindi impossibile costruirne un intorno in cui la propriet\`a non
+vada. Ma pu\`o darsi che il metodo funzioni comunque, in quanto la
+propriet\`a enunciata \emph{non \`e necessaria}.
+
+\includegraphics[width=350px]{imgs/121702.jpg}
+\end{example}
+
+Enunciamo un secondo teorema del punto fisso, che \`e  necessario e
+sufficiente.
+
+\begin{theo}[Teorema del punto fisso (necessario e sufficiente)]\label{theo:ptofisso2}
+Siano
+\begin{itemize}
+\item $g(\mathbf{x})$ di classe $C^{1}(\Omega)$
+\item $\Omega$ insieme aperto
+\item $ \mathbf{\alpha} $ punto di $ \Omega $ tale che $ \mathbf{\alpha} = g(\mathbf{\alpha}) $
+  ($ \mathbf{\alpha} $ \`e punto fisso di $g$)
+\end{itemize}
+Allora esiste una norma $|| \cdot ||_* $ vettoriale ed un intorno $ S
+= \left\lbrace x : || x - \alpha ||_* < \pi \right\rbrace $ tale che
+per $\mathbf{x}^{(0)}\in S$ si ha convergenza se e solo se $\rho(H(\mathbf{\alpha}))
+\leq 1$.
+\end{theo}
+
+Non dimostreremo questo teorema. Piuttosto viene da chiedersi il
+perch\'e delle differenze fra i due teoremi: uno pone condizioni sulla
+norma, l'altro sul raggio spettrale.
+
+Effettivamente esiste un legame fra queste due grandezze: si veda il Teorema \ref{th:raggio-spettrale-norme-indotte} a pagina \pageref{th:raggio-spettrale-norme-indotte}, il quale asserisce che per ogni matrice $B$ e per ogni norma indotta $|| \cdot ||$ vale
+$$ \rho(B) = \inf_{|| \cdot || \text{ indotta}}\{ ||B||\}$$
+
+In particolare, se $ \rho(B) < 1 $, possiamo trovare, prendendo $
+\epsilon < 1 - || H(\alpha) || $, una norma $ ||\cdot||_* $ tale che
+
+$$ \rho(B) \leq || B||_* \leq \rho(B) + \epsilon$$
+
+verificando dunque la condizione del teorema del punto fisso nella sua
+versione sufficiente, in quanto per la continuit\`a di $g$ esister\`a un
+intorno di $ \mathbf{\alpha} $ nel quale la matrice hessiana avr\`a norma
+minore di 1.
+
+
+\section{Metodo di Newton-Raphson (delle tangenti)}
+\label{section:metodo-newton-raphson}
+Vediamo adesso un metodo per la risoluzione di sistemi non
+lineari che segue lo schema presentato nel paragrafo precedente: il metodo di Newton-Raphson. Si tratta di un'estensione del
+metodo di Newton.
+
+Prendiamo il nostro problema, espresso al solito nelle due forme
+alternative $ F(\mathbf{x}) = \mathbf{0} $ e 
+$ \mathbf{x} = G(\mathbf{x}) $. Abbiamo visto che possiamo
+sempre ottenere da tali espressioni la relazione
+
+\[ \mathbf{x} = G(\mathbf{x}) = \mathbf{x} -
+A(\mathbf{x})F(\mathbf{x}) \]
+
+per una qualche funzione $A(\mathbf{x})$. Il metodo di Newton-Raphson prende $A(\mathbf{x}) = J^{-1}(\mathbf{x}) $, dove 
+$J(\mathbf{x})$ \`e la matrice Jacobiana di $F$. Manipolando
+otteniamo che
+
+\[ \mathbf{x}^{(i+1)} = \mathbf{x}^{(i)} - J^{-1}(\mathbf{x}^{(i)})F(\mathbf{x}^{(i)}) \quad \Rightarrow \quad J(\mathbf{x}^{(i)})(\mathbf{x}^{(i+1)} - \mathbf{x}^{(i)}) = - F(\mathbf{x}^{(i)}) \]
+
+che \`e un sistema lineare che ha $ J(\mathbf{x}^{(i)}) $ come matrice dei
+coefficienti, $ \mathbf{x}^{(i+1)} - \mathbf{x}^{(i)} $ come incognite e $ - F(\mathbf{x}^{(i)})$ come vettore dei termini noti.
+
+\begin{example}[Matrice associata al metodo di Newton-Raphson]
+Nel caso delle matrici 2x2 ottengo il sistema
+$$ \left[
+\begin{array}{cc}
+\frac{\partial f_1}{\partial x_1}(x^{(i)}) & \frac{\partial
+  f_1}{\partial x_2}(x^{(i)}) \\ \frac{\partial f_2}{\partial
+  x_1}(x^{(i)}) & \frac{\partial f_2}{\partial x_2}(x^{(i)})
+\end{array} 
+\right] \left[
+\begin{array}{c}
+\theta_1 \\ \theta_2
+\end{array} 
+\right] = \left[
+\begin{array}{c}
+ - f_1(x^{(i)}) \\ -f_2(x^{(i)}) \\
+\end{array} 
+\right]
+$$
+
+dove $ \theta = x^{(i+1)} - x^{(i)} $
+\end{example}
+
+Al solito, dobbiamo dimostrare che il metodo converge.
+
+\begin{theo}[Convergenza di Newton-Raphson]
+\label{theo:convergenza-newton-raphson}
+Siano
+\begin{itemize}
+\item $ F(\mathbf{x}) \in C^2(\Omega) $ con matrice jacobiana $ J(\mathbf{x}) $
+\item $ \mathbf{\alpha} \in \Omega $ tale che $ F(\mathbf{\alpha}) =\mathbf{0} $
+\end{itemize}
+Allora, se $ J(\mathbf{x}) $ \`e non singolare in $ \Omega $, $ \exists S
+\subseteq \Omega $ intorno di $ \mathbf{\alpha} $ tale che, preso $ \mathbf{x}^{(0)} \in
+S $:
+\begin{enumerate}[(a)]
+\item la successione $ \left\lbrace \mathbf{x}^{(i)} \right\rbrace_{i} $
+  generata dal metodo di Newton-Raphson a partire dal punto
+ $ \mathbf{x}^{(0)}$ converge a $ \mathbf{\alpha} $
+\item $ \forall || \cdot ||.\exists \beta.\forall i > 0.|| \mathbf{x}^{(i+1)} -
+  \mathbf{\alpha} || \leq \beta || \mathbf{x}^{(i)} - \mathbf{\alpha} ||^2 $
+\end{enumerate}
+\end{theo}
+
+\begin{thproof}
+Dimostriamo i due punti del teorema.
+
+\begin{enumerate}[(a)]
+\item Per comodit\`a di notazione nella dimostrazione scriveremo $
+  K(\mathbf{x}) = J^{-1}(\mathbf{x}) $. Abbiamo dunque
+
+\[ G(\mathbf{x}) = \mathbf{x} - K(\mathbf{x})F(\mathbf{x}) \]
+
+Si tratta di un'uguaglianza fra vettori: prendiamone la $r$-esima
+componente.
+
+\[ g_r(\mathbf{x}) = x_r - \sum_{s=1}^{n}K_{rs}(\mathbf{x})f_{s}(\mathbf{x}) \]
+
+Deriviamo rispetto ad $ x_t $, per $ t \in [1,n] $, ottenendo i valori
+della matrice jacobiana $H$ di $g$.
+
+\[ h_{rt}(\mathbf{x}) = \dfrac{\partial g_r}{\partial x_t}(\mathbf{x}) =
+\delta_{rt} - \sum_{s=1}^{n} \dfrac{\partial K_{rs}}{\partial x_t}(\mathbf{x})
+f_s(\mathbf{x}) - \sum_{s=1}^{n} K_{rs}(\mathbf{x}) \dfrac{\partial f_s}{\partial
+  x_t}(\mathbf{x})\]
+
+dove $ \delta_{rt} $ vale 1 se $ r=t $ e $0$ altrimenti. Analizziamo il
+terzo addendo: si tratta del prodotto fra la r$-$esima riga di K (ovvero
+la $r$-esima riga di $ J^{-1} $) e la $t$-esima colonna di $J$. Visto che $
+JJ^{-1} = I $ per definizione di matrice inversa, so che tale prodotto
+deve fare $1$ se $ r=t $ e $0$ altrimenti. Ho quindi che $ \delta_{rt} =
+\displaystyle \sum_{s=1}^{n} K_{rs}(\mathbf{x}) \dfrac{\partial f_s}{\partial x_t}(\mathbf{x})$, e
+posso annullarli uno con l'altro. Rimane dunque
+
+\[ h_{rt}(\mathbf{x}) = - \sum_{s=1}^{n} \dfrac{\partial K_{rs}}{\partial x_t}(\mathbf{x}) f_s(\mathbf{x}) \]
+
+che implica che $ h_{rt}(\mathbf{\alpha}) = 0 $, in quanto $ \forall
+s.f_s(\alpha) = 0 $. Quindi $ \rho (H(\mathbf{\alpha})) = 0 $, e posso
+applicare il teorema \ref{theo:ptofisso2} del punto fisso che mi
+assicura la convergenza in un intorno $S$ di $ \mathbf{\alpha} $.
+\item Vale
+\[ J(x^{(i)})(x^{(i+1)} - x^{(i)}) = - F(x^{(i)}) \]
+\[ J(x^{(i)})\left[ (x^{(i+1)} - \alpha) - (x^{(i)} - \alpha) \right] = - F(x^{(i)}) \]
+\begin{equation} 
+J(x^{(i)}) (x^{(i+1)} - \alpha) = J(x^{(i)}) (x^{(i)} - \alpha) -
+F(x^{(i)})
+\label{eqn:newtrhap1}\end{equation}
+
+Indichiamo con $ S_r $ le matrici hessiane delle funzioni $ f_r $.
+
+\[ (S_r(x))_{st} = \dfrac{\partial^2 f_r}{\partial x_s \partial x_t} (x) \]
+
+Applicando la sostituzione di Taylor posso porre
+
+\[ F(\alpha) = F(x^{(i)}) + J(x^{(i)})(\alpha - x^{(i)}) + v \]
+\begin{equation}
+-F(x^{(i)}) = - F(\alpha) + J(x^{(i)})(\alpha - x^{(i)}) + v
+\label{eqn:newtrhap3}\end{equation}
+
+dove $ v = \frac{1}{2} (x^{(i)} - \alpha)^T S_r (\xi_r)(x^{(i)} -
+\alpha) $, e passando a moduli e norme,
+
+\begin{equation}
+|v_r| \leq \frac{n}{2} || S_r(\xi_r) ||_{\infty} || x^{(i)}-\alpha
+||_{\infty}^2
+\label{eqn:newtrhap4}\end{equation}
+
+Abbiamo tutti i pezzi per trarre la conclusione: prendiamo l'equazione
+\ref{eqn:newtrhap1} ed applichiamo la sostituzione
+\ref{eqn:newtrhap3}:
+
+\[ J(x^{(i)}) (x^{(i+1)} - \alpha) = J(x^{(i)}) (x^{(i)} - \alpha) - F(x^{(i)}) \]
+\[ J(x^{(i)}) (x^{(i+1)} - \alpha) = J(x^{(i)}) (x^{(i)} - \alpha) - F(\alpha) + J(x^{(i)})(\alpha - x^{(i)}) + v \]
+
+Essendo $ F(\alpha) = 0 $ e $ (x^{(i)} - \alpha) = - (\alpha -
+x^{(i)}) $, ottengo $ (x^{(i+1)} - \alpha) = J^{-1}(x^{(i)}) v
+$. Passando alle norme ed applicando \ref{eqn:newtrhap4} ottengo
+
+\[ ||x^{(i+1)} - \alpha ||_{\infty} \leq \gamma || x^{(i)} - \alpha ||_{\infty}^2 \]
+
+per $ \gamma = \frac{n}{2} \max _{x \in S} || K(x) ||_{\infty} \max_{x
+  \in S, r \in [1,n]} ||S_r(x)|| _{\infty} $
+
+Notare che $ \gamma $ \`e costante: per l'equivalenza topologica fra
+le norme, esister\'a un $ \beta $ per cui questa relazione vale per
+qualunque norma $ || \cdot || $, come volevasi dimostrare.
+\end{enumerate}
+\end{thproof}
+
+
+%%Buco dell`ultima lezione prima di Natale (Newton Raphson)
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "appunti"
+%%% End: 
+
+\subsection{Newton-Raphson su funzioni convesse}
+Per via delle proprietà delle funzioni convesse, possiamo utilizzare Newton-Raphson con risultati di convergenza sensibilmente migliori rispetto al normale. Otterremo questo risultato grazie ai due teoremi seguenti.
+
+Il primo teorema lega le proprietà della matrice Jacobiana alla convessità.
+
+\begin{theo}[Legame fra matrice Jacobiana e convessità]\label{theo:legamejacobconvessita}
+Siano
+\begin{itemize}
+\item D insieme convesso
+\item $ f \in C^1(D) $
+\end{itemize}
+Allora f \`e  convessa su D \textbf{se e solo se} $ f(v) - f(u) \geq J(u)(v-u) $ 
+\end{theo}
+\begin{thproof}
+Dimostriamo i due sensi della doppia implicazione
+
+\begin{description}
+\item[$ \Leftarrow $] Assumiamo $ f(v) - f(u) \geq J(u)(v-u) $. Siano
+\begin{itemize}
+\item $ x,y \in D $
+\item $ \lambda \in [0,1] $
+\item $ z(\lambda) = \lambda \cdot x + (1-\lambda ) \cdot y $
+\end{itemize}
+
+Ovviamente, essendo D convesso, avremo che $ z(\lambda) \in D $ per definizione di insieme convesso.  Possiamo dire che
+
+\begin{eqnarray*}
+f(x) - f(z(\lambda)) \geq J(z(\lambda)) (x -z(\lambda)) \\
+f(y) - f(z(\lambda)) \geq J(z(\lambda)) (y -z(\lambda))
+\end{eqnarray*}
+
+Moltiplichiamo la prima equazione per $ \lambda $ e la seconda per $ (1 - \lambda) $, e sommiamo membro a membro. Otterremo
+
+\[ \lambda f(x) + (1 - \lambda) f(y) - f(z(\lambda)) \geq J(z(\lambda))(\lambda x + (1 - \lambda) y - z(\lambda))  \]
+
+Ma 
+
+\[ \lambda x + (1 - \lambda) y - z(\lambda) = \lambda x + (1 - \lambda) y - \lambda x - (1 - \lambda) y = 0 \]
+
+La parte destra \`e  dunque uguale a zero: rimane la relazione
+
+\[ \lambda f(x) + (1 - \lambda) f(y) \geq f(z(\lambda)) = f(\lambda x + (1-\lambda ) \cdot y) \]
+
+che corriponde alla definizione di funzione convessa vista in \ref{richiamibigi:funzioneconvessa} a pagina \pageref{richiamibigi:funzioneconvessa}.
+
+\item[$ \Rightarrow $] Supponiamo adesso che f sia convessa in D. Siano
+\begin{itemize}
+\item $ u,v \in D $
+\item $ \lambda \in [0,1] $
+\item $ w(\lambda) = \lambda v + (1 - \lambda) u $
+\end{itemize}
+
+Essendo $ f \in C^1(D) $, per una qualunque norma $ ||\cdot || $ esiste il \emph{differenziale totale}
+\[ \lim_{x' \rightarrow x} \dfrac{|| f(x') - f(x) - J(x)(x' - x) ||}{|| x' - x ||} = 0 \]
+
+Preso $ x' = w(\lambda), x = u $ ho, considerando che $ || w(\lambda) - u || = || \lambda v + (1 - \lambda) u - u || = || \lambda v - \lambda u || = |\lambda| || v - u || $ e che $ w(\lambda) \rightarrow u \Leftrightarrow \lambda \rightarrow 0 $,
+
+\[ \lim_{\lambda \rightarrow 0} \dfrac{|| f(w(\lambda)) - f(u) - J(u)(w(\lambda) - u) ||}{|| w(\lambda) - u ||} = 0 \Leftrightarrow \]
+\[ \Leftrightarrow \lim_{\lambda \rightarrow 0} \frac{1}{\lambda} || f(w(\lambda)) - f(u) - \lambda J(u)(v - u) || = 0 \Leftrightarrow \]
+\[ \Leftrightarrow \lim_{\lambda \rightarrow 0} \frac{1}{\lambda} \left[ f(w(\lambda)) - f(u) \right] = J(u)(v - u) \]
+
+Ma abbiamo che, per la definizione di funzione convessa,
+
+\[ \lambda f(v) + (1 - \lambda)f(u) \geq f(w(\lambda)) \Leftrightarrow f(v) - f(u) \geq \frac{1}{\lambda} \left[ f(w(\lambda)) - f(u) \right] \]
+
+e che quindi
+
+\[ \lambda f(v) + (1 - \lambda)f(u) \geq J(u)(v - u) \]
+
+come volevasi dimostrare
+\end{description}
+\end{thproof}
+
+Detto questo, possiamo dimostrare che
+
+\begin{theo}[Convergenza di Newton-Raphson per funzioni convesse]
+Siano
+\begin{itemize}
+\item $ a_i, b_i \in \Rset^n, i \in [1,n] $
+\item D intervallo di $ \Rset^n $
+\item $ f \in C^1(D) $ convessa su D
+\item $ \alpha \in D $ tale che $ f(\alpha) = 0 $
+\end{itemize}
+
+Allora, se si verificano le seguenti condizioni
+\begin{itemize}
+\item $ \forall x \in D. J(x) $ non \`e  singolare
+\item $ [J(x)]^{-1} \geq 0 $
+\end{itemize}
+e considerata la successione $ \left\lbrace x^{(i)} \right\rbrace_i $ generata dal metodo di Newton-Raphson, vale la seguente relazione:
+\[ \forall x^{(0)} \in D \text{ tale che } f(x^{(0)}) \geq 0 \; \lim_{i \to \infty} x^{(i)} \rightarrow \alpha \]
+
+Inoltre $ \alpha $ \`e  l'unica soluzione del problema.
+\end{theo}
+\begin{thproof}
+Per prima cosa dimostriamo per induzione su i che
+\begin{itemize}
+\item $ \forall i.\alpha \leq x^{(i+1)} \leq x^{(i)} $
+\item $ f(x^{(i+1)} \geq 0 $
+\end{itemize}
+Il secondo punto servir\'a solamente per applicare l'induzione. Il primo punto \`e  quello importante: ci dice che la successione di $ x^{(i)} $ si avvicina verso $ \alpha $.
+
+\begin{description}
+\item[Passo base] Dal teorema \ref{theo:legamejacobconvessita} sappiamo che, se f \`e  convessa, vale $ f(\alpha) - f(x^{(0)} \geq J(x^{(0)}(\alpha - x^{(0)}) $, e che dunque
+
+\begin{equation}
+-[J(x)]^{-1}f(x^{(0)} \geq \alpha - x^{(0)}
+\label{eqn:nrfunzconv}
+\end{equation}
+
+Essendo $ [J(x^{(0)})]^{-1} \geq 0 $ e $ f(x^{(0)}) \geq 0 $ per ipotesi, ottengo
+
+\begin{itemize}
+\item $ \alpha \leq x^{(0)} $ in quanto $ \alpha - x^{(0)} $ \`e  un valore negativo
+\item $ \alpha \leq x^{(1)} = x^{(0)}-[J(x)]^{-1}f(x^{(0)} \leq x^{(0)} $
+\end{itemize}
+
+Inoltre, sempre per il fatto che f \`e  convessa, posso applicare il teorema \ref{theo:legamejacobconvessita} ottenendo
+\[ f(x^{(1)} - f(x^{(0)} \geq J(x^{(0)})(x^{(1)} - x^{(0)}) \]
+Questa relazione, essendo $ J(x^{(0)})(x^{(1)} - x^{(0)}) = -f(x^{(0)}) $ per definizione del metodo, implica $ f(x^{(1)} \geq 0 $. Inoltre, essendo $ x^{(1)} $ compreso fra $ x^{(0)} $ e $ \alpha $, abbiamo che $ x^{(1)} \in D $ e che quindi $ [J(x^{(1)})]^{-1} \geq 0 $
+
+\item[Passo induttivo] Essendo $ [J(x^{(1)})]^{-1} \geq 0 $ e $ f(x^{(1)} \geq 0 $ posso applicare esattamente la stessa dimostrazione vista per il passo base.
+\end{description}
+
+La successione \`e  quindi decrescente e inferiormente limitata: possiamo esser sicuri che converge ad un valore $ \beta $ per il quale
+\[ f(\beta) = \lim_{i \rightarrow \infty} f(x^{(i)}) = \]
+\[ = \lim_{i \rightarrow \infty} J(x^{(i)})\left[ x^{(i)} - x^{(i-1)} \right] = \]
+\[ = \lim_{i \rightarrow \infty} J(x^{(i)})\left[ \beta - \beta \right] = 0 \]
+Quindi $ \beta $ \`e  un'altra soluzione dell'equazione: ma dal teorema \ref{theo:legamejacobconvessita} posso concludere che
+\[ 0 = f(\alpha) - f(\beta) \geq J(\alpha)(\beta - \alpha) \]
+\[ 0 = f(\beta) - f(\alpha) \geq J(\beta)(\alpha - \beta) \]
+ed essendo $ [J(\alpha)]^{-1} \geq 0, [J(\beta)]^{-1} \geq 0 $ ho
+\[ \left. \begin{array}{c}
+0 \geq \beta - \alpha \\ 
+0 \geq \alpha - \beta
+\end{array}  \right. \Rightarrow \alpha = \beta \]
+
+Quindi, ricapitolando
+\begin{itemize}
+\item la successione converge ad un valore
+\item tale valore \`e  $\alpha$, che \`e  soluzione \emph{unica}
+\end{itemize}
+\end{thproof}
+
+\outbpdocument

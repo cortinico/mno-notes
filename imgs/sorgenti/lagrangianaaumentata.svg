@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="New document 1">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path4033"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="466.95312"
+     inkscape:cy="358.26054"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:snap-nodes="true"
+     inkscape:object-paths="true"
+     inkscape:window-width="1024"
+     inkscape:window-height="560"
+     inkscape:window-x="0"
+     inkscape:window-y="19"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff"
+       id="rect2995"
+       width="174.28572"
+       height="111.42857"
+       x="220"
+       y="218.07646" />
+    <rect
+       style="fill:#ffffff"
+       id="rect2997"
+       width="125.71429"
+       height="62.857143"
+       x="182.85715"
+       y="660.93359" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffffff;stroke:#000000;stroke-opacity:1"
+       id="path3775"
+       sodipodi:cx="260"
+       sodipodi:cy="202.36218"
+       sodipodi:rx="225.71428"
+       sodipodi:ry="18.571428"
+       d="m 485.71428,202.36218 a 225.71428,18.571428 0 1 1 -451.428559,0 225.71428,18.571428 0 1 1 451.428559,0 z"
+       transform="matrix(1.0928787,0,0,6.5973567,57.280115,-682.56363)" />
+    <rect
+       style="fill:#ffffff;stroke:#000000;stroke-opacity:1"
+       id="rect3817"
+       width="194.28572"
+       height="102.85714"
+       x="240"
+       y="592.36218" />
+    <text
+       xml:space="preserve"
+       style="font-size:66.97092438px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="292.89078"
+       y="620.33484"
+       id="text3819"
+       sodipodi:linespacing="125%"
+       transform="scale(0.93857363,1.0654465)"><tspan
+         sodipodi:role="line"
+         id="tspan3821"
+         x="292.89078"
+         y="620.33484">KKT</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow1Lend)"
+       d="M 337.0459,774.99526 C 340,695.21932 340,695.21932 340,695.21932"
+       id="path3845"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:22.24102592px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="219.65021"
+       y="794.12915"
+       id="text4471"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99140237,1.0086722)"><tspan
+         sodipodi:role="line"
+         id="tspan4473"
+         x="219.65021"
+         y="794.12915">Lagrangiana Aumentata</tspan><tspan
+         sodipodi:role="line"
+         x="219.65021"
+         y="821.93042"
+         id="tspan4475" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:20.21565056px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="241.80043"
+       y="685.83612"
+       id="text4471-9"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99255406,1.0075018)"><tspan
+         sodipodi:role="line"
+         id="tspan4473-1"
+         x="241.80043"
+         y="685.83612">Problema Originale</tspan><tspan
+         sodipodi:role="line"
+         x="241.80043"
+         y="711.10571"
+         id="tspan4501" /><tspan
+         sodipodi:role="line"
+         x="241.80043"
+         y="736.37524"
+         id="tspan4475-9" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:19.20625687px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="345.12357"
+       y="730.26227"
+       id="text4471-99"
+       sodipodi:linespacing="125%"
+       transform="scale(0.97977729,1.0206401)"><tspan
+         sodipodi:role="line"
+         id="tspan4473-14"
+         x="345.12357"
+         y="730.26227">p</tspan><tspan
+         sodipodi:role="line"
+         x="345.12357"
+         y="754.27008"
+         id="tspan4527" /><tspan
+         sodipodi:role="line"
+         x="345.12357"
+         y="778.27789"
+         id="tspan4475-91" /></text>
+  </g>
+</svg>

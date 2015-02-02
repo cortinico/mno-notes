@@ -1,0 +1,280 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsfonts} % matematica
+\usepackage{amsmath} % matematica
+\usepackage{amssymb} % simboli vari
+\usepackage{calrsfs}
+\usepackage{caption}
+\usepackage{enumerate}
+\usepackage{extarrows} % matematica
+\usepackage{keyval}
+\usepackage{manfnt} % Simboli curva
+\usepackage{mathtools} % matematica
+\usepackage{multirow} 
+\usepackage[usenames]{color} % colori con nome
+\usepackage[pdftex]{graphicx}
+\usepackage{epstopdf} % gestione file EPS
+\usepackage{wrapfig} % per figure circondate da testo
+\usepackage{framed}	% teoremi framed
+\usepackage{fancyhdr} % header buffi
+\usepackage[T1]{fontenc} % gestione hbox e vbox
+\usepackage[a4paper]{geometry}
+\usepackage{microtype} % gestione hbox e vbox
+\usepackage[thref, amsthm, amsmath, framed]{ntheorem} % teoremi (avanzata)
+%% \usepackage{prooftree} % gestione prof-tree
+\usepackage{rotating}
+\usepackage{stmaryrd}
+\usepackage{subfig}
+\usepackage{syntax} % syntattic stuff
+\usepackage{txfonts}
+\usepackage{verbatim} % migliorie al verbatim
+\usepackage{hyperref}
+%% \usepackage{qtree}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage{cancel}
+
+\geometry{verbose,tmargin=2cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2cm}
+
+%opening
+\title{Favolette MNO}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Gradiente Coniugato}
+
+Vogliamo calcolare la soluzione del sistema 
+$$ Ax=b$$
+supponiamo che $A$ sia simmetrica e definita positiva
+in questo modo,
+considerando il funzionale quadratico
+$$ f(x) = \frac{1}{2} x^{T}Ax -b^{T}x$$
+otteniamo che
+$$\nabla f(x) = Ax+b $$
+e 
+$$\nabla^{2} f(x) = A  $$
+In questo modo abbiamo che minimizzare il funzionale quadratico
+corrisponde a risolvere il sistema lineare, inoltre se $A$ \`e positiva,
+abbiamo un'unica soluzione, in quanto la funzione \`e strettamente convessa.
+Utilizzeremo un metodo iterativo in cui
+$$ x_{k+1} = x_{k} + t_k d_k$$
+E dobbiamo ottenere delle direzione di discesa: questo accade
+se 
+$$ \nabla f(x_k)^{T}d_k < 0 $$
+Sfruttando la conoscenza della funzione, possiamo calcolare gia
+il passo migliore che \`e dato da
+minimizzare
+$$ \varphi(x_k + t_k d_k) $$
+Quindi
+$$ 0 = \varphi'(t_k) = \nabla(x_k + t_k d_k)^{T} d_k = 
+ A((x_k + t_k d_k)-b)^{T} d_k = (Ax_k -b + t_kA d_k)^{T} d_k =
+-r_k^{T}d_k + t_k d_k^{T} A d_k = 0
+$$
+Ponendo $Ax_k -b = -r_k$ il miglior $t_k$ risulta
+$$ t_k = \frac{r_k^{T}Ad_k}{d_k^{T}d_k}$$ 
+Una propriet\`a fondamentale \`e che risulta
+$$ r^{T}_{k+1} d_k =0 $$
+quindi il residuo risulta ortogonale alla direzione scelta al passo precedente,
+\`e questo il punto principale che ci fara scegliere direzioni $A$ coniugate.
+ossia
+$$ d_k^{T} A d_{k-1} =0$$
+otteniamo
+
+$$
+ d_k =
+\left\{
+\begin{array}{ll}
+r_0  & \text{se }  k=0 \\
+ r_k + \beta_k d_{k-1} & \text{ altrimenti }
+\end{array}
+\right.
+$$
+
+dobbiamo calcolare il $\beta$ che verifica questa condizione:
+vediamo come calcolarlo: applichiamo la formual dell'aggiornamento della
+direzione
+$$ d_k^{T} A d_{k-1} = (r_k + \beta_k d_{k-1})^{T} A d_{k-1} = 
+r_k^{T} A d_{k-1} + \beta_k d_{k-1}^{T} A d_{k-1} $$
+Otteniamo quindi  
+$$ \beta_k = - \frac{r_k^{T} A d_{k-1}}{d_{k-1}^{T} A d_{k-1}}$$
+La direzione $d_k$ risulta essere di discesa in quanto
+$$ d_k^{T} \nabla f(x) < 0$$
+ricordando infatti che $\nabla f(x) = Ax-b = -r$
+abbiamo che
+$$ d_k^{T} \nabla f(x) = -d_k^{T}r_k=
+(-r_k + \beta_k d_{k-1})^{T}r_k = -r_k^{T}r_k  - \beta_k d_{k-1}^{T}r_k $$
+Poich\'e il resuduo \`e ortigonale rispeto alla direzione scelta al passo precedente risulta:
+$$  - \beta_k d_{k-1}^{T}r_k = 0 $$
+Ma poich\'e il residuo \`e diverso da zero,  deve essere
+$$ -r_k^{T} r_k < 0$$ 
+Scopriamo quindi che
+$$d_k^{T} \nabla f(x) = r_k^{T} r_k$$
+Sostituendo nel passo otteniamo
+che
+$$ t_k = \frac{r_k^{T}r_k}{d_k^{T}d_k}$$
+Una propriet\`a fondamentale che si dimostra \`e che risidui risultano ortogonali fra loro, ossia
+$$ r^{k-1}r_k = 0 $$
+Ed \`e questo il motivo per cui abbiamo una covergenza al max in $n$ passi
+
+Il metodo inoltre risulta essere molto pi\`u stabile 
+rispetto a scegliere la solita direzione $-\nabla$
+\paragraph{Estensione al caso non lineare}
+Se abbiamo a che fare con sistemi non lineari, non
+possiamo pi\`u sfruttare a pieno le condizioni del funzionale quadratico.
+Il problema nasce nel fatto che metre avevamo una descrizione 
+esplicita del passo da effettuare, nel caso non lineare ci ritroviamo
+a dover affrontare un problema di minimizzazione.
+Possiamo quindi voler utilizzare la ricerca inesatta, per garantire
+la convergenza per\`o ci ritroviamo a dover modificare la condizione
+di curvature, questa \` detta \emph{condizione di curvatura forte}.
+Passiamo infatti da
+
+$$ f'(t_k) \leq c_2 f'(0) $$
+a
+$$ |f'(t_k)|  \geq c_2 |f'(0)| $$
+
+\section{Minimi quadrati non lineari}
+Un problema dei minimi quadrati non lineare ha le seguenti caratteristiche:
+$$ \min \{f(x) : x \in \mathbb{R}^{n} \} \quad
+f(x) = \frac{1}{2} \displaystyle \sum_{j=1}^{m} r_j^{2}(x) $$
+dove
+$$r_j: \mathbb{R}^{n} \rightarrow \mathbb{R} \text{ non lineari } 
+\qquad  x \rightarrow A_jx-b_j;$$
+Un esempio di problema non lineare era il data fitting, visto nelle
+prime lezioni. I metodi per risolvere questo problema li avremmo gi\`a ma,
+poich\'e conosciamo la struttura della funzione obiettivo,
+vogliamo sfruttarne la struttura  per specializzare i metodi che
+ abbiamo visto fino ad adesso. \\
+Supporremo inoltre $r_j$ differenziabile 2 volte.\\
+Cercheremo di specializzare il metodo di Newton. \\
+
+\paragraph{Calcolo del gradiente}
+Cerchiamo una rappresentazione pi\`u compatta:
+$$ R = (r_1, \ldots, r_m): \mathbb{R}^m \rightarrow \mathbb{R}^{n}$$
+$$R(x) = (r_1(x), \ldots, r_m(x)) $$
+Matrice Jacobiana, le cui righe sono i gradienti dei componenti
+$$J_R(x) =
+\left[
+\begin{array}{ccc}
+ \cdots & \nabla r_1(x)^{T} & \cdots \\
+\vdots & \vdots & \vdots  \\
+ \cdots & \nabla r_m(x)^{T} & \cdots 
+\end{array}
+\right]
+\in \mathbb{R}^{m \times n}
+ $$
+
+Il tutto si riduce quindi a:
+$$ \nabla f(x) = \ldots = J_R(x)^{T}R(x)$$
+
+\paragraph{Calcolo della matrice hessiana}
+In forma matriciale possiamo riscrivere tutto come
+$$ \nabla^{2}f(x) = J_R(x)^{T}J_R(x) + 
+ \displaystyle \sum_{j=1}^{m} r_j(x) \nabla^{2} r_j(x)$$
+Poich\'e abbbiamo le formule esplicite del gradiente e della matrice
+hessiana, possiamo sostituirle nei metodi visti
+specializzarli.  Ad esempio nel metodo di Newton: $d^{k} \in
+\mathbb{R}^{n}$ soluzione del sistema
+$$ \nabla^{2}f(x^{k})d = - \nabla f(x^{k}) $$
+Se $\nabla^{2} f(x^{k})$ è definita positiva, allora $d_{N}^{k}$ è una
+direzione di discesa.  Cercheremo un'approssimazione del metodo di
+Newton per togliere di mezzo i termini del secondo ordine: otterremo
+il metodo di Gauss-Newton, per evitare il calcolo delle matrice
+hessiane.
+
+\section{Metodo di Gauss-Newton}
+Vogliamo cercare di approssimare quindi le matrici hessiane con 
+la parte del primo ordine, che domina la parte del secondo
+ordine quando i residui sono piccoli.
+
+\paragraph{Notazioni}
+Cerchiamo delle notazioni comode per fare le nostre
+considerazioni
+$$ J_k = J_{R}(x^{k}), \quad r_k = R(x^k)= (r_1(x^{k}), \ldots,
+r_n(x^{k}))
+\quad
+\text{ Funzioni residuali:$r_j$
+}
+$$
+Il gradiente \`e definito nel seguente modo
+$$ \nabla f(x^{k}) = J_{k}^{T}r_k,\quad$$
+mentre la matrice hessiana viene approssimata
+come segue
+$$\nabla^{2}f(x^{k}) \approx J_k^{T}J_k $$
+Il metodo di Gauss-Newton 
+$$ d^{k}_{GN} \in \mathbb{R}^{n} 
+\text{ soluzione di } \underbracket{J_{k}^{T}J_kd = - J_k^{T}r_k}_{\text{sistema lineare}}$$
+Mentre nel metodo di Gauss standard per avere una direzione di discesa
+era necessario che la matrice hessiana fosse definita positiva,
+qui invece le condizioni sono meno strette.
+Vale infatti il seguente teorema:
+
+\subparagraph{Teorema}
+Se $\nabla f(x^{k}) \neq 0$, allora $d_{GN}^{k}$ è una direzione
+di discesa
+% Begin{thproof}
+% Facciamo una serie di sostituzioni
+% $$ 
+% \begin{array}{l}
+% \nabla f(x^{k})^{T}d_{GN}^{k} = 
+% (J_k^{T}r_k)^{T} d_{GN}^{k}  \underbracket{=}_{\text{sistema lineare}} 
+% -(J_k^{T} J_{k} d_{GN})^{T} d_{GN}^{k} = \\
+% \underbracket{=}_{\text{reverse order law}} 
+% -(J_{k}^{T} d_{GN}^{k})^{T}(J_{k}d_{GN}^{k})
+% = - ||J_k^{T} d_{GN}^{k}||_{2}^{2} \leq 0 
+% \end{array}
+% $$
+% Affinch\'e si abbia una direzione di discesa,
+% la quantit\`a deve essere minore di zero.
+% Ma se
+% $$ J_{k}^{T} = d_{GN}^{k} = 0 \rightarrow
+% J_{k}^{T}r_k = 0 \text{ abbiamo } \nabla f(x^{k}) = 0 $$
+% Quindi quando il gradiente non \`e zero, abbiamo una
+% direzione di discesa.
+% \end{thproof}
+
+\paragraph{Legame tra Gauss Newton e minimi quadrati}
+$$J_{k}^{T}J_kd = - J_k^{T}r_k$$
+inoltre è il sistema delle equazioni normali associate al sistema
+$J_kd + r_k=0 $, ovvero la direzione di Newton $d_{GN}^{k}$ è la
+soluzione di un problema di minimi quadrati lineare, risolve il
+problema dei minimi quadrati lineari
+$$ \min \left\{ \frac{1}{2} || J_k d + r_k ||_{2}^{2} \quad d \in \mathbb{R}^{n} \right\} $$
+Trovare quindi una direzione di Gauss Newton, corrisponde
+a risolvere un problema dei minimi quadrati,
+e con Bevilacqua abbiamo visto 3 metodi che non richiedono
+il calcolo della matrice hessiana. \\ \\
+
+\paragraph{Metodo di Gauss-Netwon (``damped GN'')}
+\begin{enumerate}
+\item si sceglie un punto $x_0 \in \mathbb{R}^{n}$, $k=0$
+\item se $\nabla f(x)=0$ (il punto trovato è stazionario),
+      allora STOP.
+\item altrimenti dobbiamo calcolare $d^{k}_{GN} \in \mathbb{R}^{n}$ soluzione
+      di $J_{k}^{T}J_{k}d = -J_{k}r_{k}$
+\item calcolare $t_k > 0 $ che soddisfi le condizioni di Wolfe
+\item $x^{k+1} = x^{k} + t_k d_{GN}^{k}$
+\item $k = k+1$ e tornare a 2)
+\end{enumerate}
+
+\subparagraph{Teorema di convergenza}
+Supponiamo che 
+\begin{itemize}
+\item $L_f(x^{0}) = \{ x \in \mathbb{R}^{n} : f(x) \leq f(x^{0}) \}$
+     (curve di sottolivello) sia compatto
+\item $r_j$ siano differenziabili con continuit\`a  per ogni $j=1\ldots n$
+ \item $\nabla f$ sia continua di tipo Lipchitziano
+\item $\exists \gamma > 0  \text{ t.c. } || J_kz||_{2} \geq \gamma ||z||_{2} 
+\quad \forall z \in \mathbb{R}^{n} \; \forall k \text{ (iterazioni del metodo)} \quad (***)$ 
+\end{itemize}
+Allora 
+$$ \lim_{k \to +\infty} || \nabla f(x^{k})||_{2} = 0 $$
+
+\end{document}

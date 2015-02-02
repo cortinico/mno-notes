@@ -1,0 +1,466 @@
+ %% Copyright (C) 2011, Andrea Cimino, All Rights Reserved.
+ %% This file is distributed under the terms of the Creative Commons
+ %% Licence Non-Commercial Share-Alike license
+
+\input{separatecompile}
+\inbpdocument 
+
+% dispensa dft.pdf
+%% Bevilacqua 31 Maggio
+
+\chapter{DFT: Trasformata discreta di Fourier}
+Non parleremo di interpolazione trigonometrica. \`e un'applicazione
+lineare da $\mathbb{C}^{n}$ in $\mathbb{C}^{n}$.  \`e rappresentata
+quindi da una matrice, la matrice di Fourier $V \in \mathbb{C}^{n
+\times n}$. Questa matrice \`e particolare: può essere
+moltiplicata per un vettore $z \in \mathbb{C}^{n}$ in $O(n \log n)$
+operazioni aritmetiche.
+$$ y = Vz$$
+Se invece vogliamo risolvere
+$$z = V^{-1}y$$
+costa $O(n \log n)$ invece che $O(n^3)$. \\
+Un'applicazione \`e la TAC oppure nel calcolo del gradiente coniugato,
+dove ad ogni passo di fa un prodotto matrice vettore, il costo passa
+da $O(n^2)$ a poco più che lineare.\\ 
+Notazione: DFT, IDFT (trasformata inversa). Algoritmo FFT: un algoritmo che
+calcola DFT o IDFT.
+
+
+\begin{defn}[Radice $n$-esima]
+Sia $n$ un intero. Si definisce radice $n$-esima dell'unit\`a
+ogni numero complesso $z$ tale che $z^{n} = 1$. Una radice n-esima $\omega$ \`e detta
+\emph{primitiva} se l'insieme $\{\omega^{i} , i = 0, \ldots , n-1\}$ \`e costituito da 
+$n$ elementi distinti. In particolare, indicata con $\mathbf{i}$ l’unit\`a immaginaria ($\mathbf{i}^2 = −1$),
+ il numero complesso
+$$\omega_n= e^{i 2\pi/n}$$
+\`e una radice primitiva $n$-esima dell'unit\`a.
+\end{defn}
+
+Una particolare propriet\`a delle radici $n$-esime \`e che possono
+essere generate utilizzando una successione di potenze, infatti:
+$$
+\omega^{k}_{n} = e^{ki 2\pi / n} = \cos k \frac{2\pi}{n} + i \sin k
+\frac{2\pi}{n} \qquad k=1, \ldots, n
+$$
+$V$ \`e la matrice di Vandermonde di ordine $n$, i cui elementi sono
+$$ v_{kj} = \omega_{n}^{kj} \qquad k,j = 0, \ldots, n-1 $$
+
+
+\begin{example}
+Per $n = 4$ scegliamo $k=1$ che corrisponde alle serie di potenze
+$$ 1 \quad i \quad -1 \quad -i $$
+
+La matrice $V$ contiene tutte le potenze
+$$
+\begin{pmatrix}
+  1 & 1 & 1 & 1 \\
+  1 & i & -1 & - i  \\
+  1 & -1 & 1 & -1 \\
+  1 & -i & -1 & - i
+\end{pmatrix}
+$$
+\end{example}
+
+\begin{property}
+$V$ \`e simmetrica (non Hermitiana, perch\`e sui complessi):
+ $$V^{T} = V$$
+\end{property}
+
+\begin{theo}
+ Vale la relazione di ortogonalit\`a:
+ \begin{equation}
+   \label{dft:01}
+    \displaystyle \sum_{j=0}^{n-1} \omega_{n}^{kj} =
+      \left\{
+      \begin{array}{ll}
+        n & \text{ se } k \equiv 0\; (\text{mod } n), \\
+        0 & \text{ altrimenti}
+      \end{array}
+    \right.   
+ \end{equation}
+ 
+(Ossia le somme per righe o per colonne sono  $n$ sulla prima riga/colonna,
+      0 sulle altre)
+\end{theo}
+\begin{thproof}
+\begin{itemize}
+\item Caso  $k \equiv 0  \mod n$:  \\
+In questo caso esiste un intero $s$ per cui $k=sn$
+e quindi \`e $\omega_{n}^{jk}=1 \quad   \forall j $\\
+\begin{comment}
+  $$ \displaystyle \sum_{j=1}^{n-1}  \omega_n^{pnj} =
+  \displaystyle \sum_{j=0}^{n-1} = n \quad \forall j$$
+\end{comment}
+\item Caso  $k \not \equiv 0 \mod n$:  \\
+  In questo caso \`e $\omega_n^{k} \neq 1$: ponendo
+  $x = \omega_n^{k}$ e utilizzando la nota relazione
+  (serie geometrica)
+  $$(x + x^{2} + \ldots + x^{n-1})(1-x) = 1 - x^{n}$$
+  si ottiene
+  $$
+  \displaystyle (\sum_{j=0}^{n-1} \omega_n^{jk})\underbracket{(1 - \omega_n^{k})}_{\neq 0} 
+  = \underbracket{1 - \underbracket{\omega_n^{nk}}_{1}}_{0}
+  $$
+  e, ricordando che $\omega_n^{k} \neq 1 $ e che $\omega_n^{nk} =1$,
+  segue la tesi.
+\end{itemize}  
+\end{thproof}
+
+\begin{property}
+  $$V^{H}V = nI$$
+\end{property}
+Il risultato si ottiene utilizzando (\ref{dft:01})
+
+\begin{theo}
+  $$V^{H}V = nI  \quad \Rightarrow \quad V^{-1} = \dfrac{1}{n}V^{H}$$
+\end{theo}
+\begin{workinprogress}
+  A lezione ha spiegato perch\`e: lascio commentata la dimostrazione
+ che va riscritta.
+\end{workinprogress}
+\begin{comment}
+  Inffatti
+  $(V^HV)_{rs} = \displaystyle \sum_{k=0}^{n-} \overline{\omega_n}^{kr} \omega_n^{ks}
+  = \ldots
+  $
+  Ma
+  Vale inoltre vale la propriet\`a
+  $$
+  \overline{e^{-i\alpha}} = e^{-i\alpha}
+  $$
+  quindi
+  $\overline{\omega_n}^{kr} = (\overline{e^{kr \dfrac{2\pi}{n}i}}) = \omega_{n}^{-kr}$
+  Sostituendo
+  $$\ldots \displaystyle \sum \omega_n ^{-kr + ks} =
+  \sum_{k=0}^{n-1} \omega_n^{k(s-r)}
+  $$
+  Abbiamo due casi
+  \begin{itemize}
+  \item $n$ se $s=r$
+  \item $0$ se $s \neq r$
+  \end{itemize}
+\end{comment}
+
+Una conseguenza \`e che:
+$$ z = V^{-1} y \quad \Longleftrightarrow \quad
+z = \dfrac{1}{n}V^{H} y$$
+
+\begin{defn}[Trasformata discreta di Fourier]
+  L'applicazione
+  $$z = \dfrac{1}{n}V^{H} y$$
+  \`e detta \emph{trasformata discrata di Fourier} e viene
+  generamlmente indicata con la sigla DFT, mentre il vettore
+  $z= DFT(y)$ \`e detto \emph{trasformata discreta di Fourier}
+  del vettore $y$ e verifica la relazione
+  \begin{equation}
+    % 74
+    \label{fft:02}
+    z_j = \dfrac{1}{n} \displaystyle \sum_{k=0}^{n-1}
+    y_k \omega_n^{-jk}, \; j=1, \ldots, n-1   
+  \end{equation}
+\end{defn}
+
+\begin{defn}[Trasformata discreta inversa di Fourier]
+  L'applicazione che al vettore $z$ associa il vettore $y$
+  \`e detta \emph{trasformata discreta inversa di Fourier}
+  e viene generalmente indicata con la sigla IDFT,
+  mentre il vettore $y=IDFT(z)$ \`e detto
+  \emph{trasformata discreta inversa di Fourier} del vettore
+  $z$ e verifica la relazione
+
+\begin{equation}
+%75
+  \label{fft:03}
+  y_k = \displaystyle \sum_{j=0}^{n-1} z_j \omega_n^{jk},
+  \;  k =0, \ldots, n-1   
+\end{equation}
+\end{defn}
+
+Possiamo constatare adesso che possiamo fare il prodotto in $O(n \log n)$ \\
+$y = Vz$ prodotto $Vz$: IDFT, trasformata inversa. 
+\begin{theo}
+  Sia $n = 2^s$ ; il costo computazionale del calcolo della IDFT di un
+  vettore $z$ di ordine $n$ o del calcolo della DFT di un vettore $y$ di
+  ordine $n$, a meno di termini di ordine inferiore, \`e di $(n/2) \log_2
+  n$ moltiplicazioni fra numeri complessi e $n \log_2 $n addizioni fra
+  numeri complessi, non contando il calcolo delle $n$ radici $n$-esime
+  dell'unit\`a.
+\end{theo}
+
+\begin{thproof}
+Posto $n=2m$, per la IDFT(z) si ha dalla (\ref{fft:03}):
+$$
+  \begin{array}{c}
+y_k = \displaystyle \sum_{j=0}^{n-1}
+z_j \omega_n^{jk} = 
+\displaystyle \sum_{j \text{ pari}} z_j \omega_n^{jk}  +
+\displaystyle \sum_{j \text{ dispari}} z_j \omega_n^{jk}        
+=
+\\
+\displaystyle \sum_{p=0}^{m-1}z_{2p} \omega_{n}^{2kp}
++
+\displaystyle \sum_{p=0}^{m-1}z_{2p+1} \omega_{n}^{k(2p+1)}
+  \end{array}
+$$
+Ponendo $z'_P = z_{2p}$ e $z''_p = z_{2p+1}, p = 0,1, \ldots, m-1$,
+si ha
+$$
+y_k = \displaystyle \sum_{p=0}^{m-1}z'_{p} \omega_{n}^{2kp}
++
+\displaystyle \sum_{p=0}^{m-1}z''_{p} \omega_{n}^{k(2p+1)}
+$$
+Tenendo presente che $\omega_n^{2p} = (\omega_{n/2})^{p} =
+\omega_m^{p}$, \`e
+
+\begin{equation}
+%81
+  \label{fft:04}
+y_k = \displaystyle \sum_{p=0}^{m-1}  z'_{p} \omega_{m}^{kp}
++
+\omega_n^{k} \displaystyle \sum_{p=0}^{m-1}z''_{p} \omega_{m}^{kp},
+\quad k=0, \ldots, n-1  
+\end{equation}
+Posto $y'=IDFT(z')$ e $y''=IDFT(z'')$, cio\`e
+$$
+y'_q = \displaystyle \sum_{p=0}^{m-1} z'_p \omega_{m}^{qp},
+\quad
+y''_q = \displaystyle \sum_{p=0}^{m-1} z_p'' \omega_{m}^{qp},
+\quad q=0, \ldots m-1
+$$
+dalla   (\ref{fft:04}) segue che i primi $m$ elementi
+della trasformata sono dati da
+\begin{equation}
+%82
+  \label{fft:05}
+y_q = y_q' + \omega_n^{q} y_q^{''}, \quad q=0, \ldots m-1  
+\end{equation}
+Per calcolare i rimanenti $m$ elementi della trasformata,
+poich\'e $\omega^{m} = -1$ e 
+$\omega_m^{q+m} = \omega_m^{q}$ dalla
+(\ref{fft:04}) segue
+$$
+y_{q+m} = \displaystyle \sum_{p=0}^{m-1} z'_p \omega_m^{(q+m)p}
+ + \omega_n^{q+m} \displaystyle \sum_{p=0}^{m=1} z''_p
+\omega_m^{(q+m)p} =
+$$
+$$
+ \displaystyle \sum_{p=0}^{m-1} z'_p \omega_m^{qp}
+   + \omega_n^{q+m} \displaystyle 
+\sum_{p=0}^{m-1} z''_p \omega_m^{qp} =
+$$
+\begin{equation}
+%83
+  \label{fft:06}
+y'_q - \omega_n^{q} y_q^{''}, \quad q =0, \ldots m-1  
+\end{equation}
+
+La trasformata di ordine $n$ pu\`o quindi essere effettuata
+ con 2 trasformate  di ordine $n/2 =m $ pi\`u $n/2= m$ 
+moltiplicazioni e $n$ addizioni.
+\begin{notes}
+  $\omega_m^{qp}$ \`e comune sia per i primi $m$ che per i secondi $m$
+elementi, quindi si calcola una volta sola.
+Bisogna poi fare 2 volte $m$ somme, quindi $n$ somme in totale.
+\end{notes}
+ Poich\'e la trasformata di ordine 1 non richiede operazioni, si
+possono scrivere le seguenti relazioni di ricorrenza per il numero di
+addizioni $A(n)$ e di moltiplicazioni $M (n$) occorrenti per il
+calcolo della trasformata di ordine $n$
+
+\begin{equation}
+%(84)
+  \label{fft:07}
+    A(1) = 0, \quad A(n) = 2A(n/2) + n,
+\end{equation}
+$$ M (1) = 0,\quad  M (n) = 2M (n/2) + n/2.
+ $$
+Posto $t_s = A(n)$, dove $s=\log_2 n$, dalla (\ref{fft:07}) si
+ottiene l'equazione alle differenze
+$$t_0 = 0 \quad t_s = 2t_{s-1} + 2^{s} $$
+la cui soluzione \`e data da
+$$ t_s = s2^s $$
+da cui $A(n) = n \log_2 n$. Analogamente si ottiene $M (n) = n/2 log_2
+n$. Si procede nello stesso modo per la $DFT(y)$, eseguendo solo al
+termine le divisioni per $n$.
+
+\end{thproof}
+
+% Possiamo constatare adesso che possiamo fare il prodotto in $O(n \log n)$ \\
+% $y = Vz$ prodotto $Vz$: IDFT, trasformata inversa. \\
+% Quand calcoliamo $z = V^{-1}y = \dfrac{1}{n} V^{H} y$: Trasformata diretta DFT.
+
+% Data $y=Vz$ facciamo veere che lo calcoliamo in $O(n \log n)$
+% $$ (V)_{kj} = e^{jk \dfrac{2\pi}{n}i} \quad n=2^{s} \quad n=2^{s-1} = \dfrac{n}{2}$$
+% $$ y = Vz \quad y_k \displaystyle \sum_{j=0}^{n-1} \omega_n^{kj} z_j =
+% \displaystyle \sum_{j \text{ pari}} +
+% \displaystyle \sum_{j \text{ dispari}} +
+% =
+% \ldots =
+% \displaystyle \sum_{p=0}^{m-1} \omega_{n}^{2pk} z_{2p} +
+%  \omega_{n}^{k}
+% \displaystyle \sum_{p=0}^{m-1} \omega_n^{2pk} z_{2p+1}
+% = \ldots
+% $$
+% Il quadrato di $\omega_8$ \`e $\omega_4$, quasto vale in generale
+% $$ \omega_n^{2} = \omega_m$$
+% $$
+% =
+% \displaystyle \sum_{p=0}^{m-1} \omega_m^{pk} z_{p+1}
+% +
+%  \omega_{n}^{k}
+% \displaystyle \sum_{p=0}^{m-1} \omega_m^{pk} z_{p+1}
+% $$
+% $$
+% y' = \underbracket{IDFT(z')}_{m} \quad \underbracket{y''= IDFT(z'')}_{m}
+% $$
+% Le prime $m$ componenti sono possibili con 2 strasformate piccole
+% $$q = k = 0, \ldots m=1 $$
+% $$\quad y_p = y'_q  + \omega_n^{q} y''_q$$
+% Mancano quelle da $m$ a $n-1$
+% $$
+% \underbracket{y_{m+q}}_{q=0, \ldots, m-1} =
+% \displaystyle \sum_{p} \omega_m^{\underbracket{(\cancel{m}+q)}_{k}p}
+% z_{2p} + \omega_n^{\underbracket{m+q}_{k}}
+% \displaystyle \sum_{p} \omega_{m}^{\underbracket{(\cancel{m}+q)}_{k}p}
+% z_{2p+1}
+% $$
+% $$
+% e^{n/2}\dfrac{2\pi}{\pi}i = e^{\pi}
+% $$
+% Schema ricorsivo
+% $$ y_{m+q} = y'_q - \omega_n^{q}y''q$$
+\paragraph{Algoritmo}
+\begin{enumerate}
+\item Si calcolano $\omega_n$ e le sue potenze con espoente
+      per $k=0, \ldots, n-1$
+\item Calcolo di $y'= IDFT(z')$ di indice pari\\
+      Calcolo di $y''= IDFT(z'')$ di indice dispari
+
+\item
+$$ y_{m+q} = y'_q - \omega_n^{q}y''q$$
+$$\quad y_p = y'_q  + \omega_n^{q} y''_q$$
+\end{enumerate}
+% Complessit\`a:
+% $$M(n) = 2 M(\dfrac{n}{2}) + \dfrac{n}{2} $$
+% $$ A(n) = 2A(\dfrac{n}{2}) + n $$
+% \\
+% \\
+% $$M(n) = 2 M(\dfrac{n}{2}) + \dfrac{n}{2}  =
+% 2 (2M(\dfrac{n}{4}) + \dfrac{n}{4}) + \dfrac{n}{2} =
+% \ldots =
+% $$
+% Ma $M(1) =0$
+% $$
+% = \ldots = 2^{s}M(1) + s \dfrac{n}{2}  = \dfrac{n}{2} \log n
+% $$
+% Per le addizioni
+% Viene $A(n) =  n \log n $ \\
+Algoritmo FFT pi\`u famoso Cooley-Tuckey e Sande-Tuckey.
+Entrambi predisponono l'ordinamento di $v$.
+bit reversal.
+$$z_0z_1z_2 z_3 z_4 z_5 z_6 z_7$$
+$$z_0 z_2 z_4 z_6 \quad z_1 z_3 z_5 z_7 $$
+Permutazione di indici.
+$$z_0 z_4 z_2 z_6 \quad z_1 z_5  z_3 z_7 $$
+
+\paragraph{Applicazione: Prodotto di polinomi}
+$$
+2 u(x) = u_0 + u_1x + u_2 x^2  + \underbrace{u_3}_{0} x^{3} + \underbracket{u_4}_{0} x^{4}
+2 v(x) =  v_0 + v_1x + v_2 x^2  + \underbrace{v_3}_{0} x^{3} + \underbracket{v_4}_{0} x^{4}
+4 z(z)
+$$
+$$
+z(x) = u(x) -v(x) = z_0  + z_1x + z_2 x^{2} + z_3 x^{3} + z_4 x^{4}
+$$
+$n=5$
+
+$$
+\begin{pmatrix}
+  u(\omega_5^{0}) \\
+  u(\omega_5^{1}) \\
+ \ldots
+  u(\omega_5^{4}) \\
+\end{pmatrix}
+=
+V
+\begin{pmatrix}
+  u_1 \\
+  u_2 \\
+ u_3 \\
+ u_4 \\
+\end{pmatrix}
+\quad
+V=
+\begin{pmatrix}
+ \omega_5^{0} & \omega_5^{1} & \ldots \\
+\\
+\\
+\end{pmatrix}
+$$
+
+$$
+t = \begin{pmatrix}
+  z(\omega_5^0) \\
+   \\
+  \\
+  \\
+\end{pmatrix}
+\begin{pmatrix}
+u(\omega_5^{0} =
+  z(\omega_5^0) \\
+   \\
+  \\
+  \\
+\end{pmatrix}
+$$
+\paragraph{Altre applicazioni}
+\begin{itemize}
+\item Prodotto di interi (\`e come moltiplicare due polinomi)
+\item FFT ele matrici circolanti: vengono fuori nei modelli che
+     hanno rotazioni (immagine tomografiche)
+$$
+\begin{pmatrix}
+   a_0  & a_1 &  a_2 & a_3 \\
+   a_1 & a_2 & a_3 & a_4 \\
+   a_2 & a_3 & a_4 & a_1 \\
+   a_3 & a_4 & a_1  & a_2 
+\end{pmatrix}
+$$
+Le colonne della matrice di Fourier sono gli autovalori.
+
+
+
+\item Im(sfocata) = T Im
+Dove T \`e matrice di Toepliz
+$$
+\begin{pmatrix}
+  a & b & c \\
+  d & a & b \\
+  e & d & a
+\end{pmatrix}
+$$
+
+$$ t_{ij} = \alpha^{i-j} $$
+la Incorniciamo con una 7x7
+$$
+\begin{pmatrix}
+  a & b & c \\
+  d & a & b \\
+  e & d & a
+\end{pmatrix}
+$$
+Allora diventa circolante.
+L'aumento di dimensione \`e compensato dall'uso di DFT.
+
+\end{itemize}
+\begin{notes}
+All'esame vuole sapere l'idea del costo e di come si fanno i
+prodotti.  
+\end{notes}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "appunti"
+%%% End: 
+
+\outbpdocument

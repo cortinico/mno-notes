@@ -1,0 +1,76 @@
+\chapter{Risoluzione di sistemi non lineari}
+$ F(x) = 0 \qquad F:\Omega \rightarrow \mathbb{R}^n \; \Omega \subseteq \mathbb{R}^n $
+
+Matrice Jacobiana di F (se $ F \in C^1(\Omega) $): $ J(x) $
+
+$ \left\lbrace \begin{array}{c}
+f_1(x_1, \ldots, x_n) = 0 \\ 
+f_2(x_1, \ldots, x_n) = 0 \\ 
+\vdots \\ 
+f_n(x_1, \ldots, x_n) = 0
+\end{array}  \right. $
+
+\askip
+
+Altra forma: posto $ G(x) = x - A(x)F(x) $ per un qualche $ A(x) $, ho
+
+$ x = G(x) \qquad G:\Omega \rightarrow \mathbb{R}^n \; \Omega \subseteq \mathbb{R}^n $
+
+Matrice Jacobiana di G (se $ G \in C^1(\Omega) $): $ H(x) $
+
+$ \left\lbrace \begin{array}{c}
+x = g_1(x_1, \ldots, x_n) \\ 
+x = g_2(x_1, \ldots, x_n) \\ 
+\vdots \\ 
+x = g_n(x_1, \ldots, x_n)
+\end{array}  \right. $
+
+\askip
+
+\begin{proc}[Metodo generico per la risoluzione di sistemi non lineari]\label{proc:genericosistnonlin}
+\begin{enumerate}
+\item Scelgo $ x^{(0)} \in \mathbb{R}^n $
+\item Ad ogni passo $ x^{(i+1)} = G(x^{(i)}) = x^{(i)} - A(x^{(i)})F(x^{(i)}) $
+\end{enumerate}
+\end{proc}
+
+Nel metodo non \'e specificato
+\begin{itemize}
+\item il modo in cui scelgo $ x^{(0)} $
+\item com'\'e fatta la matrice A
+\end{itemize}
+
+\askip
+
+Sia $ \alpha $ tale che $ G(\alpha) = \alpha $ (e dunque $ F(\alpha) = 0 $), soluzione del problema.
+
+\askip
+
+Sia S un intorno di $ \alpha $ di raggio $ \rho $, e sia $ \forall x \in S. \; || H(x) ||_{\infty} < 1 $.\\
+\ftheo{Il metodo converge $ \Leftarrow $} $ x^{(0)} \in S $
+
+\askip
+
+Sia $ G(x) \in C^1(\Omega) $, $ \Omega $ aperto contenente $ \alpha $ \\
+\ftheo{$ \exists ||\cdot||_v. \exists S $ intorno di $ \alpha $ di raggio $ \rho $ rispetto a tale norma$ . \forall x^{(0)} \in S $ il metodo converge $ \Leftarrow $} $ \rho(H(\alpha)) < 1 $
+
+\section{\fdefn{Metodo di Newton-Raphson}}
+\begin{proc}[Metodo di Newton-Raphson]\label{proc:newtonraphson}
+\begin{enumerate}
+\item Scelgo $ A(x) = [J(x)]^{-1} $
+\item Applico la procedura \ref{proc:genericosistnonlin}
+\end{enumerate}
+\end{proc}
+
+Lo schema iterativo diventa $ x^{(i+1)} = x^{(i)} - [J(x^{(i)})]^{-1}F(x^{(i)}) $, che viene calcolato come sistema lineare della forma $ J(x^{(i)})(x^{(i+1)} - x^{(i)}) = -F(x^{(i)}) $ per evitare di invertire J.
+
+\askip
+
+\ftheo{$ \exists S \subseteq \Omega.$ se $ x^{(0)} \in S $ allora il metodo converge $ \Leftarrow $} $ \forall x \in \Omega. $ J(x) \'e non singolare \\
+Inoltre $ \forall ||\cdot||. \exists \beta. \forall i \in \mathbb{N}. ||x^{(i+1)} - \alpha|| \leq \beta || x^{(i)} - \alpha ||^2 $
+
+Se le condizioni non sono verificate, pu\'o comunque esserci convergenza, ma non si ha garanzie sulla velocit\'a.
+
+\askip
+
+\ftheo{il metodo converge alla soluzione unica $ \alpha \Leftarrow $} D intervallo di $ \mathbb{R}^n $, $ F(x) \in C^1(D) $ convessa su D, $ \alpha \in D $ tale che $ F(\alpha) = 0 $, $ \forall x \in D. $ J(x) non singolare e $ \left[ J(x) \right]^{-1} $ ad elementi non negativi, $ x^{(0)} \in D $ tale che $ f(x^{(0)}) \geq 0 $

@@ -1,0 +1,246 @@
+\chapter{Risoluzione di sistemi lineari}
+$ Ax=b \qquad \begin{array}{l}
+A \in \mathbb{C}^{n \times n}, \det A \neq 0 \\
+x \in \mathbb{C}^n
+b \in \mathbb{C}^n
+\end{array} $
+
+
+
+
+
+
+
+
+\section{Metodi diretti}
+\subsection{\fdefn{Metodo di Gauss}}
+\positive{\ftheo{costa $ O(\frac{2}{3}n^3) $}}
+
+\negative{\ftheo{bassa stabilit\'a}}
+
+\begin{proc}[Metodo di Gauss]
+\begin{enumerate}
+\item fattorizzo A con procedura LR (\ref{proc:fattorizzazioneLR})
+\item pongo $ LRx = b $ e risolvo in sequenza i due sistemi $ Ly = b $ e $ Rx = y $ (semplici in quanto triangolari)
+\end{enumerate}
+\end{proc}
+
+
+\subsubsection{\fdefn{Fattorizzazione LR}}
+Pongo $ A = LR \qquad \begin{array}{l}
+L \in \mathbb{C}^{n \times n} \text{, triangolare inferiore con } \forall i \in [1,n].l_{ii} = 1 \\
+R \in \mathbb{C}^{n \times n} \text{, triangolare superiore}
+\end{array} $ 
+
+\askip
+
+\ftheo{esiste unica $ \Leftarrow $} $ \forall i \in [1,n], A_i \text{ sottomatrice princ. di testa di ordine i }. \det A_i \neq 0 $
+
+\askip
+
+\begin{proc}[Fattorizzazione LR]\label{proc:fattorizzazioneLR}
+\begin{enumerate}
+	\item pongo $ A^{(n)} = E^{(n)} E^{(n-1)} \ldots E^{(0)}A $, dove
+	\begin{itemize}
+		\item $ E^{(i)} = I - \sigma_i u_i v_i^H $ tale che $ E^{(i)}A^{(i)}e_i = w \text{ tale che } \forall j \in (i,n]. w_j = 0 \text{ e } w_i = 1 $
+		\item $ \Rightarrow \bm{\left[ \sigma_i u_i \right]} = \left\lbrace \begin{array}{ll}
+				0 & \quad j \leq i \\
+				\frac{x_j}{x_i} & \quad j > i
+			\end{array} \right. \qquad \bm{v_i} = e_i $
+	\end{itemize}
+	\item Alla fine $ L = \prod_{i = 0}^{n-1} \left[ E^{(i)} \right]^{-1} \qquad R = A^{(n)} $
+\end{enumerate}
+\end{proc}
+
+
+
+
+\subsection{\fdefn{Metodo di Householder}}
+\negative{\ftheo{costa $ O(\frac{4}{3}n^3) $}}
+
+\positive{\ftheo{alta stabilit\'a}, soprattutto con particolari strategie di pivotaggio}
+
+\begin{proc}[Metodo di Householder]
+\begin{enumerate}
+\item fattorizzo A con procedura QR (\ref{proc:fattorizzazioneQR})
+\item pongo $ QRx = b $ e risolvo in sequenza i due sistemi $ Qy = b $ e $ Rx = y $ (semplici in quanto unitari e triangolari)
+\end{enumerate}
+\end{proc}
+
+
+\subsubsection{\fdefn{Fattorizzazione QR}}
+Pongo $ A = QR \qquad \begin{array}{l}
+Q \in \mathbb{C}^{n \times n} \text{, unitaria ed hermitiana} \\
+R \in \mathbb{C}^{n \times n} \text{, triangolare superiore}
+\end{array} $ 
+
+\askip
+
+\ftheo{esiste sempre}
+
+\askip
+
+\ftheo{unica a meno di moltiplicazione per matrici di fase (diagonali, elem. su diagonale di modulo 1)}
+
+\askip
+
+\begin{proc}[Fattorizzazione QR]\label{proc:fattorizzazioneQR}
+\begin{enumerate}
+	\item pongo $ A^{(n)} = _P^{(n)} P^{(n-1)} \ldots P^{(0)}A $, dove
+	\begin{itemize}
+		\item $ \bm{\alpha_i} = \frac{x_i}{|x_i|} $
+		\item $ \bm{v_i} = A^{(i)}e_i - \alpha_i e_i $
+		\item $ \bm{\beta_i} = \dfrac{2}{|| v_i ||_2^{\phantom{2}2}} $
+		\item $ P^{(i)} = I - \beta_i v_i v_i^H $ tale che $ P^{(i)}A^{(i)}e_i = w \text{ tale che } \forall j \in (i,n]. w_j = 0 \text{ e } w_i = \alpha_i $
+	\end{itemize}
+	\item Alla fine $ Q = \prod_{i = 0}^{n-1} \left[ P^{(i)} \right]^{-1} \qquad R = A^{(n)} $
+\end{enumerate}
+\end{proc}
+
+
+
+
+\subsection{\fdefn{Metodo di Cholesky}}
+\positive{\ftheo{costa $ O(\frac{1}{3}n^3) $}}
+
+\positive{\ftheo{alta stabilit\'a}, soprattutto con particolari strategie di pivotaggio}
+
+\negative{si applica solo in casi molto particolari}
+
+\begin{proc}[Metodo di Cholesky]
+\begin{enumerate}
+\item fattorizzo A con procedura $ LL^H $ (\ref{proc:fattorizzazioneLLH})
+\item pongo $ LL^Hx = b $ e risolvo in sequenza i due sistemi $ Ly = b $ e $ L^Hx = y $ (semplici in quanto triangolari)
+\end{enumerate}
+\end{proc}
+
+
+\subsubsection{\fdefn{Fattorizzazione $ LL^H $}}
+Pongo $ A = LL^H \qquad L \in \mathbb{C}^{n \times n}, \forall i \in [1,n].l_{ii} > 0 $
+
+\askip
+
+\ftheo{esiste unica $ \Leftarrow $} A hermitiana definita positiva
+
+\askip
+
+\begin{proc}[Fattorizzazione $ LL^H $]\label{proc:fattorizzazioneLLH}
+per ogni colonna $ j \in [1,n] $
+\begin{itemize}
+\item per $ i \in [1,j) $ pongo $ l_{ij} = 0 $
+\item per $ i = j $ pongo $ l_{ij} = \sqrt{a_{ij} - \sum_{k=1}^{j-1}|l_{jk}|^2} $
+\item per $ i \in (j,n] $ pongo $ l_{ij} = \dfrac{a_{ij} - \sum_{k=1}^{j-1}|l_{jk}|^2}{l_{jj}} $
+\end{itemize}
+\end{proc}
+
+
+
+
+
+
+
+
+\section{Metodi iterativi}
+\begin{proc}[Schema iterativo per sistemi lineari]\label{proc:schemaiterativosistemilineari}
+\begin{enumerate}
+\item Pongo $ A = M - N \qquad \begin{array}{l}
+M \in \mathbb{C}^{n \times n}, det M \neq 0
+N \in \mathbb{C}^{n \times n}
+\end{array} $ in modo dipendente dal particolare algoritmo
+\item Pongo $ P = M^{-1}N $ e $ q = M^{-1}b $
+\item Scelgo $ x^{(0)} \in \mathbb{C}^n $
+\item Itero $ x^{(i+1)} = Px^{(i)} + q $ fino a che la soluzione non mi soddisfa
+\end{enumerate}
+\end{proc}
+
+\askip
+
+\ftheo{converge $ \Leftrightarrow $} $ \rho(P) < 1 $
+
+\askip
+
+\ftheo{converge $ \Leftarrow $} $ \exists || \cdot ||. \; || P || < 1 $
+
+
+
+
+\subsection{\fdefn{Metodo di Jacobi} e \fdefn{Metodo di Gauss-Seidel}}
+\begin{proc}[Decomposizione di A]\label{proc:decomposizioneAjacgse}
+Pongo
+\begin{itemize}
+\item $ D = \left[ \begin{array}{ll}
+0 & \quad i < j \\
+a_{ij} & \quad i = j \\
+0 & \quad i > j
+\end{array} \right]_{ij} $
+\item $ B = \left[ \begin{array}{ll}
+0 & \quad i < j \\
+0 & \quad i = j \\
+-a_{ij} & \quad i > j
+\end{array} \right]_{ij} $
+\item $ C = \left[ \begin{array}{ll}
+-a_{ij} & \quad i < j \\
+0 & \quad i = j \\
+0 & \quad i > j
+\end{array} \right]_{ij} $
+\end{itemize}
+\end{proc}
+
+\askip
+
+\begin{proc}[Metodo di Jacobi]
+\begin{enumerate}
+\item Pongo $ A = D - C - B $ seguendo la procedura \ref{proc:decomposizioneAjacgse}
+\item Applico la prodecura \ref{proc:schemaiterativosistemilineari} con $ M = D $ e $ N = B + C $
+\end{enumerate}
+\end{proc}
+
+\askip
+
+\begin{itemize}
+\item Schema iterativo: $ x^{(i+1)} = D^{-1}(B+C)x^{(i)} + D^{-1}b $
+\item indichiamo la matrice P di iterazione con la lettera J
+\end{itemize}
+
+\askip
+
+\begin{proc}[Metodo di Gauss-Seidel]
+\begin{enumerate}
+\item Pongo $ A = D - C - B $ seguendo la procedura \ref{proc:decomposizioneAjacgse}
+\item Applico la prodecura \ref{proc:schemaiterativosistemilineari} con $ M = D - B $ e $ N = C $
+\end{enumerate}
+\end{proc}
+
+\askip
+
+\begin{itemize}
+\item Schema iterativo: $ x^{(i+1)} = (D-B)^{-1}Cx^{(i)} + (D-B)^{-1}b $
+\item indichiamo la matrice P di iterazione con la lettera G
+\end{itemize}
+
+\askip
+
+\ftheo{Jacobi e Gauss-Seidel convergono $ \Leftarrow $} si verifica una delle seguenti
+\begin{itemize}
+\item A ha \textbf{predominanza diagonale forte} per righe o colonne
+\item A ha \textbf{predominanza diagonale debole} per righe o colonne ed \'e \textbf{irriducibile}
+\end{itemize}
+
+\askip
+
+A hermitiana, $ \forall i \in [1,n]. \; a_{ii} > 0 \quad \Rightarrow $ \\
+\ftheo{Gauss-Seidel converge $ \Leftrightarrow $} A definita positiva
+
+\askip
+
+\ftheo{Teorema di Stein-Rosenberg} Sia A con $ A_{ii} \neq 0 $, $ J $ sua matrice di Jacobi con $ \forall i,j \in [1,n]. \; a_{ij} \geq 0 $, $ G $ sua matrice di Gauss-Seidel. Allora si verifica una delle seg.
+\begin{itemize}
+\item $ \rho(G) = \rho(J) = 0 $
+\item $ \rho(G) \leq \rho(J) \leq 0 $
+\item $ \rho(G) = \rho(J) = 1 $
+\item $ \rho(G) \geq \rho(J) \geq 0 $
+\end{itemize}
+
+\askip
+
+T matrice tridiagonale, $ \forall i \in [1,n]. \; t_{ii} \neq 0 $, con J matrice di Jacobi e G matrice di Gauss-Seidel \ftheo{$ \Rightarrow $} autovalori di G \emph{quadrati} degli autovalori di J

@@ -1,0 +1,16 @@
+Hello :)
+guardavo la suddivisione in capitoli degli appunti e attualmente non è messa gran che bene... pensavo di fare una suddivisione diversa, tipo
+
+- Richiami (magari spostato come appendice in fondo, ampliato e riveduto... me ne posso occupare io)
+
+- Minimi di Funzioni e loro proprietà
+- Metodi risolutivi per sistemi
+	- diretti per sist. lineari
+	- iterativi per sist. lineari
+	- metodi per sist. non lineari
+- Metodi risolutivi per ottimizz. non vincolata
+	- gradienti vari
+	- newton raphson
+	- grad coniugato
+	- senza derivate
+- Minimi quadrati

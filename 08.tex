@@ -1,0 +1,423 @@
+ %% Copyright (C) 2011, Andrea Cimino, All Rights Reserved.
+ %% This file is distributed under the terms of the Creative Commons
+ %% Licence Non-Commercial Share-Alike license
+
+
+\input{separatecompile}
+\inbpdocument 
+
+%% 25 Marzo 2011
+\chapter{Il problema nonlineare dei minimi quadrati}
+\section{Minimi quadrati lineari}
+Analizzeremo il problema dei minimi quadrati lineari dal punto di vista
+dell'ottimizzazione. Siamo nel caso continuo non vincolato:
+è un problema quindi che rientra nella classe di problemi
+che abbiamo studiato. Analizziamone la forma:
+$$ A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^{n} \qquad
+ \min \{ || Ax -b ||_{2} : x \in \mathbb{R}^{n} \} $$
+Per trattare il problema, riscriviamo la funzione obiettivo:
+possiamo fare la seguente equivalenza che  agevoler\`a
+meglio i conti (tale riscrittura vale solo nel caso lineare)
+$$ \min \{ || Ax -b ||_{2} : x \in \mathbb{R}^{n} \} 
+ \equiv
+ \min \left\{ \frac{1}{2} || Ax -b ||_{2}^{2} : x \in \mathbb{R}^{n} \right\}
+ $$
+Abbiamo fatto una scalatura ed elevato al quadrato:
+i minimi in tutte e due le scritture coincidono, in quanto
+le funzioni che abbiamo applicato sono monotone.
+Sviluppiamo la funzione obiettivo:
+
+$$ f(x) = \frac{1}{2} || Ax - b ||_{2}^{2} = \frac{1}{2}(Ax-b)^{T}(Ax-b) =
+\frac{1}{2}x^{T} A^{T}A x - (A^{T}b)^{T}x + \frac{1}{2} b^{T}b $$
+Questa \`e una  funzione quadratica, di cui sappiamo calcolare immediatamente
+il gradiente 
+$$ \nabla f(x) = A^{T}A x - A^{T}b $$
+mentre la matrice Hessiana \`e data da :
+$$ \nabla^{2}f(x) = A^{T}A$$
+
+\paragraph{Considerazione 1: annullamento del gradiente}
+Dove si annulla il gradiente?
+$$ \nabla f(x) = 0 \quad
+ \Longleftrightarrow \quad 
+A^{T}A x = A^{T}b $$
+Quest'ultimo è il sistema delle equazioni normali: i punti stazionari
+sono le soluzioni delle equazioni normali. \\
+Sappiamo dalla teoria che si ha minimo se la funzione è \emph{convessa},
+ed \`e noto inoltre che una funzione \`e convessa se la matrice Hessiana
+($\nabla^{2}f(x)$) \`e semidefinita positiva.
+Andiamo quindi a controllare se abbiamo questa condizione:
+$$ x^{T} A^{T}A x = (Ax)^{T}Ax = || Ax||_{2}^{2} \geq 0$$
+La matrice Hessiana \`e semidefinita positiva in ogni punto, quindi
+la funzione è convessa: concludiamo quindi che i punti stazionari
+coincidono con i punti di minimo. Abbiamo visto quello che ha spiegato
+Bevilacqua sotto un altro punto di vista, quello dell'ottimizzazione.
+
+\paragraph{Considerazione 2: matrice A di rango massimo}
+Se la matrice $A$ \`e di rango massimo,
+abbiamo che la funzione \`e strettamente convessa: infatti
+$$
+\begin{array}{c}
+ A \text { rango massimo } \quad
+ \Longrightarrow  \quad ( Ax=0 \Longleftrightarrow x =0 ) \quad 
+ \Longrightarrow \quad  x^{T}\nabla^{2} f(x)x  > 0 \; 
+\forall x \neq 0  \\
+\quad \Longrightarrow \quad f \text{ strettamente convessa }
+\end{array}
+$$
+\`E noto inoltre che, quando la funzione \`e strettamente convessa, 
+esiste un solo punto di minimo.
+
+\paragraph{Considerazione 3}
+$$ f(x) = \frac{1}{2} || Ax -b||_{2}^{2} =
+\frac{1}{2}\left((A_1x -b_1)^{2} + (A_2x - b_2)^{2} +
+\ldots   + (A_mx -b_m)^{2})\right)$$
+$f(x)$ si dice lineare quando gli addendi $ (A_mx -b_m)$ sono lineari. \\
+Questo \`e il punto di partenza per parlare del problema
+dei minimi quadrati non lineare.
+
+\section{Problema dei minimi quadrati non lineare}
+Un problema dei minimi quadrati non lineare ha le seguenti caratteristiche:
+$$ \min \{f(x) : x \in \mathbb{R}^{n} \} \quad
+f(x) = \frac{1}{2} \displaystyle \sum_{j=1}^{m} r_j^{2}(x) $$
+dove
+$$r_j: \mathbb{R}^{n} \rightarrow \mathbb{R} \text{ non lineari } 
+\qquad  x \rightarrow A_jx-b_j;$$
+Un esempio di problema non lineare era il data fitting, visto nelle
+prime lezioni. I metodi per risolvere questo problema li avremmo gi\`a ma,
+poich\'e conosciamo la struttura della funzione obiettivo,
+vogliamo sfruttarne la struttura  per specializzare i metodi che
+ abbiamo visto fino ad adesso. \\
+Supporremo inoltre $r_j$ differenziabile 2 volte.\\
+Cercheremo di specializzare il metodo di Newton. \\
+\paragraph{Calcolo del gradiente}
+La funzione $r_j^{2}$ è la composizione di $r_j$ con una funzione $\varphi$
+che associa ad un valore il suo quadrato
+$$ r_j^2(x) = \varphi(r_j(x)) \quad \varphi: \mathbb{R} \rightarrow \mathbb{R}
+\quad t \rightarrow t^2$$
+Tale funzione è derivabile e vale
+$$ \varphi'(t) = 2t$$
+Il gradiente di una una funzione composta \`e noto per il teorema 
+(\ref{theo:derivata-funzioni-composte}) : calcoliamolo in questo caso
+
+\begin{equation}
+\label{minqbigi:001}
+\nabla r_j^{2} = \nabla \varphi(r_j(x)) =
+\varphi'(r_j(x)) \nabla r_j(x) = 2 r_j(x) \nabla r_j(x)
+\end{equation}
+
+
+Quindi, usando la linearit\`a dei gradienti e utilizzando la
+(\ref{minqbigi:001}) otteniamo
+$$ \nabla f(x) = \frac{1}{2}
+\displaystyle \sum_{j=1}^{m} \nabla r_j^{2}(x) = 
+\displaystyle \sum_{j=1}^{m} r_j(x) \nabla r_j(x) = \ldots
+$$
+Cerchiamo una rappresentazione pi\`u compatta:
+$$ R = (r_1, \ldots, r_m): \mathbb{R}^n \rightarrow \mathbb{R}^{m}$$
+$$R(x) = (r_1(x), \ldots, r_m(x)) $$
+Matrice Jacobiana, le cui righe sono i gradienti dei componenti
+$$J_R(x) =
+\left[
+\begin{array}{c}
+\nabla r_1(x)^{T}\\
+\vdots  \\
+\nabla r_m(x)^{T}
+\end{array}
+\right]
+\in \mathbb{R}^{m \times n}
+ $$
+
+Il tutto si riduce quindi a:
+$$ \nabla f(x) = \ldots = J_R(x)^{T}R(x)$$
+
+\paragraph{Calcolo della matrice hessiana}
+Calcoliamo le derivate seconde, la matrice hessiana di $f$
+$$[ \nabla^{2}f(x)]_{kl} = 
+\frac{\partial^{2} f(x)}{\partial x_k \partial x_l}=
+\frac{\partial}{\partial x_k}\left(\frac{\partial f}{\partial x_l}(x)\right) =
+\frac{\partial}{\partial x_k }
+\left(\displaystyle \sum_{j=1}^{m} r_j(x) 
+\frac{\partial r_j}{\partial x_l}(x) \right)
+\underbracket{=}_{*)}
+\displaystyle \sum_{j=1}^{m}
+\underbracket{\frac{\partial r_j }{\partial x_k} (x)
+\frac{\partial r_j(x)}{\partial x_l}}_{[J_r(x)^{T}J_{R}(x)]_{kl}}
++ \displaystyle \sum_{j=1}^{m} r_j(x)
+\underbracket{\frac{\partial^{2}r_j(x)}{\partial x_k \partial x_l}}_{[\nabla^{2} r_j(x)]_{kl}}
+$$
+\begin{openquestion}
+ *) Derivata prodotto?
+\end{openquestion}
+
+$$
+[J_R(x)^{T}J_{R}(x)]_{kl} = 
+\left[
+\begin{array}{ccc}
+\nabla r_1(x)^{T}  & \cdots &  \nabla r_m(x)^{T} \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\nabla r_1(x)^{T}\\
+\vdots  \\
+\nabla r_m(x)^{T}
+\end{array}
+\right]
+$$\
+
+In forma matriciale possiamo riscrivere tutto come
+$$ \nabla^{2}f(x) = J_R(x)^{T}J_R(x) + 
+ \displaystyle \sum_{j=1}^{m} r_j(x) \nabla^{2} r_j(x)$$
+Poich\'e abbbiamo le formule esplicite del gradiente e della matrice
+hessiana, possiamo sostituirle nei metodi visti
+specializzarli.  Ad esempio nel metodo di Newton \ref{newtongradesatto}: $d^{k} \in
+\mathbb{R}^{n}$ soluzione del sistema
+$$ \nabla^{2}f(x^{k})d = - \nabla f(x^{k}) $$
+Se $\nabla^{2} f(x^{k})$ è definita positiva, allora $d_{N}^{k}$ è una
+direzione di discesa.  Cercheremo un'approssimazione del metodo di
+Newton per togliere di mezzo i termini del secondo ordine: otterremo
+il metodo di Gauss-Newton, per evitare il calcolo delle matrice
+hessiane.
+
+\section{Metodo di Gauss-Newton}
+Vogliamo cercare di approssimare quindi le matrici hessiane con 
+la parte del primo ordine, che domina la parte del secondo
+ordine quando i residui sono piccoli.
+
+\paragraph{Notazioni}
+Cerchiamo delle notazioni comode per fare le nostre
+considerazioni
+$$ J_k = J_{R}(x^{k}), \quad R_k = R(x^k)= (r_1(x^{k}), \ldots,
+r_n(x^{k}))
+\quad
+\text{ Funzioni residuali:$r_j$
+}
+$$
+Il gradiente \`e definito nel seguente modo
+$$ \nabla f(x^{k}) = J_{k}^{T}r_k,\quad$$
+mentre la matrice hessiana viene approssimata
+come segue
+$$\nabla^{2}f(x^{k}) \approx J_k^{T}J_k $$
+Il metodo di Gauss-Newton 
+$$ d^{k}_{GN} \in \mathbb{R}^{n} 
+\text{ soluzione di } \underbracket{J_{k}^{T}J_kd = - J_k^{T}r_k}_{\text{sistema lineare}}$$
+Mentre nel metodo di Gauss standard per avere una direzione di discesa
+era necessario che la matrice hessiana fosse definita positiva,
+qui invece le condizioni sono meno strette.
+Vale infatti il seguente teorema:
+
+\begin{theo}
+Se $\nabla f(x^{k}) \neq 0$, allora $d_{GN}^{k}$ è una direzione
+di discesa
+\end{theo}
+\begin{thproof}
+Facciamo una serie di sostituzioni
+$$ 
+\begin{array}{l}
+\nabla f(x^{k})^{T}d_{GN}^{k} = 
+(J_k^{T}r_k)^{T} d_{GN}^{k}  \underbracket{=}_{\text{sistema lineare}} 
+-(J_k^{T} J_{k} d_{GN})^{T} d_{GN}^{k} = \\
+\underbracket{=}_{\text{reverse order law}} 
+-(J_{k}^{T} d_{GN}^{k})^{T}(J_{k}d_{GN}^{k})
+= - ||J_k^{T} d_{GN}^{k}||_{2}^{2} \leq 0 
+\end{array}
+$$
+Affinch\'e si abbia una direzione di discesa,
+la quantit\`a deve essere minore di zero.
+Ma se
+$$ J_{k}^{T} = d_{GN}^{k} = 0 \rightarrow
+J_{k}^{T}r_k = 0 \text{ abbiamo } \nabla f(x^{k}) = 0 $$
+Quindi quando il gradiente non \`e zero, abbiamo una
+direzione di discesa.
+\end{thproof}
+
+\paragraph{Legame tra Gauss Newton e minimi quadrati}
+$$J_{k}^{T}J_kd = - J_k^{T}r_k$$
+inoltre è il sistema delle equazioni normali associate al sistema
+$J_kd + r_k=0 $, ovvero la direzione di Newton $d_{GN}^{k}$ è la
+soluzione di un problema di minimi quadrati lineare, risolve il
+problema dei minimi quadrati lineari
+$$ \min \left\{ \frac{1}{2} || J_k d + r_k ||_{2}^{2} \quad d \in \mathbb{R}^{n} \right\} $$
+Trovare quindi una direzione di Gauss Newton, corrisponde
+a risolvere un problema dei minimi quadrati,
+e con Bevilacqua abbiamo visto 3 metodi che non richiedono
+il calcolo della matrice hessiana. \\ \\
+Lo sviluppo di Taylor del primo ordine di $r_j(x^{k}+ d) $ è
+$$ r_j(x^{k}+ d)  \approx r_j(x^{k}) + \nabla r_j(x^{k})^{T} d$$
+$$ f(x^k + d) = 
+\frac{1}{2} \displaystyle \sum_{j=1}^{n} r_j^{2}(x^{k} + d) \approx
+ \frac{1}{2} \displaystyle \sum_{j=1}^{m}
+\left[ r_j(x^{k}) + \nabla r_j(x^{k})^{T}d\right]^{2} = 
+\frac{1}{2} || r_k + J_kd ||_{2}^{2} $$
+Abbiamo qundi un'approssimazione della funzione obiettivo.
+\begin{openquestion}
+  Non ho capito quest'ultima osservazione fatta sopra
+su Taylor: perch\'e ci serve?
+\end{openquestion}
+Potremmo pensare passi unitari in stile Newton, ma in questo caso
+non sarebbe garantita la convergenza del metodo: bisogna aggiungere
+una ricerca inesatta del passo.
+
+\paragraph{Metodo di Gauss-Netwon (``damped GN'')}
+\begin{enumerate}
+\item si sceglie un punto $x_0 \in \mathbb{R}^{n}$, $k=0$
+\item se $\nabla f(x)=0$ (il punto trovato è stazionario),
+      allora STOP.
+\item altrimenti dobbiamo calcolare $d^{k}_{GN} \in \mathbb{R}^{n}$ soluzione
+      di $J_{k}^{T}J_{k}d = -J_{k}R_{k}$
+\item calcolare $t_k > 0 $ che soddisfi le condizioni di Wolfe
+\item $x^{k+1} = x^{k} + t_k d_{GN}^{k}$
+\item $k = k+1$ e tornare a 2)
+\end{enumerate}
+
+\begin{theo}[Teorema di convergenza]
+Supponiamo che 
+\begin{itemize}
+\item $L_f(x^{0}) = \{ x \in \mathbb{R}^{n} : f(x) \leq f(x^{0}) \}$
+     (curve di sottolivello) sia compatto
+\item $r_j$ siano differenziabili con continuit\`a  per ogni $j=1\ldots n$
+ \item $\nabla f$ sia continua di tipo Lipschitziano
+\item $\exists \gamma > 0  \text{ t.c. } || J_kz||_{2} \geq \gamma ||z||_{2} 
+\quad \forall z \in \mathbb{R}^{n} \; \forall k \text{ (iterazioni del metodo)} \quad (***)$ 
+\end{itemize}
+Allora 
+$$ \lim_{k \to +\infty} || \nabla f(x^{k})||_{2} = 0 $$
+\end{theo}
+Vediamo il significato dell'ultima ipotesi:
+ci garantisce che i valori singolari di $J_k$ siano uniformemente
+distanti da 0.
+Cerchiamo di capire perch\'e: sia
+$ z=v_i $ vettore singolare destro di $J_k$: ha norma 1
+$$ || J_k v_i||_{2} = \sigma_i \quad \sigma_i \geq \gamma \text{ per ogni
+matrice } J_k $$
+Quindi per ogni iterazione del metodo tutti i valori singolari saranno maggiori di $\gamma$.
+\\
+($\sigma_i$: valori singolari)
+\begin{thproof}
+\begin{todo}
+Fare rivedere a Bigi la dimostrazione
+\end{todo}
+Per ipotesi $x \rightarrow J_r(x)$ è una funzione continua.
+Allora $x \rightarrow || J_R(x)||_{2}$ continua, poich\'e
+la norma \`e continua.
+La curva di sottolivello $L_{f}(x^{0})$  per ipotesi \`e compatta.
+Allora, per il teorema di Weirstrass esiste un massimo
+$$ \exists \; \beta > 0 \quad 
+|| J_{R}(x)||_{2} \leq \beta \quad \forall x \in L_f(x^{0}) 
+$$
+Sia $\theta_k$ l'angolo tra $-\nabla f(x^{k})$ e $d_{GN}^{k}$.
+Abbiamo
+$$ \cos \theta_{k} = 
+\frac{-f(x^{k})^{T}d_{GN}^{k}}{|| \underbracket{\nabla f(x^{k})}_{(*)}||_{2} 
+\; ||d_{GN}^{k}||_{2}} =
+ \frac{|| J_{k}^{T}d_{GN}^{k} ||_{2}^{2} }{|| \underbracket{J_{k}^{T}J_k d_{GN}^{k}}_{(*)}||_{2}
+||d_{GN}^{k}||_{2} } \geq \ldots (**)
+$$
+Valgono
+\begin{itemize}
+\item $ J_k^{T}r_k = -J_k^{T}J_{k}d_N^{k} \qquad (*)$
+\item 
+$
+ || J_k^{T} J_k d_{GN}^{k}||_{2} \leq || J_{k} ||_{2}^{2}||d_{GN}^{k}||_{2}
+\leq \beta^{2} ||d_{GN}^{k}||_{2} \qquad (**)
+$
+\end{itemize}
+$$ \ldots \geq
+\frac{|| J_k^{T} d_{GN}^{k}||_{2}^{2}}{\beta^{2} ||d^{k}_{GN}||_{2}^{2}}
+\underbracket{\geq}_{(***)} \frac{\gamma^{2}||d_{GN}^{k}||_{2}^{2}}{\beta^{2} ||d_{GN}||{2}^{2}}$$
+Dato Wolfe, Lipschitziana, funzione limite 
+$$
+\displaystyle \sum_{k=0}^{\infty} \underbracket{\cos^{2} \theta_k}_{\neq 0} || \nabla f(x^{k})||^{2} < + \infty \quad \Longrightarrow \quad \lim_{k \to + \infty} || \nabla f(x^{k})||_{2} = 0$$
+\end{thproof}
+In realt\`a  la condizione di Lipschitziana non è necessaria.
+
+
+%% Da qui parte non revisionata
+%% 29 Marzo 2011
+\section{Regressioni (non) lineari - data/curve fitting}
+Contesto: immaginiamo di avere un gruppo di dati, istanti di
+tempo 
+$$ y \in \mathbb{R}\; t_j \in \mathbb{R}^{p} $$
+Vediamo se ci sono delle correleazioni tra i $t_j$
+e gli $y$.
+L'idea è avere una black box che prende in input
+i $t_j$ e sputa fuori i $t_j$
+$$ y \approx f(\underbracket{t_j}_{\text{ regressori }})$$
+Per cercare di capire il comportamento della black box
+possiamo fare
+$$
+\min\left\{ \frac{1}{2}
+\left(\displaystyle \sum_{j=1}^{m} [y_j - f(t_j)]^{2} \right)
+; \quad f \in T
+\right\}
+$$
+Non abbiamo un vettore come incognita, abbiamo un insieme di funzioni.
+In $\mathbb{R}^{n}$ abbiamo una base finita, nello spazio
+di funzioni abbiamo una base infinita, le variabili sono
+delle funzioni. Questo argomento non fa parte del corso.
+Cerchiamo però di vedere un esempio.
+$$ T = \{ f(x_1,\ldots, x_m; \cdot) :
+\underbracket{x_1, x_2, \ldots, x_n}_{\text{parametri}} \in \mathbb{R}  \}$$
+Assegnato il valore ad un insieme finito di parametri,
+otteniamo la funzione corrispondente.
+Abbiamo quindi ristretto l'insieme delle funzioni che è possibile
+considerare, questo per un discorso di rappresentazione.
+Basta riprendere l'esempio della prima lezione
+di curve fitting per avere un esempio concreto.
+Il nuovo problema è espresso come
+$$ \min \left\{ \frac{1}{2} 
+\displaystyle \sum_{j=1}^{n}[y_j - f(x_1,\ldots, x_n)]^{2}\; : \;
+x_1, x_2, \ldots, x_n \in \mathbb{R} \right\}
+$$
+Esempio: Modello di crescita di un nuovo servizio.
+si vuole ottenere un modello.
+Vari modelli di crescita:
+\begin{itemize}
+\item Crescita esponenziale: $eg(t)  = x_1 e^{x_2 t}$
+\item Potenza temporale: $tp(t)= x_1t^{x_2}$
+ \item Crescita limitata $lmg(t) = x_3 - x_1^{-x_2 t}$
+\item Logistica: $lgs(t) = x_3 / (1 + x_1 e^{-x_2 t})$
+\end{itemize}
+I primi due non hanno un bound superiore, le ultime due si.
+Nell'esempio abbiamo gli ultimi 3 modelli ad essere
+candidati.
+
+$$
+ \min \left\{ \frac{1}{2} 
+\displaystyle \sum_{j=1}^{n}[y_j - tp(x_1,x_2;t_j)]^{2}\; : \;
+x_1, x_2 \in \mathbb{R} \right\}
+$$
+$$ tp(x_1,x_2,t) = x_1 t^{x_2}$$
+Nella lezione avevamo gli elementi residuali scritti come
+$$ r_j(x_1, x_2) = y_j - x_1 t_j^{x_2}$$
+Abbiamo 36 funzioni residuali candidate, e si può
+utilizzare Gauss Newton per risolvere il problema.
+\texttt{lsqnonlin} in Matlab.
+Da notare che nella teoria, come criterio d'arresto
+abbiamo
+$$\nabla f(x^{*})=0$$
+nella pratica si utilizza
+\begin{itemize}
+\item $ || \nabla f(x^{k})|| \leq \text{ tol } $
+ \item $ |f(x^{k-1}) - f(x^{k})| \leq \text{ tol } $
+\end{itemize}
+Secondo caso
+$$
+ \min \left\{ \frac{1}{2} 
+\displaystyle \sum_{j=1}^{n}[y_j - lmg(x_1,x_2;t_j)]^{2}\; : \;
+x_1, x_2 , x_3 \in \mathbb{R} \right\}
+$$
+
+$$ tp(x_1,x_2, x_3, t) =x_3 - x_1 e^{-x_2 t}$$
+Ultimo caso: funzione logistica
+
+$$
+ \min \left\{ \frac{1}{2} 
+\displaystyle \sum_{j=1}^{n}[y_j - lmg(x_1,x_2;t_j)]^{2}\; : \;
+x_1, x_2, x_3 \in \mathbb{R} \right\}
+$$
+
+$$lgs(x_1,x_2, x_3, t) =x_3 /(1+x_1e^{-x_2t})$$
+
+\outbpdocument
+
