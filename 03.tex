@@ -186,7 +186,7 @@ Otteniamo le sequenti equazioni:
 \right.\]
 Da cui traiamo le seguenti:
 \begin{itemize}
-\item $(1)$ essendo $L_{n-1}$ triangolare superiore $det(L_{n−1}) =
+\item $(1)$ essendo $L_{n-1}$ triangolare inferiore $det(L_{n−1}) =
   \Pi_{i=0}^{n-i} l_{ii} = 1$ allora $det (U_{n-1}) = det(A_{n-1})$ che
   per ipotesi \`e diverso da zero. Quindi esistono le inverse di $L$ e $U$
   e i seguenti valori sono determinati univocamente.
@@ -248,7 +248,7 @@ unica la fattorizzazione $LL^H$ di A.
 
 \begin{thproof}
   con $l_{ii} > 0$. \\
-  Per il teorema \ref{richiamibevilacqua:theo01},
+  Per il teorema \ref{richiamibevilacqua:definitepositive},
   $A$ ha le sottomatrici $A_k$ con $det(A_k) > 0$ e quindi per il
   teorema \ref{th:LU} esiste unica la fattorizzazione (per evitare
   confusione rinominiamo L con M):
@@ -448,7 +448,7 @@ esiste un $\tau$ tale che:
    u)}_{\text{scalare}} \underbracket{uv^{H}}_{\text{matrice}} = 0 
 \end{array}\]
 
-Per non cadere nel caso in cui $E=I$, poniamo che ne $u$ ne $v$ siano
+Per non cadere nel caso in cui $E=I$, poniamo che n\'e $u$ n\'e $v$ siano
 nulli. Allora possiamo concludere che
 \[\begin{array}{ll}
  - \sigma - \tau + \sigma\tau v^{H} u = 0 \\
@@ -833,7 +833,7 @@ A questo punto manca da trovare $\mathbf{v}$ tale che $\beta = \frac{2}{|| \math
 \end{array}\]
 
 Teoricamente non possiamo ricavare v dalla prima forma, perch\'e \`e in
-funzione di $\mathbf{v}^{H}$, proviamo allora \`e metterlo dentro un fattore
+funzione di $\mathbf{v}^{H}$, proviamo allora a metterlo dentro un fattore
 moltiplicativo $ c = \frac{1}{\beta \mathbf{v}^{H}\mathbf{x}}$. Calcoliamo ora 
 
 $$ \beta \mathbf{v}\mathbf{v}^{H} = 
@@ -935,7 +935,7 @@ $$
 
 
 \subsection{Complessit\`a}
-Tornando al metodo di Cholesky, per fare $PA$ non faremo
+Tornando al metodo di Householder, per fare $PA$ non faremo
 esplicitamente il prodotto (costo $O(n^3)$), ricordiamo che:
 $$ PA = (I - \beta \mathbf{v}\mathbf{v}^{H})A = A - \beta \mathbf{v}\mathbf{v}^{H}A$$
 \begin{enumerate}
@@ -956,7 +956,7 @@ $$ A = LL^{H} $$
 
 Dal precedente risultato \ref{th:esistenza-LL} Sappiamo che per $A$
 hermitiana definita positiva $L$ esiste unica (con $l_{ii} > 0 $).\\
-Ogni componente $l_{ij}$ è il prodotto della riga $i$ della matrice
+Ogni componente $a_{ij}$ è il prodotto della riga $i$ della matrice
 $L$ e della colonna $j$ delle matrice $L^H$:
 % $$
 % \begin{pmatrix}
@@ -1076,7 +1076,7 @@ $\theta = \log_{2}7=2,8\ldots$.
   Cholesky  ($LL^{H}$) & $n^{3}/6$ & 
   $L$ triangolare inferore con elementi diagonali positivi
     &     Hermitiana definita positiva
- & Stabile e veloce &  \\ \hline
+ & Stabile, veloce ed unica & Non sempre applicabile \\ \hline
     \end{tabular}
 \end{center}
 }
@@ -1299,7 +1299,7 @@ condizioni sufficienti di convergenza verificate da molte delle
 matrici che si ottengono risolvendo problemi differenziali.\\
 Si consideri la decomposizione della matrice A
 
-\subsection{Metodi iterativi di Jordan e Gauss-Seidel}
+\subsection{Metodi iterativi di Jacobi e Gauss-Seidel}
 
 $$ A = D- B -C $$
 $$ D = \begin{pmatrix}
@@ -1328,11 +1328,11 @@ Per queste decomposizioni risulta $\det M \neq 0$ se e solo se tutti gli
 elementi principali di A sono non nulli.
 
 
+\subsection{Metodo di Jacobi}
 
 $$ A = M -N $$ 
 $$ A = D - (B+C) \quad  P = M^{-1}N = D^{-1}(B+C)$$
 
-\subsection{Metodo di Jacobi}
 Indicando con J la matrice di iterazione del metodo di Jacobi, abbiamo
 $$ J = D^{-1} (B+C) $$
 da cui otteniamo la successione
