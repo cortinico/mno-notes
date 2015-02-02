@@ -1130,8 +1130,8 @@ minimo globale.
 \begin{thproof}
 
  Sia $\overline{x} \in D$ un minimo locale. Supponiamo, per assurdo,
-che non sia un punto di minimo globale. Allora $\exists \hat{x}$ tale 
-che $f(\hat{x}) < f(\overline{x})$. \\
+che non sia un punto di minimo globale. Allora $\exists x$ tale 
+che $f(x) < f(\overline{x})$. \\
 Consideriamo il punto $x_{\lambda} = \lambda x + (1-\lambda)\hat{x}$
 con $\lambda \in [0,1],  x_{\lambda} \in D$\\
 Quanto vale la funzione in $x_{\lambda}$?
@@ -1140,7 +1140,7 @@ Quanto vale la funzione in $x_{\lambda}$?
  + (1-\lambda) f(\overline{x})
  = f(\overline{x})$$
  $$ x_{\lambda} \xrightarrow{\lambda \rightarrow 0} \overline{x} \quad
-  \forall \epsilon  \exists  \overline{\lambda} \in [0,1] \quad 
+  \forall \varepsilon  \exists  \overline{\lambda} \in [0,1] \quad 
  \text{ t.c. }  \quad x_{\overline{\lambda}} \in  B(\overline{x}, \varepsilon)$$
 ed inoltre
 $$ f(x_{\overline{\lambda}}) < f(\overline{x})$$
@@ -1222,7 +1222,7 @@ Allora $\forall \lambda \in [0,1]$ risulta
 $$ f(\lambda x + (1-\lambda)y) \leq
  \lambda f(x) + (1-\lambda) f(y) \leq \lambda \alpha
  + (1-\lambda) \alpha = \alpha$$
-da cui $\lambda + (1-\lambda)y \in C_{\alpha}$
+da cui $\lambda x + (1-\lambda)y \in C_{\alpha}$
 \end{thproof}
 
 \begin{observation} Per vedere che quest'ultima proprietà vale solo in un
@@ -1258,7 +1258,7 @@ per un $k$ opportuno
  Sia $f$ differenziabile (su $\mathbb{R}^{n}$)
  $$  f \text{  è convessa } \Longleftrightarrow f(y) \geq  f(x) + \underbracket{ \nabla f(x)^{T} (y-x)}_{\text{piano tangente}} \quad \forall x, y \in \mathbb{R}^{n}$$
 \end{theo}
- Inforlmalmente: il grafico di $f$ sta sopra il piano tangente.
+ Informalmente: il grafico di $f$ sta sopra il piano tangente.
  Ricordiamo che $||x||$ è convessa ma non è differenziabile
 \begin{thproof} $\Longrightarrow$ \\ $x,y \in \mathbb{R}^{n}, \lambda
 \in [0,1]$ \\
@@ -1279,7 +1279,7 @@ $$
   $x,y \in \mathbb{R}^{n}, \lambda \in [0,1]$ \\
   \begin{equation}
     \label{eq01:001}    
-f(x) - f(\lambda y + (1-\lambda)x \geq 
+f(x) - f(\lambda y + (1-\lambda)x) \geq 
   \nabla f(\lambda y  + (1 - \lambda)x)^{T}[\lambda(x-y)]
   \end{equation}
   \begin{equation}
@@ -1320,7 +1320,6 @@ Sia $f$ differenziabile 2 volte (su $\mathbb{R}^{n}$). Allora
  $$ f \text { è convessa } \Longleftrightarrow \nabla^{2} f(x) \text{ è semidefinita positiva} \quad \forall x \in \mathbb{R}^{n},
 \text{ovvero } y^{T}\nabla^{2}f(x)y \geq 0
 $$
-(Matrice Hessiana)
 \end{theo}
 
 \begin{thproof}
@@ -1372,7 +1371,7 @@ $$f \text{ concava}
 \left\{
 \begin{array}{l}
 \text{ Teorema } (\ref{richiamibigi:theo01}) \text{ con }
-  f(x) \leq f(x) + \nabla f(x)^{T}(y-x) \\
+  f(y) \leq f(x) + \nabla f(x)^{T}(y-x) \\
 \text{ Teorema } (\ref{richiamibigi:theo02}) \text{ con }
   \nabla^{2}f(x) \text{ semidefinita negativa } (y^{T} \nabla f(x)y \leq 0)
 \end{array}
@@ -1383,7 +1382,7 @@ f \text{ strettamente convessa}
 \left\{
 \begin{array}{ll}
 \text{ Teorema }   (\ref{richiamibigi:theo01}) & \text{ con }
-  f(y) \geq f(x) + \nabla f(x)^{T}(y-x) \quad (y\neq x) \\
+  f(y) > f(x) + \nabla f(x)^{T}(y-x) \quad (y\neq x) \\
 \text{ Teorema }   (\ref{richiamibigi:theo02}) & 
    \text{ vale la parte necessaria con }
   \nabla^{2}f(x) \text{ semidefinita positiva}  \\
@@ -1442,7 +1441,7 @@ $$ \lambda f(x) + (1-\lambda)f(y) \geq f(\lambda x + (1-\lambda)y)$$
 
 
 \begin{notes}
- Tali teoremi possono riscritti per le funzioni convesse
+ Tali teoremi possono essere riscritti per le funzioni convesse
 \end{notes}
 
 \begin{todo}
@@ -1450,10 +1449,6 @@ $$ \lambda f(x) + (1-\lambda)f(y) \geq f(\lambda x + (1-\lambda)y)$$
 \end{todo}
 $$f(x) = x^4 \quad \nabla f(x) = 4x^{3} \quad \nabla^{2} f(x) = 12 x^{2} $$ 
 La matrice hessiana non è definita positiva. \\ \\
-$$f(x) = \frac{1}{2} x^{T} Q x + b^{T}x = c$$
-$$ \nabla f(x) = Q x + b$$
-$$ \nabla^2 f(x) = Q$$
-
 
 \begin{proposition}
  Siano $f$ convessa, $D$ convesso. Allora l'insieme dei punti di minimo
@@ -1462,13 +1457,14 @@ $$ \nabla^2 f(x) = Q$$
 
 Infatti  $\overline{x}, \hat{x} \in D$ minimi $f(\overline{x}) = f(\hat{x})$.
   $$ f(x_{\lambda}) \leq  \lambda f(\overline{x}) + 
-  (1-\lambda) \underbrace{=f(\hat{x})}_{=f(\overline{x})} = f(\overline{x})
-  \quad \rightarrow \quad  f(x\lambda) = f(\overline{x})$$
+  (1-\lambda) f(\hat{x})  = f(\hat{x}) = f(\overline{x})
+  \quad \rightarrow \quad  f(x_{\lambda}) = f(\overline{x})$$
   Cioè $x_{\lambda}$ è minimo.
 
 \paragraph{Funzioni quadratiche e convessit\`a}
  $Q \in \mathbb{R}^{n \times n} , b \in \mathbb{R}^{n},
  Q \text{ simmetrica }, c \in \mathbb{R}$
+
 $$ f(x) = \dfrac{1}{2} x^{T}Qx + b^{T}x + c
 \quad \Longrightarrow \quad f \text{ differenziabile 2 volte:}
 \nabla^{2}f(x) \equiv Q \quad \forall x
@@ -1487,10 +1483,10 @@ $Q$ definita positiva $\; \Longrightarrow \; f$ \`e strettamente convessa
 
 \section{Ottimizzazione non vincolata}
 %% 19 Novembre
-$D = \mathbb{R}^{n}$ otimizzazione \emph{non vincolata}: $(P) \quad \min\{f(\mathbf{x}): \mathbf{x} \in \mathbb{R}^{n}\}$
+$D = \mathbb{R}^{n}$ ottimizzazione \emph{non vincolata}: $(P) \quad \min\{f(\mathbf{x}): \mathbf{x} \in \mathbb{R}^{n}\}$
 \subsection{Condizioni di ottimalit\`a}
 \begin{theo}[Condizioni necessarie del primo e del secondo ordine] Sia
-$\overline{x} \in \mathbb{R}^{n}$ un punto di minimo locale di (P).
+$\mathbf{\overline{x}} \in \mathbb{R}^{n}$ un punto di minimo locale di (P).
 \begin{enumerate}
  \item Se $f$ \`e differenziabile in $\mathbf{\overline{x}}$, allora
 $\nabla f(\mathbf{\overline{x}}) = \mathbf{0}$
@@ -1500,14 +1496,14 @@ semidefinita positiva.
 \end{enumerate}
 \end{theo}
 
-\begin{thproof} Sia $ \epsilon > 0$ tale che $f(\mathbf{\overline{x}})
+\begin{thproof} Sia $ \varepsilon > 0$ tale che $f(\mathbf{\overline{x}})
 = \min \{ f(\mathbf{x}) = \mathbf{x} \in B(\mathbf{\overline{x}},
-\epsilon)\}$, e siano $\mathbf{d} \in \mathbb{R}^{n}$ con
-$||\mathbf{d}||_{2}=1$ una direzione e $ t \leq \epsilon$:
+\varepsilon)\}$, e siano $\mathbf{d} \in \mathbb{R}^{n}$ con
+$||\mathbf{d}||_{2}=1$ una direzione e $ t \leq \varepsilon$:
  \begin{enumerate}
   \item Per ipotesi $\mathbf{\overline{x}}$ è punto di minimo locale,
 quindi
- $$ \exists \epsilon > 0.  \quad f(\mathbf{\overline{x}}) 
+ $$ \exists \varepsilon > 0.  \quad f(\mathbf{\overline{x}}) 
 \leq f(\mathbf{x}) \quad \forall \mathbf{x} \in 
 B(\mathbf{\mathbf{\overline{x}}}, \varepsilon)$$
 
@@ -1586,7 +1582,7 @@ $\Leftarrow$:
  \underbrace{\nabla f(\overline{x})^{T}(y-x)}_{\text{questo pezzo sparisce}} \quad
  \forall y \in \mathbb{R}^{n} 
 $$
-$$ f(\overline{x}) = 0  
+$$ \nabla f(\overline{x}) = 0  
 \quad \Longrightarrow \quad f(y) \geq f(\overline{x}) \quad \forall y
 \in \mathbb{R}^{n} \quad \Longrightarrow \quad \overline{x}
  \text{ \`e un punto di minimo }
@@ -1709,11 +1705,11 @@ $$
  + \dfrac{r(x - \overline{x})}{|| x - \overline{x} ||_{2}^{2}}
 \xrightarrow{x \to \overline{x}} \dfrac{\lambda_{min}}{2}
  $$
-Sia $0 < \epsilon < \dfrac{\lambda_{min}}{2}$ :
-per la definizione di limite esiste $\lambda > 0$ tale che
+Sia $0 < \varepsilon < \dfrac{\lambda_{min}}{2}$ :
+per la definizione di limite esiste $\gamma > 0$ tale che
 $$
 \dfrac{f(x) - f(\overline{x})}{||x - \overline{x}||_{2}^{2}}
-\geq (\dfrac{\lambda_{min}}{2} - \epsilon) = \gamma
+\geq (\dfrac{\lambda_{min}}{2} - \varepsilon) = \gamma
 \quad \forall x \in B(\overline{x},\delta)
 $$
 da cui
