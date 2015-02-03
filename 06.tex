@@ -125,6 +125,7 @@ $$\nabla \phi(x) = Ax-b$$
 Il che vale per ogni $x$, quindi possiamo scrivere
 $$\nabla \phi(x_{k}) = Ax_{k}-b$$
 Chiamiamo questa quantità negata $r_{k}$ residuo. Intuitivamente, il residuo è la distanza dalla soluzione al passo $k$.
+$$r_{k} = - \nabla \phi(x_{k}) = b - Ax_{k}$$
 %$$\nabla \phi(x_{k}) = Ax_{k}-b = -r_{k}$$
 %$$(1) \quad \nabla \phi(x_{k}) = -r_{k}$$
 \subsection{Passo di discesa} Ora cerchiamo di definire il passo
@@ -267,9 +268,9 @@ $$
 Ora verifichiamo alcune proprietà che riguardano i parametri coinvolti
 nel metodo
 \begin{itemize}
-\item $r_{k}^{T} r_{k-1}=0$\\ \\ Sostituendo a r_{k-1} l'espressione
+\item $r_{k}^{T} r_{k-1}=0$\\ \\ Sostituendo a $r_{k-1}$ l'espressione
 (5) abbiamo
-$$r_{k}^{T} r_{k-1} =r_{k} (p_{k-1} - \beta _{k-1} p_{k-2}) =
+$$r_{k}^{T} r_{k-1} =r_{k}^{T} (p_{k-1} - \beta _{k-1} p_{k-2}) =
 r_{k}^{T} p_{k-1} - \beta_{k-1}r_{k}^{T} p_{k-2}$$ eliminiamo il primo
 termine uguale a 0 e sostituiamo a $r_{k}$ la sua espressione nella
 formula di aggiornamento del residuo
@@ -293,7 +294,7 @@ $$ p_{k}^{T}r_{k-1}= p_{k}^{T} (r_{k} + \alpha_{k-1} A p_{k-1}) = p_{k}^{T}r_{k}
 \end{itemize} Dal primo punto ricaviamo che i residui risultanti da
 due passi consecutivi dell'algoritmo sono sempre ortogonali.  Dal
 secondo punto ricaviamo una nuova formula per il calcolo di
-$\beta_{k}$ che sftrutta esclusivamente i prodotti scalari tra
+$\beta_{k}$ che sfrutta esclusivamente i prodotti scalari tra
 residui:
 $$ (6)\quad \beta_{k} = \frac{r_{k}^{T}r_{k}}{r_{k-1}^{T}r_{k-1}}$$ 
 
@@ -306,12 +307,12 @@ l'algorimo per il gradiente coniugato.
  \item Scegliere $x_0 \in \mathbb{R}^{n}; k =0$
  \item Se $r_{k}:= b-A x_{k} = 0$, STOP
  \item $\beta_{k} = r_{k}^{T}r_{k} / r_{k-1}^{T}r_{k-1} \quad (k \geq
-1), \beta_{0}$ \quad
+1) \quad \beta_{0} = 0 $
  \item $p_{k} = r_{k} + \beta_{k} p_{k-1} \quad (k \geq 1) \quad
 p_{0}=r_{0}$
  \item $\alpha_{k} = r_{k}^{T}r_{k}/p_{k}^{T} A p_{k}$ \quad (ricerca
 esatta)
- \item $x_{k+1} = x_{k} + p_{k}$
+ \item $x_{k+1} = x_{k} + \alpha_{k} p_{k}$
  \item $k = k+1$ e ritornare a 2)
 \end{enumerate}
 
@@ -348,7 +349,7 @@ loro e due direzioni successive sono A-coniugate.
 \item Passo induttivo ($h \Rightarrow h+1$) \\ Come ipotesi induttiva
 abbiamo
 $$\left\{
-\begin{array}{ll} r_{h+1}^{T} r_{j} = 0\\ \\ p_{h+1}^{T} A p_{j} = 0
+\begin{array}{ll} r_{h}^{T} r_{j} = 0\\ \\ p_{h}^{T} A p_{j} = 0
 \end{array} \right.  \text{per} j=0..h-1
 $$
 mentre per $j=h$ vale dalle stesse proprietà presenti al passo base.
@@ -357,7 +358,7 @@ Dalla formula di aggiornamento del residuo si ha per $j=0..h-1$
 $$r_{h+1}^{T}r_{j} =\underbracket{ r_{h}^{T}r_{j}}_{= 0 \text {per ip. indutt.}} - \alpha_{h}p_{h}^{T}Ar_{j}=   \\
 =-\alpha_{h}p_{h}^{T}Ar_{j}
 $$
-Ma per la definizione della direzione $p_{j}$ abbiamo
+Ma per la definizione della direzione $p_{j}$, sostituendo $r_{j}$ abbiamo
 $$
 p_{h}^{T}Ar_{j}=\underbracket{p_{h}^{T}Ap_{j}}_{=0 \text{per
 ip. indutt.}} - \beta_{j}\underbracket{p_{h}^{T}Ap_{j-1}}_{=0
@@ -369,7 +370,7 @@ $$
 $$
 Ora, per quanto riguarda le direzioni, sappiamo che per $j=0..h-1$
 abbiamo
-$$Ap_{j}=\frac{1}{\alpha_{j}}(r_{j}r_{j-1})$$
+$$Ap_{j}=\frac{1}{\alpha_{j}}(r_{j} - r_{j-1})$$
 e quindi sostituendo nella nostra tesi da valutare
 $$p_{h+1}^{T}Ap_{j}=r_{h+1}^{T}Ap_{j}=-\frac{1}{\alpha_{j}}(r_{h+1}^{T}r_{j}-r_{h+1}^{T}r_{j+1})=-\frac{1}{\alpha_{j}}r_{h+1}^{T}r_{j+1}$$
 Quest'ultimo passaggio vale 0 per $j=0..h-2$ per quanto ricavato
@@ -389,7 +390,7 @@ $r_{k}=q_{k}(A)*r_{0}$
 passo $k$ del gradiente coniugato (senza dimostrazione) \`e:
 $$
 ||e_{k}||_{A} \leq 2 \left( \frac{
-\sqrt{\mu_{2}(A)}-1}{\sqrt{\mu_{2}(A)}+1} {)} \right)^{k}
+\sqrt{\mu_{2}(A)}-1}{\sqrt{\mu_{2}(A)}+1} \right)^{k}
 ||e_{0}||_{A}
 $$
 Che \`e tanto migliore quanto la radice del numero di condizionamento di
@@ -404,7 +405,7 @@ Nel caso la matrice $A$ sia malcondizionata, \`e possibile applicare
 tecniche di precondizionamento prima di effettuare l'algoritmo, in
 modo da renderne più veloce la convergenza.
  
-\section{Metodo del gradiente coniugato precondizionato} Migliorare il
+\section{Metodo del gradiente coniugato con precondizionamento} Migliorare il
 condizionamento della matrice $A$ nel problema $Ax=b$ richiede
 trasformarla in una matrice più "vicina" alla matrice identità. Una
 possibile soluzione consiste nell'usare una matrice invertibile $C$
@@ -421,7 +422,7 @@ B \approx I \quad \Longrightarrow \quad C^{-1}AC^{-T} \approx I \quad
 $$
 
 In tal caso si può usare come matrice $C$ un fattore della
-fattorizzazione incompleta di Cholemsky, che ha la proprietà di avere
+fattorizzazione incompleta di Cholesky, che ha la proprietà di avere
 elementi nulli in corrispondenza degli elementi nulli di $A$,
 rimanendo così sparsa almeno quanto lo \`e $A$. \\ Avendo una
 fattorizzazione, il mal condizionamento rimane presente, spostato
