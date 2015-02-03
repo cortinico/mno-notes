@@ -436,7 +436,7 @@ iniziale malcondizionato.
 \section{Considerazioni preliminari} Generalizzare il metodo del
 gradiente coniugato ai casi non lineari implica perdere tutte le
 ipotesi dovute all'uso del funzionale quadratico $\phi(x) =
-\frac{1}{2} x^{T} A x - b^{T}$, adattando quindi il calcolo dei vari
+\frac{1}{2} x^{T} A x - b^{T} x$, adattando quindi il calcolo dei vari
 parametri del metodo al caso generico.\\
 
 Un primo problema nasce dalla definizione del residuo $r_{k}$ che
@@ -455,7 +455,7 @@ avremmo la seguente situazione:
 f(x_{k-1})^{T} \nabla f(x_{k-1})}, k \geq 1, \beta_{0} = 0$
  \item $p_{k} = -\nabla f(x_{k}) + \beta_{k} p_{k-1} \quad p_{0} =
 -\nabla f(x_{0})$
- \item $\alpha_{k} = r_{k}^{T} r_{k} / p_{k}^{T}Ap_{k}$ \\
+ \item $\alpha_{k} = \frac{\nabla f(x_{k})^{T} \nabla f(x_{k})}{p_{k}^{T}Ap_{k}}$ \\
  \item $x_{k+1} = x_{k} +\alpha_{k} p_{k}$
  \item $k = k+1$ e ritornare a 2)
 \end{enumerate} Il problema serio nasce al punto 5). La formula
@@ -508,7 +508,8 @@ semplice, se $\varphi'(\alpha_{k}) $ \`e positiva, allora basta che la
 direzione di discesa sia di un valore qualsiasi, mentre nella nuova
 proprietà forziamo la scelta di un valore di modulo sufficientemente
 grande.
-\begin{lemma} Se il passo $\alpha_{k}$ soddisfa (CUR1), allora il
+\begin{lemma}
+\label{lemma:coniugatocur1} Se il passo $\alpha_{k}$ soddisfa (CUR1), allora il
 metodo genera direzioni $p_{k}$ tali che
 $$ 
 -\frac{1}{1-c_{2}} \leq \frac{\nabla f(x_{k})^{T} p_{k} }{||\nabla
@@ -581,7 +582,7 @@ $\nabla f(x_{k}) \approx \nabla f(x_{k-1})$ e inotre $ \beta_{k}
 direzione scelta sarà simile a quella del passo precedente.
 
 Sia $$ \frac{2 c_2 -1}{1-c_2}= - \delta_{1} \quad \delta_{1} > 0 $$
-Per il Lemma 2.1 %(inserire riferimento)
+Per il Lemma \ref{lemma:coniugatocur1}
 $$\frac{\nabla f(x_{k-1})^{T}p_{k-1}}{|| \nabla f(x_{k-1})||_{2}^{2}} \leq \delta_{1}$$
 Moltiplicando entrambi i membri per $\frac{||\nabla
 f(x_{k-1})||_{2}}{|| p_{k-1}||_{2}}$ otteniamo
@@ -595,7 +596,7 @@ $$
 Ma il primo membro \`e uguale a $-\cos \Theta_{k-1} $, quindi:
 
 $$ 0 \approx \cos \Theta_{k-1} \geq 
-\delta_{1} \frac{||\nabla f(x_{k-1}||_{2}}{|| p_{k-1}||_{2}} \quad
+\delta_{1} \frac{||\nabla f(x_{k-1})||_{2}}{|| p_{k-1}||_{2}} \quad
 \rightarrow \underbracket{|| \nabla f(x_{k-1})||_{2}}_{\approx ||
 \nabla f(x_{k})||_{2}} << ||p_{k-1} ||_{2}
 $$
@@ -616,10 +617,9 @@ grande e la sotto successione dei $\{\beta_{k_{j}} \}_{j}$ tali che
 $\beta_{k}=0$ porta il gradiente a convergere a 0 e sarà tale che
 soddisfa la condizione sul limite inferiore del gradiente \\ Un'altra
 tecnica per risolvere questo problema \`e avere una variante
-dell'algoritmo.  \\ %Algoritmo del gradiente coniugato non lineare di
-Fletcher - Reeves \\ \\ \\ Un altro algoritmo \`e la Variazione di Polak
-Ribierre, che impone :
-$$\beta_{k}^{PR} = \frac{r_{k}^{T} r_{k}}{ r_{k-1}^{T} r_{k-1}} = \frac{r_{k}^{T}(r_{k} - r_{k-1}) }{ r^{T}_{k-1} r_{k-1}} = \frac{ \nabla f(x_{k})^{T} (\nabla f(x_{k}) 
+dell'algoritmo.  \\ 
+Ad esempio la variazione di \emph{Polak-Ribierre} impone che:
+$$\beta_{k}^{PR} = \frac{r_{k}^{T}(r_{k} - r_{k-1}) }{ r^{T}_{k-1} r_{k-1}} = \frac{ \nabla f(x_{k})^{T} (\nabla f(x_{k}) 
   - \nabla f(x_{k-1})) }{\nabla f(x_{k-1})^{T} \nabla f(x_{k+1})}$$ In
 tal modo abbiamo che:
 $$ \cos \Theta_{k-1} \approx 0 \rightarrow \beta_{k}^{PR} \approx 0$$
