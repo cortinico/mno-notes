@@ -237,9 +237,9 @@ ad un generico passo, di aver ottenuto $ \overline{x} \in
 f(\overline{x}) \neq 0$, altrimenti abbiamo gi\`a la soluzione).
 
 Dato che $f$ \`e differenziabile, abbiamo lo sviluppo di Taylor:
-$$f(\overline{x} +t \cdot d) -f(\overline{x}) = t \cdot \nabla f(\overline{x})^{T} \cdot d + r(t \cdot d)$$
+$$f(\overline{x} +t \cdot d) -f(\overline{x}) = t \cdot \nabla f(\overline{x})^{T} \cdot d + r(td)$$
 
-Dove $r(td)$ \`e un resto tale che $\frac{r(td)}{t}$ va a $0$. Inoltre
+Dove $r(td)$ \`e un resto tale che $\frac{r(td)}{t}$ va a $0$ per $||t|| \longrightarrow 0$. Inoltre
 sappiamo che
 
 $$ \lim_{t \to 0} \frac{f(\overline{x}+td)- f(\overline{x})}{t} = \nabla f(\overline{x})^{T} \cdot d $$
@@ -402,7 +402,7 @@ componente, tali che $\theta_{i}: \mathbb{R} \rightarrow \mathbb{R}$
 assume il valore dell'$i$-esima componente del vettore $x^{k}-t\nabla
 f(x^{k}) = \theta(t)$. Quindi
 
-$$ \theta = (\theta_{1},(\theta_{2}, \ldots, \theta_{n}) \qquad \theta(t) = x^{k}-t\nabla f(x^{k}) =  \left(\begin{matrix}\theta_{1}(t) \\\theta_{2}(t) \\ \vdots \\ \theta_{n}(t)\end{matrix}\right)$$
+$$ \theta = (\theta_{1}, \theta_{2}, \ldots, \theta_{n}) \qquad \theta(t) = x^{k}-t\nabla f(x^{k}) =  \left(\begin{matrix}\theta_{1}(t) \\\theta_{2}(t) \\ \vdots \\ \theta_{n}(t)\end{matrix}\right)$$
 
 La funzione $\theta$ \`e derivabile, quindi ogni $\theta_i$ \`e
 derivabile.
@@ -524,7 +524,7 @@ algoritmica.
 
 Vi sono tuttavia dei casi in cui il calcolo esatto del passo di
 spostamento non richiede un algoritmo: nel caso in cui $f$ sia una
-funzione quadratica, come vedremo non troviamo pi\`u davanti ad un
+funzione quadratica, come vedremo ci non troviamo pi\`u davanti ad un
 problema di ottimizzazione ma semplicemente al calcolo di una formula.
 
 Si ricorda la definizione di funzione quadratica:
@@ -643,7 +643,7 @@ ortogonali)} Abbiamo visto nel Teorema
 \ref{theo:gradiente-esatto-direzioni-ortogonali} che la direzione del
 passo all'iterazione $k$ \`e ortogonale a quella del passo $k+1$. Gli
 spostamenti sono quindi rigidi. Se siamo lontani dal punto stazionario
-il fatto di avere direzioni ortagonali non crea problemi, ma quando ci
+il fatto di avere direzioni ortogonali non crea problemi, ma quando ci
 si avvicina può portare a dei passi molto piccoli e quindi un
 rallentamento della convergenza.
 
@@ -810,7 +810,7 @@ vedere che la condizione di curvatura \`e rispettata.
 \varphi'(t_{k_{min}}) \geq c_2 \varphi'(0)$$ Essendo $t_{k_{min}}$ il
 minimo di $\varphi$, la derivata vale $$\varphi'(t_{k_{min}}) =0$$
 inoltre la derivata in $0$ vale $$\varphi'(0) = \nabla f(x^{k})^{T}
-d^{k} < 0 $$ quindi (CUR) \`e soddisfatta.
+d^{k} = - ||\nabla f(x^{k})|| < 0 $$ quindi (CUR) \`e soddisfatta.
 \end{thproof}
 \end{property}
 
@@ -830,7 +830,7 @@ grafici avranno dunque forma:
 \centerline{\includegraphics[width=0.60\textwidth]{imgs/ricerca-esatta-no-armijo.png}}
 
 Perch\'e la condizione di Armijo valga per la ricerca esatta, la curva
-di $\varphi(t)$, nel suo punto di minimo deve stare sotto la curva
+di $\varphi(t)$, nel suo punto di minimo deve stare sotto la retta
 $f(x) + c_1 t \nabla f(x)^{T}d$. Ma \`e possibile costruire degli
 esempi, come quello del grafico, in cui questo non avviene.
 
@@ -1004,7 +1004,7 @@ Del Lemma \ref{lemma:lipschitziana-serie-convergente} a noi non
 interessa tanto la convergenza della serie, quanto piuttosto quello
 che se ne può dedurre:
 
-$$\sum_{k=0}^{+ \infty} ~ || \nabla f(x^{k}) ||_{2}^{2} \cos^{2} \theta_{k} < + \infty \quad \Longrightarrow \quad \Vert \nabla f(x^{k}) \Vert_{2}^{2} \cos^{2} \theta_{k} \longrightarrow_{k\rightarrow + \infty} 0$$
+$$\sum_{k=0}^{+ \infty} ~ || \nabla f(x^{k}) ||_{2}^{2} \cos^{2} \theta_{k} < + \infty \quad \Longrightarrow \quad \Vert \nabla f(x^{k}) \Vert_{2}^{2} \cos \theta_{k} \longrightarrow_{k\rightarrow + \infty} 0$$
 
 Questo risultato porta ad una dimostrazione immediata della
 convergenza:
@@ -1031,8 +1031,8 @@ $\{x_k\}$ \`e un punto stazionario.
 
 \begin{thproof} Abbiamo visto che per il Lemma
 \ref{lemma:lipschitziana-serie-convergente},
-$$\Vert \nabla f(x^{k}) \Vert_{2}^{2} \cos^{2} \theta_{k} \longrightarrow_{k\rightarrow + \infty} 0$$
-Ma con l'ipotesi 3 abbiamo anche impedito che $\cos^{2} \theta_{k}$
+$$\Vert \nabla f(x^{k}) \Vert_{2}^{2} \cos \theta_{k} \longrightarrow_{k\rightarrow + \infty} 0$$
+Ma con l'ipotesi 3 abbiamo anche impedito che $\cos \theta_{k}$
 vada a zero (il punto pi\`u vicino a zero che il limite può raggiungere
 \`e $-\delta$), dunque non può che essere:
 $$ \Vert \nabla f(x^{k})\Vert^{2}_{2} \longrightarrow_{k \to +\infty} 0 \quad \Longleftrightarrow \quad \Vert \nabla f(x^{k})\Vert_{2} \longrightarrow_{k \to +\infty} 0$$
@@ -1364,7 +1364,7 @@ che il Metodo del gradiente ha convergenza lineare).
 \paragraph{Applicazioni del metodo di Newton} Abbiamo appena visto che
 il metodo di Newton minimizza una versione quadratica della funzione
 obiettivo. Se applicassimo il metodo di Newton ad una funzione
-quadrata, l'approssimazione sarebbe senza errore. Quindi la
+quadratica, l'approssimazione sarebbe senza errore. Quindi la
 convergenza si ottiene in un solo passo.
 
 \begin{exercise} Si applichi il metodo di Newton alla funzione
