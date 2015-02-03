@@ -643,7 +643,7 @@ delle derivate. \\
 
 Esistono in letteratura diversi metodi di questo tipo, vediamone alcuni:
  \paragraph{Metodo delle differenze finite}
-In questo caso si passadall'uso del limite del rapporto incrementale all'approssimazione
+In questo caso si passa dall'uso del limite del rapporto incrementale all'approssimazione
 della derivata su $x_i$ tramite il calcolo della variazione di valore
 della funzione, rispetto ad una perturbazione infinitesimale $t$ lungo
 la direzione indicata dal vettore della base canonica $\mathbf{e_i}$.
@@ -675,7 +675,7 @@ Ora descriveremo un metodo per l'ottimizzazione non vincolata di (P)
 che non usa il calcolo di gradienti.\\ Ad ogni iterazione si cercher\`a
 una direzione di discesa lungo una delle direzioni descritte dalle
 basi canoniche di $\mathbb{R}^n$ effettuando un passo $t$ fissato e
-che viene ridotto ogni volta che non rvangono trovati spostamenti che
+che viene ridotto ogni volta che non vengono trovati spostamenti che
 migliorano l'approssimazione.  \\ Prendendo in considerazione la base
 canonica
  $$ \{e_1, \ldots, e_n  \} \subseteq \mathbb{R}^{n} $$
@@ -724,7 +724,7 @@ passo $t_k$.\\ Si sceglie quindi la condizione $t_k \leq \delta \quad
 Ora riscriviamo l'algoritmo nella seguente forma per dimostrarne delle
 propriet\`a, aggiungendo un contatore $l$ dei fallimenti nella ricerca
 della direzione di decrescita e chiamiamo $ \{ z^{l} \}$ la
-successione dei punti di $\mathbb{R}^{n}$ e $\{ t_{l} \}$ la
+successione dei punti di $\mathbb{R}^{n}$ in cui c'\`e stato un fallimento e $\{ t_{l} \}$ la
 successione dei passi per cui c'\`e stato un fallimento
 dell'algoritmo.\\
  
@@ -781,7 +781,7 @@ Allora può essere scritto come combinazione lineare a coefficienti non
 negativi dei $\hat{d_i}$
 $$ v = \displaystyle \sum_{i=1}^{n} \gamma_i \hat{d_i}, 
 \quad \gamma_i \geq 0 $$ I vettori $\hat{d_i}$ della base sono tutti
-ortogonali tra di loro, quindi quando effetuiamo il prodotto scalare
+ortogonali tra di loro, quindi quando effettuiamo il prodotto scalare
 avremo per ogni singola componente $l$:
 $$ \hat{d_l}^{T} v = \gamma_l > 0 $$
 Ed avendo preso v unitario possiamo affermare che
@@ -795,10 +795,10 @@ Allora esister\`a un vettore del generatore D tale che $ -d^{T}v \geq
 Useremo questa propriet\`a che vale per ogni vettore unitario nella
 dimostrazione della convergenza.\\ Possiamo supporre che $ \nabla
 f(z^{l}) \neq 0$ dato che altrimenti avremmo gi\`a la convergenza alla
-soluzione.  DAto che $\frac{f(z^{l})}{|| \nabla f(z^{l}||}$ \`e un
+soluzione.  Dato che $\frac{f(z^{l})}{|| \nabla f(z^{l})||}$ \`e un
 vettore normalizzato, allora vale la propriet\`a definita
 precedentemente, cio\`e
-$$\exists d \in D . - \left(\frac{f(z^{l})}{|| \nabla f(z^{l}||}\right)^{T} d \geq \frac{1}{\sqrt{n}}$$
+$$\exists d \in D . - \left(\frac{f(z^{l})}{|| \nabla f(z^{l})||}\right)^{T} d \geq \frac{1}{\sqrt{n}}$$
 il che equivale a scrivere $ -\nabla f(z^{l})^{T} d \geq \frac{||
 \nabla f(z^{l})||_{2}}{\sqrt{n}} $.\\ Dato che $z^l$ fa parte di
 un'iterazione fallimentare, allora non vale la condizione di discesa
