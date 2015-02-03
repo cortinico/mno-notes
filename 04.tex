@@ -210,9 +210,9 @@ Effettivamente esiste un legame fra queste due grandezze: si veda il Teorema \re
 $$ \rho(B) = \inf_{|| \cdot || \text{ indotta}}\{ ||B||\}$$
 
 In particolare, se $ \rho(B) < 1 $, possiamo trovare, prendendo $
-\epsilon < 1 - || H(\alpha) || $, una norma $ ||\cdot||_* $ tale che
+\varepsilon < 1 - || H(\alpha) || $, una norma $ ||\cdot||_* $ tale che
 
-$$ \rho(B) \leq || B||_* \leq \rho(B) + \epsilon$$
+$$ \rho(B) \leq || B||_* \leq \rho(B) + \varepsilon$$
 
 verificando dunque la condizione del teorema del punto fisso nella sua
 versione sufficiente, in quanto per la continuit\`a di $g$ esister\`a un
@@ -476,16 +476,16 @@ Inoltre $ \alpha $ \`e  l'unica soluzione del problema.
 \begin{thproof}
 Per prima cosa dimostriamo per induzione su i che
 \begin{itemize}
-\item $ \forall i.\alpha \leq x^{(i+1)} \leq x^{(i)} $
-\item $ f(x^{(i+1)} \geq 0 $
+\item $ \forall i \quad \alpha \leq x^{(i+1)} \leq x^{(i)} $
+\item $ f(x^{(i+1)}) \geq 0 $
 \end{itemize}
 Il secondo punto servir\'a solamente per applicare l'induzione. Il primo punto \`e  quello importante: ci dice che la successione di $ x^{(i)} $ si avvicina verso $ \alpha $.
 
 \begin{description}
-\item[Passo base] Dal teorema \ref{theo:legamejacobconvessita} sappiamo che, se f \`e  convessa, vale $ f(\alpha) - f(x^{(0)} \geq J(x^{(0)}(\alpha - x^{(0)}) $, e che dunque
+\item[Passo base] Dal teorema \ref{theo:legamejacobconvessita} sappiamo che, se f \`e  convessa, vale $ f(\alpha) - f(x^{(0)}) \geq J(x^{(0)})(\alpha - x^{(0)}) $, e che dunque
 
 \begin{equation}
--[J(x)]^{-1}f(x^{(0)} \geq \alpha - x^{(0)}
+-[J(x)]^{-1}f(x^{(0)}) \geq \alpha - x^{(0)}
 \label{eqn:nrfunzconv}
 \end{equation}
 
@@ -498,9 +498,9 @@ Essendo $ [J(x^{(0)})]^{-1} \geq 0 $ e $ f(x^{(0)}) \geq 0 $ per ipotesi, otteng
 
 Inoltre, sempre per il fatto che f \`e  convessa, posso applicare il teorema \ref{theo:legamejacobconvessita} ottenendo
 \[ f(x^{(1)} - f(x^{(0)} \geq J(x^{(0)})(x^{(1)} - x^{(0)}) \]
-Questa relazione, essendo $ J(x^{(0)})(x^{(1)} - x^{(0)}) = -f(x^{(0)}) $ per definizione del metodo, implica $ f(x^{(1)} \geq 0 $. Inoltre, essendo $ x^{(1)} $ compreso fra $ x^{(0)} $ e $ \alpha $, abbiamo che $ x^{(1)} \in D $ e che quindi $ [J(x^{(1)})]^{-1} \geq 0 $
+Questa relazione, essendo $ J(x^{(0)})(x^{(1)} - x^{(0)}) = -f(x^{(0)}) $ per definizione del metodo, implica $ f(x^{(1)}) \geq 0 $. Inoltre, essendo $ x^{(1)} $ compreso fra $ x^{(0)} $ e $ \alpha $, abbiamo che $ x^{(1)} \in D $ e che quindi $ [J(x^{(1)})]^{-1} \geq 0 $
 
-\item[Passo induttivo] Essendo $ [J(x^{(1)})]^{-1} \geq 0 $ e $ f(x^{(1)} \geq 0 $ posso applicare esattamente la stessa dimostrazione vista per il passo base.
+\item[Passo induttivo] Essendo $ [J(x^{(1)})]^{-1} \geq 0 $ e $ f(x^{(1)}) \geq 0 $ posso applicare esattamente la stessa dimostrazione vista per il passo base.
 \end{description}
 
 La successione \`e  quindi decrescente e inferiormente limitata: possiamo esser sicuri che converge ad un valore $ \beta $ per il quale
