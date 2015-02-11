@@ -177,7 +177,7 @@ minimi quadrati pu\`o essere ottenuta risolvendo il sistema
 $$A^{H}Ax = A^{H}b$$
 In tal caso, poich\'e la matrice $A^{H}{A}$ \`e definita positiva
 (\ref{prop:def-pos}), si pu\`o utilizzare per la risoluzione il metodo
-di Cholesky \ref{sec:fatt-cholesky}.
+di Cholesky (presentato nel paragrafo \ref{sec:fatt-cholesky}).
 Determinata la matrice triangolare inferiore tale che
 $$LL^{H} =A^{H} A$$
 la soluzione $x^{*}$ di $A^{H}Ax = A^{H}b$ viene calcolata risolvendo
@@ -209,8 +209,8 @@ Cholesky è stabile
 
 \section{Metodo QR} 
 Si esamina ora un altro procedimento, detto metodo QR, che opera
-direttamente sulla matrice A fattorizzandola nella forma QR
-\ref{fatt:QR}, dove $Q$ \`e una matrice ortogonale.  In particolare,
+direttamente sulla matrice A fattorizzandola nella forma QR (vedi sezione
+\ref{fatt:QR}), dove $Q$ \`e una matrice ortogonale.  In particolare,
 poich\'e si sta lavorando nel campo complesso, $Q$ \`e unitaria. \\
 Si supponga dapprima che la matrice $A \in C^{m\times n} $ abbia rango
 massimo, $k = n \leq m$.  Si applica il metodo di Householder alla
@@ -236,8 +236,8 @@ $A$ ha rango massimo. Dalla (\ref{eq:06minq05}) si ha
 
 \begin{equation}
   \label{eq:06minq07} 
-  || Ax - b ||_2 = ||QRx - b||_2 \underbracket{=}_{*)} 
-  ||QRx - QQ^{H}b||_2 = ||Q(Rx - Q^{H}b)||_2 = ||Rx - Q^{H}b||_2 = 
+  || Ax - b ||_2 = ||QRx - b||_2 = 
+  ||QRx - QQ^{H}b||_2 = ||Q(Rx - Q^{H}b)||_2 \underbracket{=}_{*)} ||Rx - Q^{H}b||_2 = 
   ||Rx - c||_2
 \end{equation}
 *) Le matrici unitarie preservano la norma 2 (\ref{prop:unitarie})\\
@@ -310,9 +310,9 @@ $$ A\Pi = QR$$
 dove $\Pi$ \`e una matrice di permutazione delle colonne.  Infatti se
 la matrice $A$ non ha rango massimo, la matrice $R_1$ ottenuta ha
 almeno un elemento diagonale nullo e quindi non \`e possibile
-calcolare la soluzione del sistema (\ref{{eq:06minq08}}). \\
+calcolare la soluzione del sistema (\ref{eq:06minq08}), in quanto non \`e possibile invertire $R_1$. \\
 Questa difficolt\`a viene superata applicando il metodo QR con la
-tecnica \emph{del massimo pivot} (\ref{qr-max-pivot})per colonne nel
+tecnica \emph{del massimo pivot} (\ref{qr-max-pivot}) per colonne nel
 modo seguente: al $k$-esimo passo, costruita la matrice $A^{(k)}$
 della forma
 $$
@@ -375,7 +375,7 @@ in precedenza, vengono definite per mezzo della relazione
 $$ || A|| = \max_{||x||' = 1} ||Ax ||'' = \sup_{x \neq 0}
 \frac{||Ax||}{||x||}
 $$
-dove $|| \; . \; ||$ e $|| \; . \; ||''$ sono norme vettoriali
+dove $|| \; . \; ||'$ e $|| \; . \; ||''$ sono norme vettoriali
 rispettivamente su $\mathbb{C}^{n}$ e $\mathbb{C}^{m}$. \\ Estendiamo
 questo concetto sulla matrici $m \times n$, usando la norma 2,
 usandola in $|| \; . \; ||$ e $|| \; . \; ||''$.  Si dimostra che:
@@ -394,13 +394,15 @@ e $V \in \mathbb{C}^{n\times n}$ sono matrici unitarie, poiché
 $$ (U^{H}AV)^{H}(U^{H}AV) = V^{H}A^{H}AV$$
 risulta
 $$|| U^{H}AV||_{2} = \sqrt{\rho(A^{H}A)} = ||A||_{2}$$
-La stessa cosa vale per la norma di Frobenius. \\ \\ A lezione
-Bevilacqua ha scritto:
-$$ || AU||_{2}^{2} = \rho (U^{H} A^{H}A U)
-= \rho(A^{H}A) = ||A||_{2}^{2}
-$$
-$$ ||UA ||_{2}^{2} = \rho(A^{H} U^{H}UA)
-= \rho(A^{H}A) = ||A||_{2}^{2}$$
+La stessa cosa vale per la norma di Frobenius. \\
+%% Commento questa parte perche' non sono dimostrate
+% \\ A lezione
+%Bevilacqua ha scritto:
+%$$ || AU||_{2}^{2} = \rho (U^{H} A^{H}A U)
+%= \rho(A^{H}A) = ||A||_{2}^{2}
+%$$
+%$$ ||UA ||_{2}^{2} = \rho(A^{H} U^{H}UA)
+%= \rho(A^{H}A) = ||A||_{2}^{2}$$
 
 \section{SVD: Decomposizione ai valori singolari di una matrice }
 Vedremo un metodo per risolvere il problema dei minimi quadrati,
@@ -431,7 +433,7 @@ La decomposizione \`e detta decomposizione ai valori singolari della
 matrice $A$, mentre i valori $\sigma_i$, per $i = 1, \ldots , p,$ sono
 detti \textbf{valori singolari} di $A$. Indicate con $u_i , i = 1,
 \ldots , m,$ e $v_i , i = 1, \ldots , n$, le colonne rispettivamente
-di $ U$ e di$ V$ , i vettori $u_i$ e $v_i$ , $i = 1, \ldots , p,$ sono
+di $ U$ e di $ V$ , i vettori $u_i$ e $v_i$ , $i = 1, \ldots , p,$ sono
 detti rispettivamente \textbf{vettori singolari sinistri} e
 \textbf{vettori singolari destri} di $A$.  La matrice $\Sigma$ \`e
 univocamente determinata, anche se le matrici $U$ e $V$ non lo sono.
@@ -461,7 +463,7 @@ induzione su $n$ che la tesi vale per ogni $m \geq n$.  Per $n = 1$
 considera come matrice $U$ la matrice di Householder tale che $Ua =
 \sigma_1e_1$. La matrice $V$ \`e la matrice $V = [1]$.  \\ Per n > 1
 si dimostra che se la tesi vale per le matrici di $C^{k \times
-(n-1)}$, con $k \geq n-1$¸ allora vale per le matrici di $C^{k \times
+(n-1)}$, con $k \geq n-1$¸ allora vale per le matrici di $C^{m \times
 (n)}$ con $m \geq n$ . Sia $ x \in \mathbb{C}^{n}$ tale che $||x||_2 =
 1 $ e $||A||_2 = ||Ax||_2$.  Si consideri il vettore
  $$y = \dfrac{Ax}{||Ax||_2} \in \mathbb{C}^{n}$$
@@ -471,7 +473,7 @@ Allora $||y||_2 = 1$ e $Ax = \sigma_1y,$ con $\sigma_1 =
 \times m}$ matrici unitarie le cui prime colonne sono uguali
 rispettivamente a $x$ e $y$. Poich\'e
 $$U_1^{H} AV_1e_1 = U_1^H Ax 
-= U_1^{H} \sigma_1 y = \sigma_1[1; 0; \ldots ; 0]^T $$ \`e
+= U_1^{H} \sigma_1 y = \sigma_1[1; 0; \ldots ; 0]^T $$
 \begin{notes}
 Quest'ultimo passaggio si spiega col fatto
 che $U_1$ \`e unitaria, allora anche la sua trasposta
@@ -489,7 +491,7 @@ $$
 $$
 in cui $w \in \mathbb{C}^{n−1}, B \in \mathbb{C}^{(m−1)\times(n−1) }$
 e $\mathbf{0} \in \mathbb{C}^{m−1}$.  Si dimostra ora che $w = 0$. Si
-supponga per assurdo ch e $w \neq 0$ e si consideri il vettore $z =
+supponga per assurdo che $w \neq 0$ e si consideri il vettore $z =
 \left[
  \begin{array}{l} \sigma_1 \\ w
 \end{array} \right] \neq \mathbf{0} $ per cui
@@ -515,12 +517,12 @@ D'altra parte \`e $||A_1||_2 = ||A||_2$
  in quanto $A_1$ \`e ottenuta da $A$ con trasformazioni unitarie e
 quindi
  \begin{equation}
-   \label{eq:06minq11} ||A_2||_2 =\sigma_1.
+   \label{eq:06minq11} ||A_1||_2 =\sigma_1.
  \end{equation} Dal confronto fra la (\ref{eq:06minq10}) e la
 (\ref{eq:06minq11}) segue l’assurdo. Quindi
 
 $$
-A_1 \left[
+A_1 = \left[
 \begin{array}{ccc} \sigma_1 & & \mathbf{0}^{H}\\ & & \\ \mathbf{0} & &
 B \\
 \end{array} \right]
@@ -646,7 +648,7 @@ $$
 $$
 $$||A||_2 = \sigma_1 $$
 
-\item Se $m = n$ e $A$ \`e normale, allora $\sigma_ii = |\lambda_i |,
+\item Se $m = n$ e $A$ \`e normale, allora $\sigma_i = |\lambda_i |,
 i = 1, \ldots , n$, dove i $\lambda_i$ sono gli autovalori di $A$, e i
 vettori singolari destri e sinistri coincidono con gli autovettori di
 $A$.
@@ -756,10 +758,7 @@ A^H A = QDQ^H , D \in \mathbb{R}^{n\times n} , Q \in
 \end{equation}
 in cui gli elementi principali di $D$ sono gli autovalori in 
 ordine non crescente di $A^H A$ e $Q$ \`e la corrispondente 
-matrice degli autovettori ($Q$ \`e unitaria) (un
-metodo stabile per calcolare la decomposizione 
-(\ref{eq:06minq18}) sar\`a
- descritto nel  paragrafo 9);
+matrice degli autovettori ($Q$ \`e unitaria).
 
 \item
  si calcola la matrice
@@ -814,7 +813,7 @@ $ \Sigma = R$ e $V = Q\Pi$, rappresenta la decomposizione ai valori
  singolari di $A$.
 
 \section{Risoluzione del problema dei minimi quadrati con i valori singolari}
-Utilizzando il teorema \label{eq:06minq33} \`e possibile dare una
+Utilizzando il teorema (\ref{eq:06minq33}) \`e possibile dare una
 formulazione esplicita e della soluzione $x^*$ di minima norma del
 problema dei minimi quadrati e del corrispondente $\gamma$, anche nel
 caso in cui la matrice $A$ non sia di rango massimo.
@@ -910,7 +909,7 @@ $x^{∗} = A^+ b$.
 $A^{+} \in  \mathbb{C}^{n \times m}$ tale che
 $$A^{+} = V \Sigma^{+} U^H$$
 dove $\Sigma^+ \in \mathbb{R}^{n \times m}$ \`e  la matrice che ha 
-elementi $\sigma_{ij}$ nulli per $i \neq j $e per $i = j$
+elementi $\sigma_{ij}$ nulli per $i \neq j $ e per $i = j$
 ha elementi
 $$
 \sigma_{ii}^{+}
@@ -963,7 +962,7 @@ m \geq n
 $$
 In questo caso la funzione che si deve minimizzare \`e
 $$
-(Ay - b)^2 = y^T A^T Ay + b^Tb -2b^TAy = 2(\frac{1}{2}
+||Ay - b||_2^{2} = y^T A^T Ay + b^Tb -2b^TAy = 2(\frac{1}{2}
 y^{T}A^{T}A y - b^TAy) + b^Tb, \quad y \in \mathbb{R}^n 
 $$
 \`e soluzione del problema dei minimi quadrati \`e un vettore $x$ tale che
@@ -1712,7 +1711,7 @@ e con
 $$ S = \{ B \in \mathbb{C}^{m \times n} : \text{ rango di } B = r \}$$
 si ha
 $$
-\min_{B} \in S || A - B||_{2} = ||A - A_{r} ||_{2} = \sigma_{r+1}
+\min_{B \in S} || A - B||_{2} = ||A - A_{r} ||_{2} = \sigma_{r+1}
  $$
 \end{theo}
 \begin{thproof}
@@ -1745,7 +1744,7 @@ $\mathbf{z}$ elemento di $T$, si pu\`o scrivere
 \begin{equation}
 % (27)
 \label{eq:06minq50}
-w \mathbf{z} = \displaystyle \sum_{i=1}^{r+1} \alpha_j
+\mathbf{z} = \displaystyle \sum_{i=1}^{r+1} \alpha_j
 \mathbf{v}_{j}
 \end{equation}
 per il punto 1) del teorema
@@ -1763,7 +1762,7 @@ A\mathbf{z} =
 
 in quanto, essendo 
 $z \in  T$ e $V$ unitaria, \`e $\mathbf{v}_i^{H} 
-\mathbf{z} = 0$ per $i = r + 2,\ldots k$.
+\mathbf{z} = 0$ per $i = r + 2,\ldots k$. \\
 Poich\'e $\mathbf{z} \in N(B)$, \`e $B\mathbf{z}= \mathbf{0}$
 e si ha
 \begin{equation}
