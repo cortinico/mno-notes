@@ -49,8 +49,7 @@ Andiamo quindi a controllare se abbiamo questa condizione:
 $$ x^{T} A^{T}A x = (Ax)^{T}Ax = || Ax||_{2}^{2} \geq 0$$
 La matrice Hessiana \`e semidefinita positiva in ogni punto, quindi
 la funzione è convessa: concludiamo quindi che i punti stazionari
-coincidono con i punti di minimo. Abbiamo visto quello che ha spiegato
-Bevilacqua sotto un altro punto di vista, quello dell'ottimizzazione.
+coincidono con i punti di minimo. Abbiamo visto il problema dei minimi quadrati sotto un altro punto di vista, quello dell'ottimizzazione.
 
 \paragraph{Considerazione 2: matrice A di rango massimo}
 Se la matrice $A$ \`e di rango massimo,
@@ -140,14 +139,14 @@ $$[ \nabla^{2}f(x)]_{kl} =
 \frac{\partial r_j}{\partial x_l}(x) \right)
 \underbracket{=}_{*)}
 \displaystyle \sum_{j=1}^{m}
-\underbracket{\frac{\partial r_j }{\partial x_k} (x)
-\frac{\partial r_j(x)}{\partial x_l}}_{[J_r(x)^{T}J_{R}(x)]_{kl}}
+\underbracket{\frac{\partial r_j(x)}{\partial x_k} 
+\frac{\partial r_j(x)}{\partial x_l}}_{[J_R(x)^{T}J_{R}(x)]_{kl}}
 + \displaystyle \sum_{j=1}^{m} r_j(x)
 \underbracket{\frac{\partial^{2}r_j(x)}{\partial x_k \partial x_l}}_{[\nabla^{2} r_j(x)]_{kl}}
 $$
-\begin{openquestion}
- *) Derivata prodotto?
-\end{openquestion}
+\begin{notes}
+ *) Si sta applicando la regola di derivazione del prodotto.
+\end{notes}
 
 $$
 [J_R(x)^{T}J_{R}(x)]_{kl} = 
@@ -201,7 +200,7 @@ $$\nabla^{2}f(x^{k}) \approx J_k^{T}J_k $$
 Il metodo di Gauss-Newton 
 $$ d^{k}_{GN} \in \mathbb{R}^{n} 
 \text{ soluzione di } \underbracket{J_{k}^{T}J_kd = - J_k^{T}r_k}_{\text{sistema lineare}}$$
-Mentre nel metodo di Gauss standard per avere una direzione di discesa
+Mentre nel metodo di Newton standard per avere una direzione di discesa
 era necessario che la matrice hessiana fosse definita positiva,
 qui invece le condizioni sono meno strette.
 Vale infatti il seguente teorema:
@@ -216,7 +215,7 @@ $$
 \begin{array}{l}
 \nabla f(x^{k})^{T}d_{GN}^{k} = 
 (J_k^{T}r_k)^{T} d_{GN}^{k}  \underbracket{=}_{\text{sistema lineare}} 
--(J_k^{T} J_{k} d_{GN})^{T} d_{GN}^{k} = \\
+-(J_k^{T} J_{k} d_{GN}^{k})^{T} d_{GN}^{k} = \\
 \underbracket{=}_{\text{reverse order law}} 
 -(J_{k}^{T} d_{GN}^{k})^{T}(J_{k}d_{GN}^{k})
 = - ||J_k^{T} d_{GN}^{k}||_{2}^{2} \leq 0 
@@ -240,20 +239,17 @@ problema dei minimi quadrati lineari
 $$ \min \left\{ \frac{1}{2} || J_k d + r_k ||_{2}^{2} \quad d \in \mathbb{R}^{n} \right\} $$
 Trovare quindi una direzione di Gauss Newton, corrisponde
 a risolvere un problema dei minimi quadrati,
-e con Bevilacqua abbiamo visto 3 metodi che non richiedono
+e conosciamo tre metodi che non richiedono
 il calcolo della matrice hessiana. \\ \\
-Lo sviluppo di Taylor del primo ordine di $r_j(x^{k}+ d) $ è
+Possiamo analizzare il metodo anche da un'altro punto di vista, calcoliamo lo sviluppo di Taylor del primo ordine di $r_j(x^{k}+ d) $:
 $$ r_j(x^{k}+ d)  \approx r_j(x^{k}) + \nabla r_j(x^{k})^{T} d$$
 $$ f(x^k + d) = 
 \frac{1}{2} \displaystyle \sum_{j=1}^{n} r_j^{2}(x^{k} + d) \approx
  \frac{1}{2} \displaystyle \sum_{j=1}^{m}
 \left[ r_j(x^{k}) + \nabla r_j(x^{k})^{T}d\right]^{2} = 
 \frac{1}{2} || r_k + J_kd ||_{2}^{2} $$
-Abbiamo qundi un'approssimazione della funzione obiettivo.
-\begin{openquestion}
-  Non ho capito quest'ultima osservazione fatta sopra
-su Taylor: perch\'e ci serve?
-\end{openquestion}
+Quindi $d_{GN}^{k}$ si ottiene minimizzando questa approssimazione di $f(x^k + d)$. \\ \\
+
 Potremmo pensare passi unitari in stile Newton, ma in questo caso
 non sarebbe garantita la convergenza del metodo: bisogna aggiungere
 una ricerca inesatta del passo.
