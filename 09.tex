@@ -706,7 +706,7 @@ $y - p(x)$, al variare di $y$ in $S$.
     \begin{array}{c}
       (v - v^{*} - z + z^{*})^{T}(z^{*} - v^{*}) \leq 0 \\
       (v - z)^{T}(z^* - v^*) + \underbrace{(z^* - v^*)^{T}(z^* -
-        v*)}_{||z^* - v^*||_2} \leq 0 \\
+        v*)}_{||z^* - v^*||_2^2} \leq 0 \\
       || z^{*} - v^{*}||_{2}^{2} + (v - z)^{T}(z^{*} - v^{*}) \leq 0 \\
       || v^{*} - z^{*}||_{2}^{\cancel{2}} \leq
       (v - z)^{T} (v^{*} - z^{*}) \underbracket{\leq}_{*)}
@@ -754,10 +754,10 @@ $$
 \displaystyle \sum_{i=1}^{n}(y_i - [P_X(y)]_{i})(x_i-[P_{X}(y)]_i)
 = \\
  \displaystyle \sum_{i \in I_{>}}
-\underbracket{(y_i - \mu_i)}_{\geq 0} \underbracket{(x_i - \mu_i)}_{\ge 0}
+\underbracket{(y_i - \mu_i)}_{> 0} \underbracket{(x_i - \mu_i)}_{\leq 0}
 +
 \displaystyle \sum_{i \in I_{<}}
-\underbracket{(y_i - l_i)}_{\le 0} \underbracket{(x_i - l_i)}_{\geq 0}   
+\underbracket{(y_i - l_i)}_{< 0} \underbracket{(x_i - l_i)}_{\geq 0} \leq 0
 \; \forall x \in X \quad (I_{>} = \{ i \; | \; y_i > \mu_i \}, \;
 I_{<} = \{ i \; | \; y_i < l_i \} )
 \end{array}
@@ -900,7 +900,7 @@ $$x^{*} = P_{X} (x^{*} - s\nabla f(x^{*}))
 \quad
 \Longleftrightarrow
 \quad
-(\cancel{x^{*}} - s  \nabla f(x^{*}) - \cancel{x^{*}})^{T}
+((\cancel{x^{*}} - s  \nabla f(x^{*})) - \cancel{x^{*}})^{T}
  (x-x^{*}) \leq 0 \; \forall x \in X
 \quad
 \underbracket{\Longleftrightarrow}_{\ref{ottvinc:050}.(1)}
@@ -977,21 +977,18 @@ imporre che sia limitato.
 \end{center}
 
 Si pu\`o prendere $t_k$ identicamente 1. (versione originale dell'algoritmo)
-$$(x^{k+1} = x^{k} = P_{X}(x^{k} - s_{K}\nabla f(x^{k}))$$
+$$(x^{k+1} = x^{k} = P_{X}(x^{k} - s_{k}\nabla f(x^{k}))$$
 Ma non \`e detto che valga la condizione di Armijo,
 non rientra quindi nell'insieme dei metodi delle direzioni
 ammissibili e quello che si pu\`o dimostrare
 che ottieniamo punti stazionari sotto questa condizione:
 
 \begin{itemize}
-\item $X$ compatto
-\item $\nabla$ lipschitziana $|| \nabla f(x)  - \nabla f(y)|| \leq L ||x -y ||$
+\item $X$ sia compatto
+\item $\nabla f$ sia lipschitziana con costante $L$ (cio\'e $|| \nabla f(x)  - \nabla f(y)|| \leq L ||x -y ||$)
 \item $ 0 < s \leq 2/L$
 \end{itemize}
 Risultato che non dimostriamo: questo metodo richiede la conoscenza
-di $L$, e non \`e banale.
-
-
-
+di $L$ che risulta non banale da ricavare.
 
 \outbpdocument
