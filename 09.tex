@@ -225,7 +225,7 @@ le direzioni ammissibili.
 Allora
 $$ \nabla f(\overline{x})^{T} d \geq 0 \quad
 \forall d \in F(X,\overline{x}) \qquad (CN_{F}) $$
-Che \`e detta condizione di stazionariet\`a. ($F(X,\overline{x}$ sono le direzioni ammissibili)
+Che \`e detta condizione di stazionariet\`a. ($F(X,\overline{x})$ rappresenta il cono delle direzioni ammissibili)
 \end{theo}
 % Un punto pu\`o essere punto di minimo locale solo se il gradiente
 % si annulla.
@@ -236,7 +236,7 @@ $f(\overline{x}) = \min \{ f(x) \; : \; x \in X \cap B(\overline{x}, \epsilon) \
 fornito dalla definizione. Considerando
 $t \leq \min\{ \dfrac{\epsilon}{||d||_2}, \overline{t} \}$, risulta
 $\overline{x} + td \in X \cap B(\overline{x}, \epsilon)$ e quindi
-$f(\overline{x}, + td) - f(\overline{x}) \geq 0$.
+$f(\overline{x} + td) - f(\overline{x}) \geq 0$.
 A questo punto si procede come nel caso non vincolato,
 utilizzando lo sviluppo di Taylor
 $$ 0 \leq
@@ -290,7 +290,7 @@ di ottimalit\`a.
 
 \begin{thproof}
   \begin{enumerate}
-  \item Sia $ \in [0,1]: \overline{x} + t(x -\overline{x}) = 
+  \item Sia $ t\in [0,1]: \overline{x} + t(x -\overline{x}) = 
   (1-t) \overline{x} + tx \in X $ poich\`e $X$ \`e convesso.
   Allora $(x - \overline{x}) \in F(X, \overline{x})$ 
  \item Sia $t > 0$ tale che $\overline{x} + td \in X$.
@@ -314,10 +314,9 @@ $(CN_{X})$ è una condizione necessaria, se $f$ è convessa diventa
 anche sufficiente, questo perch\`e minimo locale e globale coincidono.
 
 \begin{thproof}
-La prima parte viene da (\ref{ottvinc:01}) 
-(\ref{prop:cono-convesso}.2), la seconda parte va dimostrata.
+La prima parte viene dal teorema (\ref{ottvinc:01}) e dal punto 1 della prop. (\ref{prop:cono-convesso}), la seconda parte va dimostrata.
 
-$x \in X$. La funzione $f$ \`e convessa: se $f$ \`e differenziabile
+Sia $x \in X$. La funzione $f$ \`e convessa: se $f$ \`e differenziabile
 e convessa vale (caratterizzazione delle funzioni convesse)
 $$ f(x) \underbracket{\geq}_{f \text{convessa}}
 f(\overline{x}) + {\nabla f(\overline{x})^{T}(x- \overline{x})}
@@ -330,14 +329,6 @@ $$
  % ottvinc08.png: 365x309 pixel, 96dpi, 9.66x8.18 cm, bb=0 0 274 232
  \caption{Significato geometrico della condizione necessaria di ottimalit\`a}
 \end{figure}
-
-\begin{workinprogress}
-  Digressione: compagnie telefoniche (minimi quadrati).  Gauss Newton
-$$
-J_{k}^{T}J_{k} + \displaystyle \sum_{j=1}^{n} r_{j} (x^{k})
-\nabla^{2}r_j(x^{k})
-$$
-\end{workinprogress}
 
 %% 5 Aprile
 \section{Metodi risolutivi}
@@ -395,8 +386,8 @@ pari a $c_1 t \nabla f(x^k)^Td^k$.\\
 
 Sappiamo anche che $\exists \tau \ge 0$ tale che vale (AJO)
 $\forall t \in (0,\tau]$
-$$( \gamma_k(t) = f(x^{k} + td^{k}) \quad \Rightarrow \quad
-\gamma_k'(0)  = \nabla f(x^{k})^{T} d^{k}<0 )  $$
+$$( \varphi_k(t) = f(x^{k} + td^{k}) \quad \Rightarrow \quad
+\varphi_k'(0)  = \nabla f(x^{k})^{T} d^{k}<0 )  $$
 
 \begin{thproof}
   Consideriamo la funzione di ricerca monodimensionale funzione della sola $t$
@@ -444,7 +435,7 @@ Riassumiamo la procedura totale
       \item Scegliere $d^{k} \in F(X, x^{k})$ tale che
         $\nabla f(x^{k})^{T} d^{k} < 0$ e $x^{k} + d^{k} \in X$
       \item Calcolare $t_k \in (0,1]$ che soddisfa (AJO) tramite Procedura di Armijo
-      \item $x^{k+1} = x^{k} + t_k d^{K}$
+      \item $x^{k+1} = x^{k} + t_k d^{k}$
       \item $k=k+1$ e ritornare a 2)
       \end{enumerate}
     \end{minipage}
@@ -460,7 +451,7 @@ Questa procedura descrive un insieme di metodi che poi si
 differenziano in
 \begin{itemize}
 \item come verificare la condizione di stazionarietà (ora andrebbe
-  testata su infinite di direzioni)
+  testata su infinite direzioni)
 \item come scegliere una direzione ammissibile che sia anche di discesa.
 \end{itemize}
 
