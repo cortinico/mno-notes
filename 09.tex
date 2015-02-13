@@ -629,7 +629,7 @@ Per trovare la proiezione dobbiamo risolvere il seguente problema di ottimizzazi
 $$(P_{RX}) \qquad \min \{ || y - x ||_{2} \; : \; x \in X \}$$
 Se prendo il quadrato della norma e aggiungo un coefficiente davanti
 il problema rimane il medesimo:
-$$(P_{RX}) \qquad \min \left\{ \dfrac{1}{2}|| y - x ||_{2}^{2} \}\; : \; x \in X \right\}  $$
+$$(P_{RX}) \qquad \min \left\{ \dfrac{1}{2}|| y - x ||_{2}^{2} \; : \; x \in X \right\}  $$
 Analizziamo la funzione obiettivo, il gradiente e la matrice hessiana
 $$ 
 \begin{array}{l}
@@ -693,25 +693,14 @@ $y - p(x)$, al variare di $y$ in $S$.
       (y - x^{*})^{T} (x - x^{*}) \leq 0 \; \forall x \in X
     \end{array}\]
 
-  \item indichiamo con $v^{*} = P_{X}(v)$ e $z^{*} = P_{X}(x)$.\\
+  \item indichiamo con $v^{*} = P_{X}(v)$ e $z^{*} = P_{X}(z)$. Possiamo supporre $x \neq y$ \\
     Sfruttando la propriet\`a 1)
     
-    \[\begin{array}{l}
-      (v - v^{*})^{T} (x - v^{*}) \leq 0 \\
-      (z - z^{*})^{T} (x - z^{*}) \leq 0 
-    \end{array}\]
-    Le disuguaglianza sopra valgono $\forall x \in X$ quindi in
-    particolare valgono per $x=z^*$ e $x=v^*$.
     \[\begin{array}{l}
       (v - v^{*})^{T} (z^{*} - v^{*}) \leq 0 \\
       (z - z^{*})^{T} (v^{*} - z^{*}) \leq 0 
     \end{array}\]
-    Portiamo fuori il meno nella seconda
-    \[\begin{array}{l}
-      (v - v^{*})^{T} (z^{*} - v^{*}) \leq 0 \\
-      - (z - z^{*})^{T} (z^{*} - v^{*}) \leq 0 
-    \end{array}\]
-
+    
     Sommiamo membro a membro (distributiva del prodotto scalare)
     $$
     \begin{array}{c}
@@ -761,8 +750,8 @@ y_i & \text{se } l_i \leq y_i \leq u_i \\
 $$
 $$
 \begin{array}{l}
-(y - P_{X}(y))^{T}(x- P_X(y) = \\
-\displaystyle \sum_{i=1}^{n}(y_i - [P_x(y)]_{i})(x_i-[P_{X}(y)]_i)
+(y - P_{X}(y))^{T}(x- P_X(y)) = \\
+\displaystyle \sum_{i=1}^{n}(y_i - [P_X(y)]_{i})(x_i-[P_{X}(y)]_i)
 = \\
  \displaystyle \sum_{i \in I_{>}}
 \underbracket{(y_i - \mu_i)}_{\geq 0} \underbracket{(x_i - \mu_i)}_{\ge 0}
@@ -838,7 +827,7 @@ $$
 (||y||_{2} - \lambda) (y^{T}x - \lambda ||y||_{2})
 \underbracket{\leq}_{\text{Schwarz}} \\
 \leq (||y||_{2}-\lambda)(||y||_{2} ||x||_{2} - \lambda||y||_{2})
-= ||y||_{2} (||x||_{2} - \lambda \underbracket{\leq}_{(*)} 0 
+= ||y||_{2} (||x||_{2} - \lambda) \underbracket{\leq}_{(*)} 0 
 \end{array}
 $$
 $ (*) \lambda <r \; \Rightarrow \lambda = ||y||_{2} \; ; \;
@@ -907,12 +896,12 @@ $$
 \end{proposition}
 
 \begin{thproof}
-$$x^{*} = P_{X} (x^{*} - s\nabla f(x^{*})
+$$x^{*} = P_{X} (x^{*} - s\nabla f(x^{*}))
 \quad
-\Longleftrightarrow_{theo di prima}
+\Longleftrightarrow
 \quad
-(\cancel{x^{*}} - s  \nabla f(x^{*})) \cancel{- x^{*}})^{T}
- (x-x^{*}) \leq 0 \forall x \in X
+(\cancel{x^{*}} - s  \nabla f(x^{*}) - \cancel{x^{*}})^{T}
+ (x-x^{*}) \leq 0 \; \forall x \in X
 \quad
 \underbracket{\Longleftrightarrow}_{\ref{ottvinc:050}.(1)}
 \quad
@@ -932,13 +921,13 @@ sottosuccessione di $x^k \rightarrow x^{*}$.\\
 Sfruttando la trasformazione usata in una dimostrazione precedente:
 
 $$ || \overline{x}^k - x^k ||_2 = 
-|| P_X (x^k - s \nabla f(x^k)) d^k - x^k ||_2 \underbracket{\leq}_{teo \ref{ottvinc:050}}
+|| P_X (x^k - s \nabla f(x^k)) - x^k ||_2 \underbracket{\leq}_{\ref{ottvinc:050}}
 \cancel{x^k} - s \nabla f(x^k) d^k - \cancel{x^k} 
 \xrightarrow{k \to \infty \ref{prop:gradiente-compatto}} 0 $$ 
 possiamo fare il limite perché la proiezione è continua, quindi
 $$ || P_X (x^{*} - s \nabla f(x^{*})) - x^{*} ||_2 = 0 $$ 
 da cui 
-$$ x^{*} = || P_X (x^{*} - s \nabla f(x^{*})) $$
+$$ x^{*} = || P_X (x^{*} - s \nabla f(x^{*})) || $$
 e quindi $x^{*}$ è stazionario per \ref{prop:proiettato-stazionario}.\\
 
 Abbiamo posto $s^k=s$ per evitare che andasse all'infito, basta
@@ -971,6 +960,8 @@ imporre che sia limitato.
 % fissata.
 \end{thproof}
 
+\paragraph{Cenni sull'originale metodo del gradiente proiettato}
+
 \begin{center}
 \fbox{
 	\begin{minipage}[position]{0.85\textwidth}
@@ -985,8 +976,6 @@ imporre che sia limitato.
 }
 \end{center}
 
-
-\paragraph{Cenni sull'originale metodo del gradiente proiettato}
 Si pu\`o prendere $t_k$ identicamente 1. (versione originale dell'algoritmo)
 $$(x^{k+1} = x^{k} = P_{X}(x^{k} - s_{K}\nabla f(x^{k}))$$
 Ma non \`e detto che valga la condizione di Armijo,
