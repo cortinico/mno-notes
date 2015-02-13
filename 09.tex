@@ -419,8 +419,7 @@ $$( \varphi_k(t) = f(x^{k} + td^{k}) \quad \Rightarrow \quad
 Alla fine risulta che $t= \gamma ^S$ con S numero di iterazioni
 effettuate. Quindi $\gamma ^{S-1}$ non soddisfa la condizione
 (AJO). \\
-Quello che ci servir\`a sar\`a (nella dimostrazione della
-convergenza?)  appunto che $\displaystyle \frac{t_k}{\gamma}$ non
+Quello che ci servir\`a sar\`a appunto che $\displaystyle \gamma ^{S-1} = \frac{t_k}{\gamma}$ non
 sar\`a uno spostamento corretto.
 
 Riassumiamo la procedura totale
@@ -486,8 +485,8 @@ Notare che la condizione di compattezza esclude il caso non vincolato.
   \quad \Rightarrow \quad t_k \to 0 $$
   Abbiamo preso il minimo limite, dato che il limite potrebbe non esistere.\\
   Adesso sfruttiamo la compattezza di $X$: una successione dentro un compatto ammette
-  una sottosuccessione convergente .\\
-  Inoltre
+  una sottosuccessione convergente. Inoltre
+  
   $$ \{x^{k}\} \subseteq X, \qquad x^{k} + d^{k} \in X \quad
   \Rightarrow \quad 
   \{ d^{k}\} \text{ \`e limitata }$$
@@ -503,14 +502,14 @@ Notare che la condizione di compattezza esclude il caso non vincolato.
   Importante risultato \`e che il prodotto scalare fra il gradiente e la
   direzioni calcolato nei punti limite \`e negativo.\\
   Adesso sfruttiamo la ricerca della condizione di armijo. Se $t_k$
-  soddisfa (AJO) il passo $ \dfrac{t_k}{\gamma}$ non pu\`o soddisfare.\\
+  soddisfa (AJO) il passo $ \dfrac{t_k}{\gamma}$ non pu\`o soddisfarla (per come abbiamo definito la procedura di Armijo).\\
   Deve essere:
   $$ f(x^{k}+ \dfrac{t_k}{\gamma} d^{k}) -
   f(x^{k}) > c_1 \dfrac{t_k}{\gamma} \nabla f(x^{k})^{T}d^{k}$$
   
   Per il teorema del valor medio:
   $$ f(x^{k}+ \dfrac{t_k}{\gamma} d^{k}) - f(x^{k}) = 
-  \nabla f(x^{k} + \tau_k d^k)^{T} \dfrac{t_k}{\gamma} d^{k} \qquad 
+  \dfrac{t_k}{\gamma} \nabla f(x^{k} + \tau_k d^k)^{T} d^{k} \qquad 
   \tau_k \in[0,\dfrac{t_k}{\gamma}]$$
   Riprendendo la disuguaglianza che esprime la non soddisfacibilit\`a di (AJO)
   $$ \cancel{\dfrac{t_k}{\gamma}} \nabla f(x^{k} + \tau_k d^k)^{T} d^{k} > 
@@ -521,7 +520,7 @@ Notare che la condizione di compattezza esclude il caso non vincolato.
   $$ \nabla f(\overline{x})^{T}\overline{d} \geq
   c_1 \nabla f(\overline{x})^{T} \overline{d} $$
   Quindi deve essere
-  $$(1 -c_1)\nabla f(\overline{x})^{T} \geq 0$$
+  $$(1 -c_1)\nabla f(\overline{x})^{T} \overline{d} \geq 0$$
   Questo pu\`o accadere solo se $c_1 \geq 1$, ma la condizione
   che utilizzavamo \`e che
   $$ 0 < c_1 < 1 $$
@@ -550,7 +549,7 @@ Era stato pensato per le funzioni quadratiche, ma in realt\`a funziona
 anche sulle funzioni non quadratiche. \\
 \`E un metodo delle direzioni ammissibili cui si impone direzione
 $$ d^{k} = \overline{x}^{k} - x^{k} \qquad 
-\overline{x}^{k} \in argmin \{\nabla f(x^{k})(x -x^{k}) \; : \; x \in X \}
+\overline{x}^{k} \in argmin \{\nabla f(x^{k})^{T}(x -x^{k}) \; : \; x \in X \}
 $$
 
 La verifica della stazionariet\`a \`e immediata:
@@ -574,8 +573,8 @@ infatti poiché
 $$ \nabla f(x^{k})^{T} (x-x^k) = \underbracket{\nabla f(x^{k})^{T}}_{costante} x -
 \underbracket{\nabla (x^{k})^{T}x^k}_{costante} $$ 
 risulta
-$$ argmin \{\nabla f(x^{k})(x -x^{k}) \; : \; x \in X \} \;\equiv\;
-   argmin \{\nabla f(x^{k})x \; : \; x \in X \} $$
+$$ argmin \{\nabla f(x^{k})^{T}(x -x^{k}) \; : \; x \in X \} \;\equiv\;
+   argmin \{\nabla f(x^{k})^{T}x \; : \; x \in X \} $$
 
 Inoltre se $X$ \`e un \emph{poliedro} abbiamo un problema di 
 \emph{programmazione lineare}.
@@ -597,7 +596,7 @@ Notare che in questo modo risolviamo sia il passo 2) che il passo 3) dell'algori
   Passiamo al limite membro a membro
   $$ \nabla f(x^{*})^{T} d^{*}
   \leq \nabla f(x^{*})^{T}(x-x^{*}) \quad \forall x \in X$$
-  Ma per la proposizione \ref{prop:gradiente-compatto} $\nabla
+  Ma per la propriet\`a \ref{prop:gradiente-compatto} $\nabla
   f(x^{*})^{T} d^{*} = 0$, che è la condizione di stazionariet\`a di $x^{*}$.
 \end{thproof}
 
