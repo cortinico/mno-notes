@@ -9,7 +9,7 @@
 
 \chapter{Calcolo di autovalori e autovettori}
 
-Possibili percorsi
+Vedremo in questo capitolo quelli che sono i principali metodi per il calcolo degli autovalori $\lambda_i$ di una matrice. I possibili percorsi che  possiamo seguire sono:
 
 \begin{itemize}
 
@@ -42,20 +42,17 @@ iterativi.
   metodi delle iterazioni inverse.
 
 \end{itemize}
-Se gli autovalori sono non reali, come fanno a venire
-fuori gli autovalori sulla diagonale?
-
 
 \section{Condizionamento del problema}
 \begin{notes}
 Risultati di localizzazione: non da studiare.
 \end{notes}
-Il Teorema di Bauer--Fike riguarda la perturbazione degli autovalori di una matrice diagonalizzabile a valori complessi. In sostanza, stabilisce un limite superiore alla deviazione di un autovalore calcolato su una matrice perturbata rispetto a quello calcolato sulla matrice esatta. (Informalmente, quello che dice è che la sensibilità degli autovalori è stimata dal condizionamento $\mu(t)$ della matrice composta dagli autovettori).\footnote{Tradotto da Wikipedia, \url{http://en.wikipedia.org/wiki/Condition_number}} 
+Il Teorema di Bauer-Fike riguarda la perturbazione degli autovalori di una matrice diagonalizzabile a valori complessi. In sostanza, stabilisce un limite superiore alla deviazione di un autovalore calcolato su una matrice perturbata rispetto a quello calcolato sulla matrice esatta. (Informalmente, quello che dice è che la sensibilità degli autovalori è stimata dal condizionamento $\mu(T)$ della matrice composta dagli autovettori).\footnote{Tradotto da Wikipedia, \url{http://en.wikipedia.org/wiki/Condition_number}} 
 
 \begin{theo}[Teorema di Bauer-Fike]
  Sia $ || \cdot ||$ una norma matricale indotta che verifichi la seguente
  propriet\`a
- $$ || D||| = \displaystyle \max_{i=1, \ldots, n} |d_{ii}|$$
+ $$ || D || = \displaystyle \max_{i=1, \ldots, n} |d_{ii}|$$
 per ogni matrice diagonale $D \in \mathbb{C}^{n \times n}$
  (una tale norma viene detta \emph{norma assoluta},
  le norme $||\cdot||_{1}$, $ || \cdot ||_{2}$ e $|| \cdot ||_{\infty}  $
@@ -70,24 +67,28 @@ $$ | \lambda - \xi | \leq \mu(T) \; || \delta A||,$$
 dove $\mu(T) = ||T|| \; ||T^{-1}||$.
 \end{theo}
 
-Condizionamento degli autovalori dipende dagli autovettori.
-Condizionamento = 1 se $|| \cdot ||_2$ e $T$ unitaria
-allora
-$$ 1 = \mu(T) = \underbracket{||T||_{2}}_{1} \underbracket{||T^{H}||}_{1}$$
+Ricordiamo che il condizionamento degli autovalori dipende strettamente dagli autovettori.
+Il condizionamento vale 1 se consideriamo con norma la $|| \cdot ||_2$ e $T$ \`e unitaria, infatti
+
+$$ 1 = \mu(T) = \underbracket{||T||_{2}}_{1} \underbracket{||T^{H}||_{2}}_{1}$$
 (Matrici normali) \\
-Queste sono quantit\`a assolute rispetto a quelle di
-quelle viste nella risoluzione dei sistemi lineari.
+Queste sono quantit\`a assolute rispetto a quelle viste nella risoluzione dei sistemi lineari.
 $$
 \dfrac{||\delta A||}{||A||} \approx 10^{-15}
 $$
-Supponiamo che il problemi sia non ben condizionato
+Supponiamo che il problemi sia mal condizionato
 $\mu(T) = 10^8$ $||\delta A || =10^{-7}$
-vupo; dire che non si riesce ad approssimare bene
+vuol dire allora che non si riesce ad approssimare bene
 autovalori con $10^{-7}$. Gli autovalori di modulo
- piccolo danno maggiori problemi di approssimazione
+ piccolo danno infatti maggiori problemi di approssimazione
 rispetto a quelli pi\`u grandi.  \\
 Sono stati trovati risultati relativi ai singoli autovalori,
 e non rispetto a tutta la matrice
+
+%% FIXME
+%	Mi pare che in questa sezione i discorsi siano molto scombinati,
+%	andrebbero sistemati un attimo per renderli piu' organici.
+%	NICOLA
 
 \begin{thproof}
 \begin{itemize}
@@ -133,7 +134,7 @@ $$ 1 \leq || T(D - \xi I)^{-1} T^{-1} \delta A || \leq || T|| \; ||
 T^{-1}|| \; ||(D- \xi I)^{-1}|| \; || \delta A||,
 $$
 
-\item Poich\'e $||\cdot||$ \`e una norma assoluta, dunque $||D|| = \max{d_{i,i}}$ abbiamo
+\item Poich\'e $||\cdot||$ \`e una norma assoluta, dunque $||D|| = \max{|d_{ii}|}$ abbiamo
 
 $$
   1 \leq \mu(T) \displaystyle \cdot \max_{i= 1, \ldots, n}{\{ | \lambda_i - \xi|^{-1}\}} \cdot || \delta A||
@@ -209,21 +210,19 @@ grosse dimensioni. \`E  facile dimostrare la convergenza del metodo nel caso
 che la matrice sia diagonalizzabile e abbia un solo autovalore di modulo
 massimo.
 \begin{example}
-  $A =
+Mostriamo il metodo delle potenze con un piccolo esempio numerico:
+  $$A =
   \begin{pmatrix}
     2 & 1 \\
     1 & 2
   \end{pmatrix}
   \qquad 
   \lambda_1 = 3 \; \lambda_2 = 1
-  $
-
-Se rappresentiamo le direzioni un cui si trovano gli autovettori, sono
+  $$
+Se rappresentiamo le direzioni in cui si trovano gli autovettori si nota che sono
 ortogonali, perch\`e la matrice \`e ortogonale.
-Se si moltiplica $y_1 = Ay_0$ con $y_0$ non autovettore.Si calcola a
-sua volta $y_2$ sempre con $y_2 = Ay_1$. Si converge a $\lambda_1 = 3$
-Vettori di lunghezza che si avvicinano alla bisettrice del primo e del
-terzo quadrante.
+Si moltiplichi $y_1 = Ay_0$ con $y_0$ non autovettore, si calcola a
+sua volta $y_2$ sempre con $y_2 = Ay_1$; cos\`i facendo si converge a $\lambda_1 = 3$.
 Ci si avvicina alla direzione dell'autovettore pi\`u grande. Si nota
 che ad esempio
 $y_{10} =
@@ -258,9 +257,9 @@ che garantiscono questo tipo di convergenza:
   stesso modulo.
   \begin{notes}
     C'e un autovalore che attira, per questo introduciamo questa
-    condizione, direzione che prevale sulle altre.  Questa ipotesi \`e
+    condizione, cos\`i abbiamo una direzione che prevale sulle altre. Questa ipotesi \`e
     problematica perch\`e dovremmo gi\`a sapere la natura degli
-    autovalori.
+    autovalori; studieremo altri risultati che rilassano questo requisito nei paragrafi successivi.
   \end{notes}
 \item
   Fissiamo un vettore $y_0$ come base della successione e dato che gli
@@ -371,7 +370,7 @@ $$
 $$
 \end{comment}
 
-Problema: abbiamo un solo autovalore alla volta. Inoltre a convergenza
+Problema: abbiamo un solo autovalore alla volta. Inoltre la convergenza
 \`e data dal rapporto tra il primo ed il secondo autovalore.
 
 Questo metodo richiede ad ogni passo il calcolo del prodotto di una
@@ -423,11 +422,11 @@ $$
 I $t_k$ hanno norma 1.
 \end{comment}
 
-Possiamo sceglere $||\cdot||_{\infty}$ e  $||\cdot||_{2}$.
+Possiamo scegliere $||\cdot||_{\infty}$ e  $||\cdot||_{2}$.
 \paragraph{Norma $\infty$}
 Utilizzando la norma $\infty$, sia $||t_0||_{\infty} = 1$ e sia
 $\beta_k$ una componente di massimo modulo di $u_k$ , cio\'e tale che
-e
+
 $$
 \beta_k = u_{m}^{(k)}, \quad \text{con} \quad
 |u_m^{(k)}| = \max_{j=1, \ldots,n} |u_j^{(k)}| = ||u_k||_{\infty}
@@ -536,7 +535,7 @@ $$
 
 L'autovalore $\lambda_1$ si approssima con la successione dei
 $\beta_k$ o dei $\sigma_k$ , e l'errore dell'approssimazione tende a zero come
-$(\lambda_{r+1} / \lambda_1 )^k$ o come $|\lambda_{r+1}/\lambda_1|^{2k}$. 
+$(\lambda_{r+1} / \lambda_1 )^k$ o come $(\lambda_{r+1}/\lambda_1)^{2k}$. 
 Inoltre
 
 $$
@@ -580,7 +579,7 @@ a lezione ha detto che non converge, ma una variante converge\\
 
 \begin{notes}
   Il metodo delle potenze può essere modificato in modo da approssimare
-  o anche autovalori distinti con lo stesso modulo, come nel caso di
+  anche autovalori distinti con lo stesso modulo, come nel caso di
   autovalori complessi coniugati [28] (si veda anche l’esercizio
   6.34).
 \end{notes}
@@ -709,7 +708,7 @@ $$ (A − \mu I) y_k = y_{k-1} $$
 
 
 \subsubsection{Variante della deflazione}
-Sia $|\lambda_1 | > |\lambda_2 |$. Calcolati $\lambda_1$ e $x_1$ , di norma 2
+Sia $|\lambda_1 | > |\lambda_2 |$. Calcolati $\lambda_1$ e $x_1$, di norma 2
 unitaria, si considera la matrice di Householder $P$ tale che
 $ Px_1 = e_1 $, risulta
 
@@ -808,7 +807,7 @@ Quest è la forma ottenuta nel caso più generale.
   $$
 Se la matrice $A$ è hermitiana, e la trasformazione viene eseguita con
 matrici unitarie (householder), la matrice $B$ risulta hermitiana e
-tridiagonale (rientra in hessemberg).
+tridiagonale (rientra in Hessemberg).
 \end{itemize}
 
 \section{Il metodo di Householder}
@@ -1173,8 +1172,8 @@ $\lambda \to -\infty,n = 4$).
 \end{thproof}
 
 \begin{theo}[Sturm]
-Se $\{Pi (\lambda)\}, i = 0, 1, . . . , n,$  una successione di Sturm,
-il numero $w(b) − w(a)$ \`e uguale al numero di zeri di $Pn (\lambda)$
+Se $\{P_i (\lambda)\}, i = 0, 1, . . . , n,$  una successione di Sturm,
+il numero $w(b) − w(a)$ \`e uguale al numero di zeri di $P_n (\lambda)$
  appartenenti all’intervallo $[a, b)$.
 \end{theo}
 
@@ -1513,14 +1512,14 @@ Adesso possiamo dimostrare il seguente teorema. Putroppo non \`e possibile
 verificarne le ipotesi a priori.
 \begin{theo}[Convergenza]
 \begin{enumerate}
-\item $$ | \lambda_1| > | \lambda_2 | > \ldots > | \lambda_n | > 0 $$,
+\item $$ | \lambda_1| > | \lambda_2 | > \ldots > | \lambda_n | > 0 $$
 in questo caso la matrice \`e diagonalizzabile
 \item
 Indicata con $X$ la matrice degli autovettori di $A$, tale che
 \begin{equation}
 % (30)
  \label{eigenvalues:19}
-A = XDX ^{-1} ,
+A = XDX ^{-1}
 \end{equation}
 in cui $D$ \`e la matrice diagonale il cui $i$-esimo elemento principale \`e $\lambda_i$ ,
 si supponga che la matrice $X^{-1}$ ammetta la fattorizzazione $LU$.
@@ -1721,7 +1720,7 @@ A_{k+1} = R_k Q_k + \mu I
 $$
 
 e risulta
-$$Q_k A_{k+1} = A_k Q_k − \mu Q_k + \mu Q_k = A_k Q_k $$.
+$$Q_k A_{k+1} = A_k Q_k − \mu Q_k + \mu Q_k = A_k Q_k $$
 Tenendo presente che gli autovalori di $A − \mu I$ sono $\lambda_i − \mu$ e che
  la velocit\`a
 di convergenza \`e regolata dalla (\ref{eigenvalues:23}), \`e
@@ -1735,7 +1734,7 @@ scegliere
 \begin{equation}
  %(39)
 \label{eigenvalues:24}
-\mu_k = a_{nn}^{(k)} \quad, k = 1, 2, \ldots
+\mu_k = a_{nn}^{(k)} \quad k = 1, 2, \ldots
 \end{equation}
 
 Quando le condizioni di arresto verificata per $p = n−1$, si passa a operare sulla matrice
