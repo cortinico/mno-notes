@@ -738,7 +738,7 @@ autovettore $y_2$ di $A_1$ .  L'autovettore $x_2$ di $A$
 corrispondente a $\lambda_2$ \`e dato da
 
 $$
-x_1 = P^{H}
+x_2 = P^{H}
 \left[
   \begin{array}{l}
     \theta \\
@@ -803,7 +803,7 @@ Quest è la forma ottenuta nel caso più generale.
   \end{bmatrix}
   $$
 Se la matrice $A$ è hermitiana, e la trasformazione viene eseguita con
-matrici unitarie (householder), la matrice $B$ risulta hermitiana e
+matrici unitarie (Householder), la matrice $B$ risulta hermitiana e
 tridiagonale (rientra in Hessemberg).
 \end{itemize}
 
@@ -1161,8 +1161,7 @@ $$
 Da questo fatto, tenendo presente che il coefficiente di
 $\lambda^i$ in $P_i(\lambda)$ \`e $(−1)^i$ ,
 e quindi $\displaystyle \lim_{\lambda \to - \infty}P_i(\lambda) = +\infty$,
-segue la 3) (si veda la figura 6.1 per il caso
-$\lambda \to -\infty,n = 4$).
+segue la 3).
 \begin{center}
 \includegraphics[width=0.7\textwidth]{imgs/grafico01.png}
 \end{center}
@@ -1186,7 +1185,7 @@ Si distinguono allora i due casi:
 \begin{enumerate}
 \item $i\neq n$ \\
 In questo caso, per la propriet\`a 2) del teorema
-(\ref{eigenvalues:13}  si ha
+(\ref{eigenvalues:13})  si ha
 $$P_{i−1} (\lambda^∗ )P_{i+1} (\lambda^∗ ) < 0.$$
 Esiste perci\`o un numero $h$ tale che nell’intervallo
 $[\lambda^∗ − h, \lambda^∗ + h]$
@@ -1211,18 +1210,18 @@ Quindi nella sequenza $P_{i−1} (\lambda), P_i (\lambda), P_{i+1} (\lambda)$
 $w(\lambda)$.
 
 \item $i = n$\\
- In questo caso, poich\`e per la propriet\`a 3) del teorema (\ref{eigenvalues:13} il
+ In questo caso, poich\`e per la propriet\`a 3) del teorema (\ref{eigenvalues:13}) il
  polinomio $P_n(\lambda)$ ha radici semplici,
 la sua derivata $P_n' (\lambda)$ non si annulla
 in $\lambda^∗$ ed esiste un numero $h$ tale che nell’intervallo
-$[\lambda^∗ -h, \lambda^∗ +h]P_n (\lambda)$
+$[\lambda^∗ -h, \lambda^∗ +h] \; P_n (\lambda)$
  ha lo stesso segno che $P_n (\lambda)$ ha in
 $\lambda^∗ + h$ e segno opposto a quello che
  $P_n (\lambda)$ ha in $\lambda^∗ - h$.
 Se $h$ tale che nell’intervallo $[\lambda^∗ − h, \lambda^∗ + h]$
  anche
  $P_{n−1} (\lambda)$ non si annulla, poich\'e per la propriet\`a 3)
- del teorema (\ref{eigenvalues:13}
+ del teorema (\ref{eigenvalues:13})
  $P_{n−1} (\lambda)$ ha segno opposto a quello di
 $P_n (\lambda)$ per $\lambda \in [\lambda^∗ − h, \lambda^∗ + h]$,
  la  sequenza $P_{n−1} (\lambda^∗ + h), P_n (\lambda^∗ + h)$
@@ -1243,9 +1242,9 @@ intorno sinistro di $b$, $w(\lambda)$ non cambia in tale
 intorno. Perci\`o la radice $b$ non altera il numero di variazioni di
 segno.
 \end{thproof}
-Risultato serve a metodo di bisezione
-$$p_n(a) \cdot p_n(b) < 0$$
-$V(b) - V(a)$ \\
+%%Risultato serve a metodo di bisezione
+%$$p_n(a) \cdot p_n(b) < 0$$
+%$V(b) - V(a)$ \\
 
 %% Appunti presi a lezione
 \begin{comment}
@@ -1548,7 +1547,6 @@ che la fattorizzazione sia unica. \\ \\
 
  Il teorema viene dimostrato confrontando due fattorizzazioni $QR$
 della matrice $A_k$ ottenute in due modi diversi.
-Due fattorizzazione $QR$ di $A^{k}$
 \begin{enumerate}
 \item
  Una prima fattorizzazione \`e data dalla seguente relazione
@@ -1562,7 +1560,7 @@ $$H_k = Q_1 Q_2 \ldots Q_k$$
 \`e una matrice unitaria e
 $$U_k = R_k R_{k−1} \ldots R_1$$
 $$A^{k} = \underbracket{Q_1 Q_2 \ldots Q_k}_{\text{tipo Q}}
- \underbracket{R_1 R_2 \ldots R_k}_{\text{tipo R}}$$
+ \underbracket{R_k R_{k-1} \ldots R_1}_{\text{tipo R}}$$
 Per dimostrare la (\ref{eigenvalues:17}) si procede per induzione: \\ \\
 \textbf{Caso} $k=1$
  $$A = A_1 = H_1 U_1$$
@@ -1584,7 +1582,7 @@ $$
 \begin{array}{ll}
 H_{k+1} U_{k+1} & = Q1 \ldots Q_k Q_{k+1} R_{k+1} R_k \ldots R_1 \\
  &  = Q_1 \ldots Q_{k-1} Q_k A_{k+1} R_k R_{k-1} \ldots R_1 \\
- & = AQ_1 \ldots Q_{k-1} Q_k R_k R_{k-1} \ldots R_1 = AH_k U_k = A{k+1} ,
+ & = AQ_1 \ldots Q_{k-1} Q_k R_k R_{k-1} \ldots R_1 = AH_k U_k = A_{k+1} ,
 \end{array}
 $$
 cio\`e
@@ -1609,12 +1607,12 @@ Poich\`e gli elementi della matrice $D^k LD^{-k}$ sono dati da
  \end{array}
  \right.
 \end{equation}
-e $|\lambda_i | < |\lambda_j | $per $i > j$, si pu\`o porre
+e $|\lambda_i | < |\lambda_j | \;$ per $i > j$, si pu\`o porre
 
 $$D^k LD^{-k} = I + E_k,$$
 dove
 
-$$\lim_{k \to \infty} E_k = 0$$,
+$$\lim_{k \to \infty} E_k = 0$$
 e quindi \`e
 $$A^k = X(I + E_k )D^k U.$$
 Indicata con
@@ -1628,7 +1626,7 @@ e indicata con
 \label{eigenvalues:21}
 I + RE_k R^{-1} = P_k T_k
 \end{equation}
-una fattorizzazione $QR$ della matrice $I + RE_k R^{-1}$ , si ha
+una fattorizzazione $QR$ della matrice $I + RE_k R^{-1}$ si ha
 \begin{equation}
 %(36)
 \label{eigenvalues:22}
@@ -1645,8 +1643,8 @@ i $r_{ii}$ sono reali? Quest'ultima parte \`e assolutamente da rivedere.
 \end{openquestion}
 
 
-$$ QP_k = Q_1 Q_2 \ldots Qk$$
-$$ Tk_RD^{k} U = R_{k} \underbracket{R_{k-1} \ldots R_1}_{T_{k-1} RD^{k-1U}} $$
+$$ QP_k = Q_1 Q_2 \ldots Q_k$$
+$$ T_kRD^{k} U = R_{k} \underbracket{R_{k-1} \ldots R_1}_{T_{k-1} RD^{k-1}U} $$
 Ottieniamo
 $$ QP_{k}= QP_{k-1} Q_k$$
 $$ T_k RD^{k} U  = R_{k} T_{k-1} RD^{k-1} U$$
@@ -1739,17 +1737,20 @@ $B_k$ di ordine $n - 1$ ottenuta dalla matrice $A_k$ eliminando l'ultima riga e
 l'ultima colonna. Per l'approssimazione degli altri autovalori si procede in
 modo analogo.
 
-\subsection{Matrice di Sylvester}
-\begin{workinprogress}
- $$ S^{T}S - SS^{T} \neq 0$$
- non \`e normale, per risultato del condizionamento. \\
-Matlab, quando l'ordine della matrice cresce abbastanza,
-alcuni autovalori di $S$ calcolati con il metodo $QR$
-non hanno nessuna cifra significativa.
-
-Varianti del metodo $QR$ che vanno su sottoninsiemi
-degli autovalori dominanti in modulo
-\end{workinprogress}
+%\subsection{Matrice di Sylvester}
+%\begin{workinprogress}
+% $$ S^{T}S - SS^{T} \neq 0$$
+% non \`e normale, per risultato del condizionamento. \\
+%Matlab, quando l'ordine della matrice cresce abbastanza,
+%alcuni autovalori di $S$ calcolati con il metodo $QR$
+%non hanno nessuna cifra significativa.
+%Varianti del metodo $QR$ che vanno su sottoninsiemi
+%degli autovalori dominanti in modulo
+%\end{workinprogress}
+%%%%%%%
+% Commento perche' non e' presente nel programma
+%
+% Nic
 
 %% Parte presa a lezione
 \begin{comment}
