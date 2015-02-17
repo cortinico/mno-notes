@@ -44,9 +44,6 @@ iterativi.
 \end{itemize}
 
 \section{Condizionamento del problema}
-\begin{notes}
-Risultati di localizzazione: non da studiare.
-\end{notes}
 Il Teorema di Bauer-Fike riguarda la perturbazione degli autovalori di una matrice diagonalizzabile a valori complessi. In sostanza, stabilisce un limite superiore alla deviazione di un autovalore calcolato su una matrice perturbata rispetto a quello calcolato sulla matrice esatta. (Informalmente, quello che dice è che la sensibilità degli autovalori è stimata dal condizionamento $\mu(T)$ della matrice composta dagli autovettori).\footnote{Tradotto da Wikipedia, \url{http://en.wikipedia.org/wiki/Condition_number}} 
 
 \begin{theo}[Teorema di Bauer-Fike]
@@ -465,7 +462,7 @@ ortonormali, risulta che
 
 $$
 \begin{array}{l}
-\sigma_k = t_k^{H}u_{k+1} = \dfrac{t_k^{H}At_k}{t_k^{H}t} =
+\sigma_k = t_k^{H}u_{k+1} = \dfrac{t_k^{H}At_k}{t_k^{H}t_k} =
 \dfrac{(A^{k} t_0)^{H} (A^{k+1}t_0)}{(A^{k}t_0)^{H} (A^{k}t_0)}  \\
 = \lambda_1 \dfrac{|\alpha_1|^{2} + \displaystyle
  \sum_{i=2}^{n} |\alpha_i|^{2}
