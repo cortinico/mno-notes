@@ -70,7 +70,7 @@ $$
 
 \begin{defn}[Direzione limite]
 $d \in \mathbb{R}^{n}$ si dice \emph{direzione limite} per $X$ in
-$\overline{x}$ se esiste una successione ammissibile
+$\overline{x}$ se esiste una successione ammissibile $\{x_n \}$ 
 per $\overline{x} \in X$ tale che
 $$
 \dfrac{x_n - \overline{x}}{||x_n - \overline{x}||_2 }\to d
@@ -116,15 +116,15 @@ Sia $\overline{x} \in X$ un punto di minimo locale di $(P)$. Allora
 \begin{thproof}
 Estensione della vecchia dimostrazione (caso non vincolato). \\
 Sia
-$$ \exists \epsilon > 0 \quad f(\overline{x}) =
-\min\{f(x): \; x \in X \cap B(\overline{x}, \epsilon) \}.
+$$ \exists \varepsilon > 0 \quad f(\overline{x}) =
+\min\{f(x): \; x \in X \cap B(\overline{x}, \varepsilon) \}.
 \; \text{ e } d \in T(X, \overline{x})$$
 Per definizione di cono tangente:
 $$ d \in T(X, \overline{x}) \; \Rightarrow \; \exists t_n \rightarrow 0^{+}, d_n \to d \; \text{ t.c. } \;
 \overline{x} + t_n d_n \in X$$
 Poich\'e
 $\overline{x} + t_n d_n \rightarrow \overline{x}$ risulta
-$\overline{x} + t_n d_n \in  B(\overline{x}, \epsilon) $
+$\overline{x} + t_n d_n \in  B(\overline{x}, \varepsilon) $
 per $n$ sufficientemente grande. Quindi:
 $$ 0 \leq f(\overline{x} + t_n d_n) - f(\overline{x})
 \underbrace{=}_{Taylor}  t_n \nabla f(\overline{x})^{T}d_n +
@@ -140,7 +140,7 @@ $$
 \begin{observation}
 Poich\'e $F(X, \overline{x})\subseteq T(X, \overline{x})$,
 se $X$ \`e convesso e $f$ \`e convessa allora
-(  \ref{eq:bigivincopt1}) \`e anche condizione sufficiente.
+(\ref{eq:bigivincopt1}) \`e anche condizione sufficiente.
 Inoltre 
 $$S
 \overline{x} \in int\; X \quad
@@ -238,7 +238,9 @@ $$L_{\leq}(X, \overline{x}) = \{ d \in \mathbb{R}^{n} \; | \;
  Allora
  $$L_{<} (X, \overline{x}) \subseteq T(X, \overline{x})
  \subseteq L_{\leq}(X, \overline{x}) $$
-(No Dimostrazione)
+\begin{todo}
+Qui manca la dimostrazione che sarebbe bene includere.
+\end{todo}
 \end{proposition}
 Abbiamo quindi inscatolato il cono tangente.
 \begin{example}[Continuazione esempio precedente]
@@ -252,12 +254,12 @@ $$ L_{\leq}(X, \overline{x}) = T(X, \overline{x})$$
 $L_{<}(X, \overline{x})$ \`e un insieme aperto mentre $T(X, \overline{x})$ \`e un insieme chiuso,
 l'unico caso in cui possono coincidere \`e che i 2 insiemi sono aperti e
 chiusi: questo avviene quando tali insiemi sono tutto lo spazio, questo
-corrissponde a non avere vincoli attivi. \\
+corrisponde a non avere vincoli attivi. \\
 Se $\overline{x}$ \`e un punto interno alla regione ammissibile,
 il cono tangente \`e tutto $\mathbb{R}^{n}$, perch\'e ci possiamo
 avvicinare da ogni direzione.
 \`E possibile che $T$ e $L_{\leq}$ siano diversi, ossia
-$$ T(X, \overline{x}) \subset L_{\leq}(X, \overline{x})$$
+$$ T(X, \overline{x}) \subsetneq L_{\leq}(X, \overline{x})$$
 Ad esempio (verificare per casa)
 $$ X = \{ x \in \mathbb{R}^{2} \; | \; x_1^{2} - x_2^{2} \leq 0 \}
 \quad \overline{x} = (0,0)
@@ -314,7 +316,7 @@ c_j^{T}d = 0, j \in I^{=} \\
 \begin{array}{l}
 \displaystyle \sum_{k \in I^{<}} \theta_k a_k + \displaystyle \sum_{i \in I^{\leq}}
  v_i b_i + \displaystyle \sum_{j \in I^{=}} \mu_j c_j = 0 \\
-\underline{\theta}_k \geq 0 , \underline{v}_{i} \geq 0 , \mu \in \mathbb{R}
+\theta_k \geq 0 , v_{i} \geq 0 , \mu_{j} \in \mathbb{R}
 \end{array}
 \right.  \\
 \text{ ammette soluzione in cui i } \theta_k \text{ non sono tutti nulli}
@@ -375,9 +377,9 @@ $$
 $$
 \end{theo}
 Il vincolo $(FJ_2)$ esprime una condizione di complementarit\`a:
-nel caso che il vincolo sia attivo in $\overline{x}$ (cioé $g(\overline{x}) = 0$) può essere $\lambda_i \geq 0$. Altrimenti se il vincolo non è attivo ($g(\overline{x}) < 0$) deve essere $\lambda_i = 0$.
+nel caso che il vincolo sia attivo in $\overline{x}$ (cioé $g_{i}(\overline{x}) = 0$) può essere $\lambda_i \geq 0$. Altrimenti se il vincolo non è attivo ($g(\overline{x}) < 0$) deve essere $\lambda_i = 0$.
 
-Per la verifica di ottimalità di $\overline{x}$ siamo passati da un controllo di infiniti vettori alla risoluzione di un sistema di equazioni che \`e trattabile. Risolvendo il sistema di Fritz--John si otterranno $\theta$ e dei $\lambda_i$. Questi ultimi varranno $0$ per i vincoli non attivi, fornendo un'indicazione si quali siano i vincoli che effettivamente entrano in gioco nella risoluzione del problema di minimizzazione. I $\lambda_i$ vengono chiamati \emph{moltplicatori di Lagrange}.
+Per la verifica di ottimalità di $\overline{x}$ siamo passati da un controllo di infiniti vettori alla risoluzione di un sistema di equazioni che \`e trattabile. Risolvendo il sistema di Fritz--John si otterranno $\theta$ e dei $\lambda_i$. Questi ultimi varranno $0$ per i vincoli non attivi, fornendo un'indicazione su quali siano i vincoli che effettivamente entrano in gioco nella risoluzione del problema di minimizzazione. I $\lambda_i$ vengono chiamati \emph{moltiplicatori di Lagrange}.
 
 Che fastidio ci da $\theta =0$ ? Compaiono esclusivamente i vincoli
 del problema, non c'\`e la funzione obiettivo: vorremo che le condizioni
@@ -426,7 +428,7 @@ $$
 \end{array}
 \right.
 $$
-,dove $(KKT_3)$ e $(KKT_4)$ sono le condizioni di ammissibilit\`a,
+dove $(KKT_3)$ e $(KKT_4)$ sono le condizioni di ammissibilit\`a,
 nelle incognite $x \in \mathbb{R}^{n}, \lambda = (\lambda_1, \ldots, \lambda_n) \in \mathbb{R}^{n}$
 
 \begin{notes}
@@ -462,7 +464,7 @@ e $\hat{\lambda} = (\hat{\lambda_1}, \ldots, \hat{\lambda}_{n})$
 soddisfano $(KKT_1)$, sottraendo un sistema di equazioni dall'altro
 si ottiene:
 $$ \displaystyle \sum_{i \in I(\overline{x})}
-  ( \overline{\lambda}_{i} - \hat{\lambda}) \nabla g_i(\overline{x}) = 0
+  ( \overline{\lambda}_{i} - \hat{\lambda}_{i}) \nabla g_i(\overline{x}) = 0
 $$
 Allora
 $\overline{\lambda}_{i} = \hat{\lambda}_{i} \quad \forall i \in [1 \ldots n]$
@@ -480,7 +482,7 @@ Qualifiche dei vincoli: $\equiv$ condizioni su vincoli per cui (FJ) valgono
  \end{defn}
 
  \begin{defn}[Condizioni di Mangasarian-Fromovits]
-   $\exists d \in \mathbb{R}^{n}:  \nabla g_i(\hat{x})^{T}d <
+   $\exists d \in \mathbb{R}^{n}:  \nabla g_i(\hat{x})^{T}d < 0
    \text{ per ogni } i \in I(\overline{x})$
    (cio\`e $ L_{<} (X, \hat{x}) \neq \emptyset$)
  \end{defn}
@@ -609,23 +611,23 @@ A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^{n} $$
 
 \begin{proposition}
 Sia $\overline{x} \in X$, allora 
-$$T(X, \overline{x}) =L_{\leq} (X, \hat{x})$$
+$$T(X, \overline{x}) =L_{\leq} (X, \overline{x})$$
 \end{proposition}
 \begin{notes}
 No dimostrazione, ma sulla note c'e'.
 \end{notes}
 \paragraph{Condizioni KKT nella programmazione lineare}
 Consideriamo la programmazione lineare
-$$ \max \{c^{T}x \;  Ax \leq b \}  = - \min\{-cx : Ax \leq b \}$$
+$$ \max \{c^{T}x \; | \;  Ax \leq b \}  = - \min\{(-c)^{T}x \; | \; Ax \leq b \}$$
 Sappiamo che valgono le condizioni $KKT$ sempre. \\
 Come minimo
-$$  -\min \{ - c^{T}x \; | \; \hat{x} \in X \} $$
+$$  -\min \{(-c)^{T}x \; | \; x \in X \} $$
 Obiettivo
 $$ f(x)  = -c^{T}x \quad \nabla f(\overline{x}) = - c $$
 Vincoli
-$$ g_i(x) = A_i x - b_i  \quad \rightarrow \quad \nabla g_i(x) = A$$
+$$ g_i(x) = A_i x - b_i  \quad \rightarrow \quad \nabla g_i(x) = A_i$$
 Condizioni moltiplicatori di Lagrange 
-$$ -c + \displaystyle \sum_{i+1}^{n} \lambda_i A_i
+$$ -c + \displaystyle \sum_{i=1}^{n} \lambda_i A_i
 = -c + \lambda^{T} A = 0
 $$
 Ossia
@@ -635,7 +637,7 @@ $$
   \lambda \geq 0  & (KKT_4) \text{ (ammissibilit\`a duale 2) } \\
    Ax \leq b & \text (KKT_3) \text{ (ammissibilit\`a primale)} \\
 \lambda_i \underbracket{(b_i - a_i^{T}x)}_{g_i} = 0 &
- (KKT_4) \text{ (scarti complementari) } 
+ (KKT_2) \text{ (scarti complementari) } 
 \end{array}
 $$
 
@@ -684,7 +686,7 @@ $$L_{<} =
 \quad j=1 \ldots p \}
 $$
 L'inclusione 
-$$T(X, \overline{x}) \subseteq (X, \overline{x})$$
+$$T(X, \overline{x}) \subseteq L_{\leq}(X, \overline{x})$$
 si dimostra similmente al caso delle sole disuguaglianze
 mentre l'inclusione 
 $$ L_{<}(X, \overline{x}) \subseteq T(X, \overline{x})$$
@@ -707,7 +709,7 @@ indipendenti}
 \begin{array}{l}
   \nabla f(\overline{x})^{T}d < 0  \\
  \nabla g_i(\overline{x})^{T}d < 0 \quad i \in I(\overline{x}) \\
- \nabla h_j(\overline{X})^{T}d = 0 \quad j =1 \ldots p \\
+ \nabla h_j(\overline{x})^{T}d = 0 \quad j =1 \ldots p \\
 \end{array}
 \right. \\
 \text{Non ammette soluzione } d \in \mathbb{R}^{n}
@@ -722,7 +724,7 @@ che i vettori $\{ \nabla g_i(\overline{x})\}_{i \in I(\overline{x})}
 \{ \nabla h_j(\overline{x}) \}_{j=1\ldots p}
 $
 siano linearmente indipendenti. Allora esistono $\lambda_i \geq 0$
-con $i=1\ldots n$,  $\mu \in \mathbb{R}$ con $j=1\ldots p$ tali che
+con $i=1\ldots n$,  $\mu_{j} \in \mathbb{R}$ con $j=1\ldots p$ tali che
 $$
 \begin{array}{ll}
 \nabla f(\overline{x}) +
@@ -764,12 +766,14 @@ $$
 
 \begin{observation}
 $$(\overline{KKT}_1) \equiv \nabla_x L(x, \lambda, \mu) = 0$$
+
+Nota che il grandiente \`e calcolato solamente per la variabile $x$.
 \end{observation}
 \paragraph{Altre qualifiche dei vincoli}
 
  \subparagraph{Slater}
  \begin{itemize}
- \item $h_j: \text{ affini }: h_j(x) = a_j^{T}x + b_j, k=1\ldots p $
+ \item $h_j: \text{ affini }: h_j(x) = a_j^{T}x + b_j, \quad j=1\ldots p $
  \item $g_i: \text{ convesse per ogni  }: i \in I(\overline{x})$
  \item $\{\nabla h_j(\overline{x})\}_{j=1\ldots p }$ linearmente indipendenti
  \item $\exists \hat{x} \in \mathbb{R}^{n}$ tale che
@@ -784,12 +788,12 @@ $
  \end{itemize}
  \subparagraph{Mangasarian-Fromovitz}
  \begin{itemize}
- \item $\{ \nabla h_j(\overline{x})_{j=1\ldots p} \}$ linearmente indipendenti
+ \item $\{ \nabla h_j(\overline{x})\}_{j=1\ldots p}$ linearmente indipendenti
  \item $\exists d \in \mathbb{R}^{n}$ tale che
 $  
 \left\{
  \begin{array}{ll}
-  \nabla g_i(\overline{x}^{T})d \leq 0 & i \in I(\overline{x})  \\
+  \nabla g_i(\overline{x})^{T}d \leq 0 & i \in I(\overline{x})  \\
   \nabla h_j(\overline{x})^{T}d = 0 & j=1\ldots p  
  \end{array}
 (\Longleftrightarrow L_{<}(X, \overline{x}) \neq \emptyset)
@@ -800,10 +804,10 @@ $
 \begin{exercise}
   Possiamo provare a scrivere le condizioni KKT per il problema
   duale
-  $$ \min \{ b^{T}\lambda \; | \; \lambda \in x \} $$
+  $$ \min \{ b^{T}\lambda \; | \; \lambda \in X \} $$
   $$ X = \{ \lambda \in \mathbb{R}^{n} \; | \; \lambda^{T}A = c,
-  \lambda \geq 0 $$
-Indicazione, deve veinire fuori $\lambda_i(A_ix - b_i) = 0 \quad
+  \lambda \geq 0 }$$
+Indicazione, deve venire fuori $\lambda_i(A_ix - b_i) = 0 \quad
 i=1 \ldots n$
 \end{exercise}
 \begin{exercise}
@@ -815,21 +819,24 @@ $(x,s) \in \mathbb{R}^{n+m} $
 Scrivere le condizioni KKT in questo caso.
 Problema: per le ugaglianze serve la lineare indipendenza.
 \end{exercise}
-Le condizioni KKT sono necessarie per l'ottimalit\`a e
-ma vale il seguente teorema:
+%% Questo non mi è chiaro...io toglierei
+%% NIC
+
+Le condizioni KKT sono necessarie per l'ottimalit\`a, 
+ma per $f$ convessa vale il seguente teorema:
 \begin{theo}
 Siano $f$ e $g_i$ convesse con $i \in I(\overline{x})$ per
 qualche $\overline{x} \in X$ e siano
 $h_j$ affini con $j=1\ldots p$ ($h_j(x) = a_j^{T}x- b_j$
 per opportuni $a_j \in \mathbb{R}^{n}, b_j \in \mathbb{R}$).
 Se esistono $\lambda_i \geq 0$, con $i=1\ldots n$ e
-$\mu \in \mathbb{R}$, con $j=1\ldots p$, tali che
+$\mu_j \in \mathbb{R}$ con $j=1\ldots p$, tali che
 valgono $(KKT_1)$ e $(KKT_2)$ allora $\overline{x}$
 \`e un punto di minimo globale.
 \end{theo}
 
 \section{Metodi per la risoluzione}
-\subsection{Alcuni approcci alla risoluzione del problema}
+\subsection{Eliminazione di variabili}
 \begin{example}
 Vogliamo minimizzare la norma, che \`e una funzione convessa.
   $$ \min \{ x_1^{2} + x_2^{2} \} \qquad x_1 + x_2 -1 = 0$$
@@ -874,9 +881,9 @@ di vincoli lineari.
 A \text{ rango massimo}
 $$
 Se una matrice $A$ ha rango massimo, si possono riordinare le $n$ colonne
-delle matrice $A$ in modo che le prime $n$ siano linearmente indipendenti
+delle matrice $A$ in modo che le prime $m$ siano linearmente indipendenti
 
-$$ A = [ \underbracket{A_1}_{n\times n}  \; | \underbracket{A_2}_{n n-m} ]$$
+$$ A = [ \underbracket{A_1}_{m \times m}  \; | \underbracket{A_2}_{m \times n-m} ]$$
 $$x =
 \begin{pmatrix}
 x^{1} \\
@@ -907,12 +914,12 @@ Accenno ad un'altra tecnica
 $$ x_1^{2}  + x_2^{2} + r(x_1 + x_2 -1)^{2} $$
 Nuova famiglia di problemi
 $$
-\min \{ x_1^{2} + x_2^{2} + r(x_1 + x_2 -1 ) \; | \; x_1, x_2 \in \mathbb{R}
+\min \{ x_1^{2} + x_2^{2} + r(x_1 + x_2 -1 ) \; | \; x_1, x_2 \in \mathbb{R} \}
 $$
 \end{example}
-\begin{exercise}
-  Provare a risolvere il problema per $r$ fissato.
-\end{exercise}
+%\begin{exercise}
+%  Provare a risolvere il problema per $r$ fissato.
+%\end{exercise}
 
 
 % Bigi 24 Maggio
@@ -926,7 +933,7 @@ $$
 \displaystyle \sum_{j=1}^{p}
 \mu_j \nabla h_j(x) = 0
 \Longleftrightarrow
-\nabla_x L(x, \nabla,\mu)=0
+\nabla_x L(x, \lambda,\mu)=0
 $$
 
 $$
@@ -947,9 +954,8 @@ L(x, \lambda, \mu) = f(x) +
 \mu_j h_j(x)
 $$
 
-$$
-(P) \min \{f(x) \; : \; {g_i(x)}_{i=\ldots m} \leq 0,
- {h_j(x)}_{j=1\ldots o} = 0
+$$ (P) \quad  \min\{f(x): \; g_i(x)\leq 0, i=1\ldots n, \;
+h_j(x)=0, j=1\ldots p \}
 $$
 
 \subsubsection{Trasformazione di problemi in forma non vincolata:
@@ -1000,12 +1006,12 @@ $$
 Proviamo a porci in una situazione pi\`u generale: sia $h$ il
 vincolo di uguaglianza.
 $$
-\min \{f(x) + rh^2(x)\; x \in \mathbb{R}^{n} \}
+\min \{f(x) + rh^2(x) \; | \; x \in \mathbb{R}^{n} \}
 $$
 e deriviamo rispetto a $x$
 $$\nabla f(x^{r}) + \underbrace{2rh(x^{r})}_{\mu} \nabla h(x^{r})
 $$
-dove $x^r$ \`e il minimo:abbiamo ottenuto un moltiplicatore
+dove $x^r$ \`e il minimo: abbiamo ottenuto un moltiplicatore
 
 $$ 2r(x_1^{r} + x_2^{r} -1 ) = \dfrac{-2r}{1+2r}
 \xrightarrow{r \to + \infty} = -1
@@ -1015,7 +1021,7 @@ a risolvere il problema originale.
 \paragraph{Teoria della penalizzazione}
 Consideriamo il problema generico con vincoli di uguaglianza e di disuglianza. Introduciamo la \emph{Funzione di penalizzazione} $p_r$ che tiene conto di entrambi i tipi di vincoli e utilizziamo un parametro $r > 0$:
 $$ p_r(x) = f(x) + r \cdot \left(
-\displaystyle \sum_{i=1}^{n} {g^+_i}^{2}(x) +
+\displaystyle \sum_{i=1}^{n} ({g^+_i})^{2}(x) +
 \displaystyle \sum_{j=1}^{p} h_j^{2}(x)
 \right)
 $$
@@ -1038,7 +1044,7 @@ $$x \notin X \quad \Rightarrow \quad p_r(x) > f(x) $$
 Quindi in generale
 $$ p_r(x) \geq f(x) \quad \forall x \in \mathbb{R}^{n}, ~ \forall r \geq 0$$
 Chiamamo $\overline{v}$ il valore ottimo del problema originale $(P)$
-e $\overline{v}_r$ l'ottimo del problema con la penalizzazione $(P_r)$ ,
+e $\overline{v}_r$ l'ottimo del problema con la penalizzazione $(P_r)$,
 i valori in generale non coincidono!
 
 \begin{observation}
@@ -1057,14 +1063,14 @@ Ogni punto di accumulazione di $\{x^r\}_r$ \`e
 un punto di minimo globale di $(P)$.
 \end{proposition}
 \begin{observation}
-$x^{r}$ ammissibile, cio\`e $x^{r} \in X, \Rightarrow x^{r}$ punto
+$x^{r}$ ammissibile, cio\`e $x^{r} \in X \Rightarrow x^{r}$ punto
 di minimo globale di $(P)$. Infatti
-$$ \overline{v} \geq \overline{v}_{r_k} = p_{r_k}(x^k) 
-\underbracket{=}_{x^{k} \in X}  f(x^{k})$$, da cui
+$$ \overline{v} \geq \overline{v}_{r} = p_{r}(x^k) 
+\underbracket{=}_{x^{k} \in X}  f(x^{k})$$ da cui
 $\overline{v} = f(x^{k})$ poich\'e $x^{k}$ \`e ammissibile.
 \end{observation}
-Quindi in genere, $\{x^{k} \}$ \`e costituita da punti
-non ammissibili, cio\`e 'esterni' alla regione
+Quindi in genere $\{x^{k} \}$ \`e costituita da punti
+non ammissibili, cio\`e ``esterni'' alla regione
 ammissibile $X$ (da cui il nome di \emph{penalizzazione esterna}.
 Dovremo accontentarci di una soluzione approssimata.\\
 Sappiamo che:
@@ -1080,9 +1086,9 @@ $$
 \nabla h_j(x^{k})
 \end{array}
 $$
-$$ \lambda_i^{k} =  2rg_i^{+}(x) \; i=1\ldots m
+$$ \lambda_i^{k} =  2r_{k}g_i^{+}(x^{k}) \; i=1\ldots m
 \qquad  \text{e} \qquad
-\mu_j^{k} = 2r h_j(x^k) , j=1\ldots p$$,
+\mu_j^{k} = 2r_{k}h_j(x^k) \; j=1\ldots p$$
  sono i moltiplcatori associati
 a $x^{k}$ per il problema $(P)$ \\
  (Attenzione, le altri condizioni
@@ -1103,13 +1109,13 @@ $$
 \quad \text{linearmente indipendenti}
 $$
 soddisfa le condizioni
-KKT con i moltiplicatori
+KKT per $(P)$ con i moltiplicatori
 $$ \lambda_i^{*}, \mu_j^{*}$$
 dati da
 $$
 \begin{array}{ll}
 \displaystyle \lambda_i^{*} = \lim_{l \to + \infty}
-2r_{{k}_l} g_i(x^{k_l})  &  i =1 \ldots n \\
+2r_{{k}_l} g^{+}_i(x^{k_l})  &  i =1 \ldots n \\
 \displaystyle \mu_{j}^{*} = \lim_{l \to + \infty} 2r_{k_{l}}
 h_j(x^{k_l}) & j =1 \ldots p
 \end{array}
@@ -1186,16 +1192,16 @@ un punto stazionario della Lagrangiana aumentata vista come funzione
 della sola $x$ dove i moltipicatori sono fissati.
 
 \begin{observation}
-$L_r(\cdot, \mu)$ \`e la funzione esterna di
+$L_r(\cdot, \mu)$ \`e la funzione di penalizzazione esterna di
 $$ (PL_{eq}(\mu))\quad \min\{ f(x) + \displaystyle \sum_{j=1}^{p}
 \mu_j h_j(x) \; : \; h_j(x) = 0\; j=1\ldots p\}
 $$
 dove $\mu \in \mathbb{R}^{p}$ \`e fissato, mentre $L_r$ \`e
 la funzione lagrangiana di 
 $$(P_{eq}(r))\quad \min\{ f(x) + r \displaystyle \sum_{j=1}^{p}
-h_j^{2}(x)\; :\;   h_j(x) = 0\; j=1\ldots p \}
+h_j^{2}(x) \; : \;   h_j(x) = 0\; j=1\ldots p \}
 $$
-dove $r>0$ \`e fissato. Sia $PL_{eq}(\mu)$ che $(P_{eq}(r))$ sono
+dove $r>0$ \`e fissato. Sia $(PL_{eq}(\mu))$ che $(P_{eq}(r))$ sono
 problemi equivalenti a $(P_{eq})$, in quanto gli addendi
 della penalizzazione, quando ci si trova all'interno della
 regione ammissibile, si annullano.
@@ -1211,7 +1217,7 @@ $\overline{x}$ \`e un punto stazionario di $ L_r(\cdot, \overline{\mu})$
   $$
 \nabla_x L_r (\overline{x}, \overline{\mu}) =
  \nabla f(\overline{x}) + \displaystyle \sum_{j=1}^{p}
-\overline{\mu}_{j} \nabla h_j(\overline{x}) +
+\overline{\mu}_{j} \nabla h_j(\overline{x}) 
 + 2r \displaystyle \sum_{j}^{p} h_j(\overline{x}) \nabla h_j(\overline{x})
 \underbracket{=}_{KKT \Rightarrow h_j(\overline{x})=0} 
 \nabla f(\overline{x}) + \displaystyle \sum_{j=1}^{p}
@@ -1238,13 +1244,14 @@ $$
 $$
 ammetta un punto di minimo globale $x^{k}$ per ogni $k$.
 Allora ogni punto di accumulazione di $\{x^{k}\}_{k}$ \`e
-un punto di minimo globale di $(P_{eq})$
-Allora ogni punto di accumulazione della successione
-$x^{k}$ \`e un punto di minimo globale del problema
-$(P_e)$, quello con i soli vincoli di uguaglianza.
+un punto di minimo globale di $(P_{eq})$.
+%Allora ogni punto di accumulazione della successione
+%$x^{k}$ \`e un punto di minimo globale del problema
+%$(P_e)$, quello con i soli vincoli di uguaglianza.
 \end{proposition}
 
 \begin{observation}
+Calcoliamo il gradiente della Lagrangiana aumentata
  $$
  \nabla_{x} L_{r}(x, \mu) = 
  \nabla f(x) + \displaystyle \sum_{j=1}^{p}
@@ -1264,12 +1271,12 @@ $x^{k} \in \mathbb{R}^{n}$ tale che $|| \nabla L_{r_{x}}(x^{k}, \mu^{k})||_{2}
 Allora ogni punto di accumulazione $x^{*}$ di $\{ x^{k} \} $ tale che
 $\{ \nabla h_j(x^{*})\}_{j=1\ldots p }$ siano  linearmente indipendenti
 soddisfa le condizioni KKT insieme ai moltiplicatori
-$$\mu_j^{*} = \displaystyle \lim_{l \to \infty} (\mu_jk^{k_l} +
+$$\mu_j^{*} = \displaystyle \lim_{l \to \infty} (\mu_j^{k_l} +
  2 r_{k_{l}} h_j(x^{k_l})) $$
-dove $\{ x^{k_l}\}$ \`e una (qualsiasi) sottosuccessione per cu
+dove $\{ x^{k_l}\}$ \`e una (qualsiasi) sottosuccessione per cui
 $x^{k_l} \xrightarrow{l \to + \infty} x^{*}$
 \end{theo}
-\paragraph{Metodo dei motliplicatori}
+\paragraph{Metodo dei moltiplicatori}
 \begin{center}
 \fbox
 {
@@ -1281,7 +1288,7 @@ $viol= + \infty; k =0$
 \item Calcolare  $x^{k}\in argmin\{ L_{r_k}(x, \mu^{k}):
 x\in \mathbb{R}^{n} \}$
 \item Se $viol(x^{k}) = \displaystyle \max_{j=1\ldots p}  |h_j(x^{k})|  = 0$
-  allora STOP, $(x^{k}, \mu^K) $ soddisfano KKT
+  allora STOP, $(x^{k}, \mu^k) $ soddisfano KKT
 \item 
   Se $viol(x^{k})> \delta viol$ allora
   il parametro di penalizzazione va aumentato
@@ -1302,14 +1309,14 @@ $$r_{k+1}  = r_k \quad \text{ e } \quad
 \begin{observation}
  Se $viol(x^{k}) = 0$ (cio\`e $x^{k}$ ammissibile, allora
 $\nabla_{x} L_{r_x}(x^{k}, \mu_k) = 0 (\approx 0)$ garantisce
-che $x^{k}$ e $\mu^{k}$ soddisfano le condizioni KKT per
+che $x^{k}$ e $\mu^{k}$ soddisfino le condizioni KKT per
 $(P_{eq})$
 \end{observation}
 \begin{observation}
  L'aggiornamento (\ref{eq:bigipenalest01}) pu\`o verificarsi al pi\`u un numero
 finito di volte consecutive se la condizione di stop
-viene approssimata da $viol(x^{k})\leq \epsilon$ per qualche
-tolleranza $\epsilon > 0 $ (altrimenti si avrebbe $\mu^{k}
+viene approssimata da $viol(x^{k})\leq \varepsilon$ per qualche
+tolleranza $\varepsilon > 0 $ (altrimenti si avrebbe $\mu^{k}
 \approx \text{cost}$ definitivamente, ma $x^{k}$ non convergerebbe
 ad una soluzione ammissibile come garantito dai risultati
  precedenti). 
@@ -1332,15 +1339,15 @@ g_i(x) \leq 0 \quad i = 1 \ldots n \} \\
 \end{array}
 $$
 
-Risolviamo dunque solamente problemi in cui $X$ è formato da vincoli di disugiaglianza. Ci muoviamo inoltre sotto due ipotesi:
+Risolviamo dunque solamente problemi in cui $X$ è formato da vincoli di disuguaglianza. Ci muoviamo inoltre sotto due ipotesi:
 
 \begin{enumerate}
 \item
  $X^{0}= \{ x \in \mathbb{R}^{n}: g_i(x) < 0 \quad i = 1 \ldots n \}
 \neq \emptyset$
 
-\item $\forall x \in X ~ \forall  \epsilon > 0
-\quad \exists y \in X^{0} \text{ tale che } ||x - y||_2 \leq \epsilon$
+\item $\forall x \in X ~ \forall  \varepsilon > 0
+\quad \exists y \in X^{0} \text{ tale che } ||x - y||_2 \leq \varepsilon$
 \end{enumerate}
 Le idee alla base della penalizzazione interna sono due:
 \begin{itemize}
@@ -1365,6 +1372,7 @@ Le idee alla base della penalizzazione interna sono due:
    ai bordi, in modo da garantire convergenza.
   \begin{center}
     \includegraphics[width=0.45\textwidth]{imgs/penint.png}
+    %%% FIXME Questa immagine è brutta e non rende per niente l'idea, andrebbe cambiata
   \end{center}
   Vediamo che il minimo globale nell'area non vincolata \`e diverso
   dal minimo globale definito nella regione ammissibile: \`e qui
@@ -1373,7 +1381,7 @@ Le idee alla base della penalizzazione interna sono due:
 
 \end{itemize}
 
-  Il fatto che si utilizzi un aperto e che la nuova funzione $f'(x)$ ai bordi vada a $+\inf$ ci garantisce che per trovare i punti stazionari $\overline{x}$ sia sufficiente verificare che
+  Il fatto che si utilizzi un aperto e che la nuova funzione $f'(x)$ ai bordi vada a $+\infty$ ci garantisce che per trovare i punti stazionari $\overline{x}$ sia sufficiente verificare che
  $$ \nabla f'(\overline{x}) = 0$$
  Con queste due tecniche possiamo quindi utilizzare i metodi visti per l'ottimizzazione non vincolata.
  
@@ -1416,29 +1424,29 @@ $$ B(x) = - \displaystyle \sum_{i=1}^{n} \log(-g_i(x)) $$
 In entrambi i casi: 
 $$ g_i \text{ convesse } \quad \Rightarrow \quad B 
 \text{ \`e convessa }$$
-(fare come esercizio:le funzioni sono monotone, 
-predere una funzione alla volta)
+%(fare come esercizio:le funzioni sono monotone, 
+%predere una funzione alla volta)
 \end{observation}
 Le funzioni barriera ci permettono di considerare, al posto del
 problema di partenza
-$$(PB)_{\epsilon} \quad \min\{f(x) + \epsilon B(x) \; : \; x \in X^{0} \} $$
+$$(PB)_{\varepsilon} \quad \min\{f(x) + \varepsilon B(x) \; : \; x \in X^{0} \} $$
 La funzione barriera \`e sempre $> 0$, quindi:
-$$f(x) + \epsilon B(x) > f(x)$$
+$$f(x) + \varepsilon B(x) > f(x)$$
 Avvicinandosi al bordo $B(x)$ tende a $+\infty$ e quindi tutto
 tende a $+ \infty$.\\
-Poich\'e l'insieme \`e aperto, $(PB)_{\epsilon}$ \`e in pratica un problema di ottimizzazione non vincolata, visto che dato un punto interno a $X^0$ possiamo muoverci in qualunque direzione (con un passo di spostamento adeguato) rimanendo nella regione ammissibile. Inoltre, i punti di minimo soddisfano $\nabla(f(x) + \epsilon B(x)) =0$
+Poich\'e l'insieme \`e aperto, $(PB)_{\varepsilon}$ \`e in pratica un problema di ottimizzazione non vincolata, visto che dato un punto interno a $X^0$ possiamo muoverci in qualunque direzione (con un passo di spostamento adeguato) rimanendo nella regione ammissibile. Inoltre, i punti di minimo soddisfano $\nabla(f(x) + \varepsilon B(x)) =0$
 e utilizzando i metodi \emph{di discesa} visti nel Capitolo \ref{chap:ottimizzazione-non-vincolata} per risolvere i problemi di ottimizzazione non vincolata, partendo da un punto interno ad $X^0$ verrà generata una sequenza di punti apparenti ad $X^{0}$, ed anche il minimo trovato da questi metodi sarà dentro $X^0 \subset X$. Da questo deriva il nome di \emph{metodi del punto interno}.
 
-Ma bisogna fare attenzione: è necessario partire da un punto appartente a $X^{0}$, e individuarne uno non è sempre una cosa banale (nessun punto \`e attivo).
+Ma bisogna fare attenzione: è necessario partire da un punto appartente a $X^{0}$, e individuarne uno non è sempre una cosa banale (nessun vincolo deve essere attivo nel punto).
 \begin{observation}
   Se $f$ e $g_i$ sono convesse anche $B(x)$ \`e convessa.
 Quindi cadiamo nell'ottimizzazione convessa.
 \end{observation}
-Idea dei metodi : avere una successione $\epsilon_{k}\downarrow 0
-\quad x^{k} \in argmin \{ f(x) + \epsilon_{k} B(x): x \in X^{0} \}$
-utilizzando $x^{k-1}$ come punto iniziale. \\
+Idea dei metodi: avere una successione $\varepsilon_{k}\downarrow 0
+\quad x^{k} \in argmin \{ f(x) + \varepsilon_{k} B(x): x \in X^{0} \}$
+utilizzando $x^{0}$ come punto iniziale. \\
 Notare che la successione $x^{k}$ \`e contenuta nella regione
-ammissibile $X$ (penalizzazione interna).
+ammissibile $X$ (da qui il nome di \emph{penalizzazione interna}).
 
 \begin{example}
 Consideriamo il seguente problema. \\
@@ -1447,21 +1455,21 @@ $$\min \{ x : 1-x \leq 0 \}$$
 $\overline{x} = 1$ \`e l'unico punto di minimo globale. \\
 Proviamo ad applicare questo metodo, utilizzando la barriera
 logaritmica:
-$$ \min \{x - \epsilon \log{(x-1)} : \underbracket{x > 1}_{X^{0} } 
+$$ \min \{x - \varepsilon \log{(x-1)} : \underbracket{x > 1}_{X^{0} } 
 \}$$
 per $x \rightarrow 0$
-il rapporto tra $x$ \`e $\epsilon \log(x-1)$ va a $+ \infty$. \\
+il rapporto tra $x$ \`e $\varepsilon \log(x-1)$ va a $+ \infty$. \\
 Calcoliamo il punto in cui il gradiente si annulla
-$$\nabla (x - \epsilon \log(x-1)) =0  \quad \Rightarrow \quad
- 1- \dfrac{\epsilon}{x-1} = 0 \quad 
-\Rightarrow \quad  x = 1 + \epsilon \; (>1)$$
+$$\nabla (x - \varepsilon \log(x-1)) =0  \quad \Rightarrow \quad
+ 1- \dfrac{\varepsilon}{x-1} = 0 \quad 
+\Rightarrow \quad  x = 1 + \varepsilon \; (>1)$$
 Qundi la soluzione del problema barriera \`e
-$$ X(\epsilon) = 1 + \epsilon \xrightarrow{\epsilon \downarrow 0 } 1 $$
-La funzione obiettivo in $X(\epsilon)$ \`e
-$$ X(\epsilon) - \epsilon \log (X(\epsilon) -1)
-= 1 + \epsilon - \epsilon \log \epsilon
+$$ X(\varepsilon) = 1 + \varepsilon \xrightarrow{\varepsilon \downarrow 0 } 1 $$
+La funzione obiettivo in $X(\varepsilon)$ \`e
+$$ X(\varepsilon) - \varepsilon \log (X(\varepsilon) -1)
+= 1 + \varepsilon - \varepsilon \log \varepsilon
  $$
-Pi\`u $\epsilon$ tende a 0 pi\`u abbiamo un'esplosione.
+Pi\`u $\varepsilon$ tende a 0 pi\`u abbiamo un'esplosione.
 \end{example}
 
 \begin{example}[Esempio in due variabili]
@@ -1521,8 +1529,8 @@ $$
 $$
 Cerchiamo di risolvere il problema tramite la tecnica
 della barriera:
-$$ (PB_{\epsilon}) \qquad 
-\min \{ \dfrac{1}{2}(x_1^{2} + x_2^{2}) - \epsilon \log(x_1 -2) :
+$$ (PB_{\varepsilon}) \qquad 
+\min \{ \dfrac{1}{2}(x_1^{2} + x_2^{2}) - \varepsilon \log(x_1 -2) :
  x_1 > 2 \}
 $$
 Il punto di minimo si trova annullando il gradiente
@@ -1534,23 +1542,23 @@ $$
 0
 \end{pmatrix}
 =
-\nabla (\dfrac{1}{2}(x_1^{2} + x_2^{2}) - \epsilon \log(x_1 -2)) = \\
+\nabla (\dfrac{1}{2}(x_1^{2} + x_2^{2}) - \varepsilon \log(x_1 -2)) = \\
 \begin{pmatrix}
-  x_1 - \frac{\epsilon}{x_1 -2} \\
+  x_1 - \frac{\varepsilon}{x_1 -2} \\
  x_2
 \end{pmatrix}
 \begin{array}{ll}
- \rightarrow x_1^{2} - 2 x_1 - \epsilon =0 \;  \rightarrow \;
-x_1 = 1 \pm \sqrt{1+ \epsilon} \xrightarrow{x_1 > 2}
-x_1 = 1 + \sqrt{1+ \epsilon}
+ \rightarrow x_1^{2} - 2 x_1 - \varepsilon =0 \;  \rightarrow \;
+x_1 = 1 \pm \sqrt{1+ \varepsilon} \xrightarrow{x_1 > 2}
+x_1 = 1 + \sqrt{1+ \varepsilon}
   \\
  \rightarrow  x_2=0
 \end{array}
 \end{array}
 $$
-$X(\epsilon) = (1 + \sqrt{1 + \epsilon},0)$ risulta 
-essere l'unico punto di minimo globale di $(PB_{\epsilon})$
-ed inoltre $X(\epsilon) \xrightarrow{\epsilon \downarrow 0}(2,0)$
+$X(\varepsilon) = (1 + \sqrt{1 + \varepsilon},0)$ risulta 
+essere l'unico punto di minimo globale di $(PB_{\varepsilon})$
+ed inoltre $X(\varepsilon) \xrightarrow{\varepsilon \downarrow 0}(2,0)$
 \end{example}
 Passiamo ad una formalizzazione di quanto visto negli esempi
 
@@ -1560,7 +1568,7 @@ Ogni punto di accumulazione della successione $\{x^{k}\}$
 $(P_{in})$
 \end{theo}
 D'ora in avanti considereremo il caso della barriera logaritmica:
-$$ (PB_{\epsilon}) \qquad \min \{ q_\epsilon(x) = f(x) - \displaystyle \epsilon \sum_{i=1}^{n} \log(-g_i(x)) \; : \; x \in X^{0} \}$$
+$$ (PB_{\varepsilon}) \qquad \min \{ q_\varepsilon(x) = f(x) - \displaystyle \varepsilon \sum_{i=1}^{n} \log(-g_i(x)) \; : \; x \in X^{0} \}$$
 
 Nel caso convesso ci possiamo spingere oltre.
 \begin{theo}
@@ -1576,32 +1584,32 @@ Nel caso convesso ci possiamo spingere oltre.
     (non stiamo parlando della regione ammissibile, stiamo usando la
     barriera)
     \item
-      $f(x^{k}) \rightarrow f^{*} \quad \text{} \quad q_{\epsilon_{k}}(x^{k})\rightarrow f^{*}, $  dove $f^{*}$ \`e il valore ottimo di $(P_{in}) $
+      $f(x^{k}) \rightarrow f^{*} \quad \text{} \quad q_{\varepsilon_{k}}(x^{k})\rightarrow f^{*}, $  dove $f^{*}$ \`e il valore ottimo di $(P_{in}) $
   \end{enumerate}
 \end{theo}
 
 \paragraph{Legame con KKT}
 Cosa possiamo dire sui moltiplicatori di Lagrange?
-Sia $x(\epsilon)$ \`e punto di minimo di $(PB_{\epsilon})$.\\
+Sia $x(\varepsilon)$ \`e punto di minimo di $(PB_{\varepsilon})$.\\
 Consideriamo il gradiente:
 $$
 \begin{array}{l}
- 0 = \nabla q_{\epsilon}(x(\epsilon)) =
-\nabla f(x(\epsilon)) - \epsilon
-\displaystyle \sum_{i=1}^{n} \dfrac{1}{-g_i(x(\epsilon))}
-\nabla g_i(x(\epsilon)) =  \\ 
-\nabla f(x(\epsilon)) +
+ 0 = \nabla q_{\varepsilon}(x(\varepsilon)) =
+\nabla f(x(\varepsilon)) - \varepsilon
+\displaystyle \sum_{i=1}^{n} \dfrac{1}{-g_i(x(\varepsilon))}
+\nabla g_i(x(\varepsilon)) =  \\ 
+\nabla f(x(\varepsilon)) +
 \displaystyle \sum_{i}^{n} \underbracket{
-\left(\dfrac{-\epsilon}{g_i(x(\epsilon))}\right)}_{
+\left(\dfrac{-\varepsilon}{g_i(x(\varepsilon))}\right)}_{
 \footnotesize{
 \begin{array}{l}
 \text{moltiplicatori} \\
-\text{associati a } x(\epsilon) \\
+\text{associati a } x(\varepsilon) \\
 \text{nel problema}\\
 \text{originale}  (\lambda_i)
 \end{array}
 }
-} \nabla g_i(x(\epsilon))$$
+} \nabla g_i(x(\varepsilon))$$
 \end{array}
 $$
 Sotto opportune ipotesi su un punto di minimo locale $x^{*}$
@@ -1611,12 +1619,12 @@ l'unicit\`a dei moltiplicatori]),
 \`e possibile dimostrare che:
 \begin{itemize}
 \item in un opportuno intorno di $x^{*}$ esiste un unico punto di
-minimo locale $x(\epsilon)$ di $(PB_{\epsilon)})$ per $\epsilon$
+minimo locale $x(\varepsilon)$ di $(PB_{\varepsilon})$ per $\varepsilon$
 sufficientemente piccolo
 \item 
- $x(\epsilon) \xrightarrow{x \downarrow 0}x^{*}$ e $
-\lambda_i(\epsilon) \xrightarrow{x \downarrow 0} \lambda_i^{*}$ sono i
-moltiplicatori assiociati a $x^{*}$.
+ $x(\varepsilon) \xrightarrow{x \downarrow 0}x^{*}$ e $
+\lambda_i(\varepsilon) \xrightarrow{x \downarrow 0} \lambda_i^{*}$ sono i
+moltiplicatori associati a $x^{*}$.
 \end{itemize}
 
   
@@ -1624,8 +1632,8 @@ moltiplicatori assiociati a $x^{*}$.
 Tornando all'esempio su 2 dimensioni abbiamo
 $$ g_1(x) = 2 - x_1$$
 e quindi
-$$ \nabla_{i}(\epsilon) =  \dfrac{-\epsilon}{g_i(x(\epsilon))}
-= \dfrac{-\epsilon}{1- \sqrt{1+\epsilon} -1} \xrightarrow{\epsilon \downarrow 0 }
+$$ \nabla_{i}(\varepsilon) =  \dfrac{-\varepsilon}{g_i(x(\varepsilon))}
+= \dfrac{-\varepsilon}{\sqrt{1+\varepsilon} -1} \xrightarrow{\varepsilon \downarrow 0 }
 2
 $$
 dove $2$ \`e il moltiplicatore di Lagrange
@@ -1633,22 +1641,22 @@ $\lambda_1$ associato a $x^{*}=(2,0)$.
 \end{example}
 %% REVIEW FROM HERE
 
- $x(\epsilon)$ e $\lambda_i(\epsilon) =  \dfrac{\epsilon}{-g_i(x(\epsilon))}$
+ $x(\varepsilon)$ e $\lambda_i(\varepsilon) =  \dfrac{\varepsilon}{-g_i(x(\varepsilon))}$
 soddisfano:
 $$ 
 \begin{array}{ll}
-\nabla f(x(\epsilon)) + \displaystyle \sum_{i=1}^{n}
-\lambda_i(\epsilon) \nabla g_i(x(\epsilon)) = 0
-& (\text{per la scelta di }\lambda_i(\epsilon)) \\
- g_i(x(\epsilon)) \leq 0 \quad i=1\ldots n  &
-( \text{poich\'e } x(\epsilon) \in X^{0} [\text{quindi in realt\`a } g_i(x(\epsilon))<0 ]) \\
- \lambda_i(\epsilon) \geq 0   &  (\text{conseguenza})
+\nabla f(x(\varepsilon)) + \displaystyle \sum_{i=1}^{n}
+\lambda_i(\varepsilon) \nabla g_i(x(\varepsilon)) = 0
+& (\text{per la scelta di }\lambda_i(\varepsilon)) \\
+ g_i(x(\varepsilon)) \leq 0 \quad i=1\ldots n  &
+( \text{poich\'e } x(\varepsilon) \in X^{0} [\text{quindi in realt\`a } g_i(x(\varepsilon))<0 ]) \\
+ \lambda_i(\varepsilon) \geq 0   &  (\text{conseguenza})
 \end{array}
 $$
 Manca la complementarit\`a: infatti in questo caso abbiamo
-$$ \lambda_i(\epsilon) g_i(x(\epsilon)) = - \epsilon \neq 0 $$
+$$ \lambda_i(\varepsilon) g_i(x(\varepsilon)) = - \varepsilon \neq 0 $$
 ossia
-$$ \lambda_i(\epsilon)(-g_i(x(\epsilon))) = \epsilon > 0$$
+$$ \lambda_i(\varepsilon)(-g_i(x(\varepsilon))) = \varepsilon > 0$$
 Non \`e  rispettata la condizione di complementarit\`a: se valesse
 avremmo avuto una soluzione del problema originale.
 A noi interessa proprio la condizione modificata della complementarit\`a.
@@ -1658,33 +1666,33 @@ Utilizzando le variabili di scarto (slack)
 \begin{array}{ll}
 \nabla f(x) + \displaystyle \sum_{i=1}^{m} \lambda_i \nabla g_i(x) = 0  & \\
  g_i(x) + s_i = 0  &    i=1 \ldots n \\
- \lambda_i s_i = \epsilon &  i =1 \ldots n \\
+ \lambda_i s_i = \varepsilon &  i =1 \ldots n \\
   \lambda_i s_i \geq 0 \quad &  i= 1 \ldots n
 \end{array}
 $$
 
 \begin{observation}
 Piccola parentesi sui vincoli di uguaglianza (discorso dell'aperto):
-2 possiblit\`a:
+2 possibilit\`a:
 \begin{itemize}
 \item Considerarli come vincoli generici
-  $$ \min \{ f(x) + \epsilon B(x) \; : \; x \in X^{0}, h_j(x) = 0 \;
-  j =  1 ldots p$$
+  $$ \min \{ f(x) + \varepsilon B(x) \; : \; x \in X^{0}, h_j(x) = 0 \;
+  j =  1 \ldots p$$
 \item Utilizzare la penalizzazione esterna
-  $$ \min \{ f(x) + \epsilon B(X) + r \displaystyle \sum_{j=1}^{p} h_j^{2}(x)
-  : \; x \in X^{0} $$
+  $$ \min \{ f(x) + \varepsilon B(X) + r \displaystyle \sum_{j=1}^{p} h_j^{2}(x)
+  : \; x \in X^{0} \}$$
 \end{itemize}
 Chiusa parentesi
 \end{observation}
 \paragraph{Metodi primali duali del punto interno}
-Abbiamo $2m + n$ equazioni $+ i$ vincoli di non negativit\`a.
+Abbiamo $2m + n$ equazioni e $i$ vincoli di non negativit\`a.
 Possiamo cercare di risolvere questo sistema di equazioni
-adattando Newton Rapsson in modo da soddisfare la condizione
+adattando Newton Raphson in modo da soddisfare la condizione
 $$ \lambda_i s_i \geq 0 \quad i = 1 \ldots n $$
 L'idea \`e considerare $\lambda_i$ ed $s_i$ positivi
 $$ \lambda_i, s_i > 0$$
-La complementarit\`a non la possiamo avere, dobbiamo avere $\epsilon >
-0 $. Possiamo fare un passo nella direziopne di newton mantenendo la
+La complementarit\`a non la possiamo avere, dobbiamo avere $\varepsilon >
+0 $. Possiamo fare un passo nella direzione di Newton mantenendo la
 positivit\`a (accorciamo il passo da unitario a qualcosa di
 inferiore). Questi sono detti \emph{Metodi primali-duali del punto
 interno}.  Questi metodi funzionano bene con programmazione lineare e
@@ -1736,7 +1744,7 @@ $$
 \end{center}
 
 Condizioni KKT approssimate:  sostiusce lo 0 del complementarit\`a con 
-un $\epsilon$.
+un $\varepsilon$.
 \begin{center}
 \fbox
 {
@@ -1745,7 +1753,7 @@ $$
 \begin{array}{lll}
 A^{T}\lambda  -c = 0 & & \text{(Ammisibilit\`a duale)}  \\
  Ax +s - b = 0 & &  \text{(Ammissibilt\`a del problema originale)} \\
- \lambda_i  s_i = \epsilon & i=1\ldots n & \\
+ \lambda_i  s_i = \varepsilon & i=1\ldots n & \\
  \lambda_i \geq 0, s_i \geq 0 & i=1\ldots n  &
 \end{array}
 $$
@@ -1785,17 +1793,17 @@ $$
 \begin{pmatrix}
   0 \\
  0 \\
- \epsilon e
+ \varepsilon e
 \end{pmatrix}\; : \; \lambda, s \geq 0
 $$
 Il metodo di Newton-Raphson per la risoluzione di $F(x, S, \lambda) = 0$
 fornisce la direzione $d = (d_x, d_s, d_{\Lambda})$ che risolve il sistema
-$$(Nd) \qquad JF( x, S, \lambda) d = - F(x, S , \lambda)$$
-Se $(x,s)$ \`e ammisible per ($\overline{P}$) con $s_i > 0 \; i=1\ldots n$
-e $\lambda$ \`e ammissibile per ($D$) con $\lambda_i > 0 \; i = 1\ldots n$,
+$$(N_d) \qquad JF( x, S, \lambda) d = - F(x, S , \lambda)$$
+Se $(x,s)$ \`e ammisible per $\overline{(Primale)}$ con $s_i > 0 \; i=1\ldots n$
+e $\lambda$ \`e ammissibile per (Duale) con $\lambda_i > 0 \; i = 1\ldots n$,
 il sistema $(N_d)$ diventa
 $$
-(Nd) \qquad
+(N_d) \qquad
 \begin{pmatrix}
   0 & 0 & A^{T}   \\
   A & I & 0  \\
@@ -1890,7 +1898,7 @@ $$
 $$ s_i^{k} + \alpha_k(d_s^{k})_i, \; \lambda_i^{k} + \alpha+k(d_{\lambda})_i^{k}>0
 \quad i=1 \ldots n$$
 \item Porre $$(x^{k+1}, s^{k+1}, \lambda^{k+1}) = 
-  (x^{k}, s^{k}, \lambda^{k}) + \alpha_k(d_x^{k}, d_s^{k}, d_{\lambda}^{k}
+  (x^{k}, s^{k}, \lambda^{k}) + \alpha_k(d_x^{k}, d_s^{k}, d_{\lambda}^{k})
 \quad k=k+1
 $$
 e ritornare a 2)
