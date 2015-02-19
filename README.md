@@ -21,6 +21,7 @@ Gli appunti hanno ancora bisogno di essere corretti ed ampliati, se vuoi aiutarc
 
 ### Scaricare gli appunti
 E' possibile scaricare gli appunti in formato PDF liberamente seguendo il link seguente.
+[Download appunti in formato PDF](https://github.com/cortinico/mno-notes/raw/master/appunti.pdf)
 
 ### Compilare gli appunti
 Per compilare gli appunti si consiglia dapprima di installare il pacchetto `texlive-full` (in una distribuzione Ubuntu-like) in quanto risultano necessarie svarite librerie per compilare il sorgente LaTeX.
@@ -35,9 +36,10 @@ Clonare il repository
 git clone https://github.com/cortinico/mno-notes.git
 ```
 
-Compilare il file `appunti.tex` due volte, per generare correttamente l'indice.
+Spostarsi nella cartella `src` ed invocare il target `all`
 ```
-pdflatex appunti.tex && pdflatex appunti.tex
+cd src
+make all
 ```
 
 ### Come contribuire
