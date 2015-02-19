@@ -1,0 +1,14 @@
+%% Useful stuff for separate compilation.
+\ifx\ismaindoc\undefined
+\providecommand{\inbpdocument}{
+ \documentclass[11pt,a4paper,twoside,titlepage]{scrbook}
+\include{formattazione}
+\begin{document}
+}
+\providecommand{\outbpdocument}{\end{document}}
+\else
+\providecommand{\inbpdocument}{}
+\providecommand{\outbpdocument}{}
+\fi
+
+
