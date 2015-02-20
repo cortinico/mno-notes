@@ -9,22 +9,19 @@
 %% Bevilacqua 31 Maggio
 
 \chapter{DFT: Trasformata discreta di Fourier}
-Non parleremo di interpolazione trigonometrica. \`e un'applicazione
-lineare da $\mathbb{C}^{n}$ in $\mathbb{C}^{n}$.  \`e rappresentata
+Affronteremo il tema della \emph{trasformata di Fourier} vedendola come applicazione lineare da $\mathbb{C}^{n}$ in $\mathbb{C}^{n}$, e non come interpolazione trigonometrica. La trasformata \`e rappresentata
 quindi da una matrice, la matrice di Fourier $V \in \mathbb{C}^{n
 \times n}$. Questa matrice \`e particolare: può essere
 moltiplicata per un vettore $z \in \mathbb{C}^{n}$ in $O(n \log n)$
 operazioni aritmetiche.
 $$ y = Vz$$
-Se invece vogliamo risolvere
+Se invece vogliamo risolvere il problema inverso
 $$z = V^{-1}y$$
-costa $O(n \log n)$ invece che $O(n^3)$. \\
-Un'applicazione \`e la TAC oppure nel calcolo del gradiente coniugato,
-dove ad ogni passo di fa un prodotto matrice vettore, il costo passa
+costa comunque $O(n \log n)$ (invece del classico $O(n^3)$). \\
+Un'applicazione concreta della \emph{trasformata di Fourier} \`e la TAC oppure viene impiegato nel calcolo del gradiente coniugato,
+dove ad ogni passo si fa un prodotto matrice per vettore, il costo passa
 da $O(n^2)$ a poco più che lineare.\\ 
-Notazione: DFT, IDFT (trasformata inversa). Algoritmo FFT: un algoritmo che
-calcola DFT o IDFT.
-
+Notazione: indicheremo con DFT la trasformata discreta di Fourier, con IDFT la trasformata discreta inversa di Fourier e con FFT (\emph{fast Fourier trasformata}) un algoritmo che calcola la DFT o la IDFT.
 
 \begin{defn}[Radice $n$-esima]
 Sia $n$ un intero. Si definisce radice $n$-esima dell'unit\`a
@@ -148,8 +145,8 @@ z = \dfrac{1}{n}V^{H} y$$
 \begin{defn}[Trasformata discreta di Fourier]
   L'applicazione
   $$z = \dfrac{1}{n}V^{H} y$$
-  \`e detta \emph{trasformata discrata di Fourier} e viene
-  generamlmente indicata con la sigla DFT, mentre il vettore
+  \`e detta \emph{trasformata discreta di Fourier} e viene
+  generalmente indicata con la sigla DFT, mentre il vettore
   $z= DFT(y)$ \`e detto \emph{trasformata discreta di Fourier}
   del vettore $y$ e verifica la relazione
   \begin{equation}
@@ -331,7 +328,7 @@ termine le divisioni per $n$.
 % $$ y_{m+q} = y'_q - \omega_n^{q}y''q$$
 \paragraph{Algoritmo}
 \begin{enumerate}
-\item Si calcolano $\omega_n$ e le sue potenze con espoente
+\item Si calcolano $\omega_n$ e le sue potenze con esponente
       per $k=0, \ldots, n-1$
 \item Calcolo di $y'= IDFT(z')$ di indice pari\\
       Calcolo di $y''= IDFT(z'')$ di indice dispari
@@ -356,17 +353,22 @@ $$\quad y_p = y'_q  + \omega_n^{q} y''_q$$
 % Per le addizioni
 % Viene $A(n) =  n \log n $ \\
 Algoritmo FFT pi\`u famoso Cooley-Tuckey e Sande-Tuckey.
-Entrambi predisponono l'ordinamento di $v$.
-bit reversal.
+Entrambi predisponono l'ordinamento di $v$. \\
+
+Bit reversal.
 $$z_0z_1z_2 z_3 z_4 z_5 z_6 z_7$$
 $$z_0 z_2 z_4 z_6 \quad z_1 z_3 z_5 z_7 $$
 Permutazione di indici.
 $$z_0 z_4 z_2 z_6 \quad z_1 z_5  z_3 z_7 $$
 
 \paragraph{Applicazione: Prodotto di polinomi}
+%
+% FIXME Qui andrebbe spiegato un po' meglio come si applica effettivamente...
+% Nic
 $$
-2 u(x) = u_0 + u_1x + u_2 x^2  + \underbrace{u_3}_{0} x^{3} + \underbracket{u_4}_{0} x^{4}
-2 v(x) =  v_0 + v_1x + v_2 x^2  + \underbrace{v_3}_{0} x^{3} + \underbracket{v_4}_{0} x^{4}
+2 u(x) = u_0 + u_1x + u_2 x^2  + \underbracket{u_3}_{0} x^{3} + \underbracket{u_4}_{0} x^{4}$$
+
+$$2 v(x) =  v_0 + v_1x + v_2 x^2  + \underbracket{v_3}_{0} x^{3} + \underbracket{v_4}_{0} x^{4}
 4 z(z)
 $$
 $$
@@ -416,7 +418,7 @@ $$
 \paragraph{Altre applicazioni}
 \begin{itemize}
 \item Prodotto di interi (\`e come moltiplicare due polinomi)
-\item FFT ele matrici circolanti: vengono fuori nei modelli che
+\item FFT e le matrici circolanti: vengono fuori nei modelli che
      hanno rotazioni (immagine tomografiche)
 $$
 \begin{pmatrix}
