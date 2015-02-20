@@ -8,14 +8,14 @@ In questo repository sono raccolti gli appunti degli studenti relativi al corso 
 
 Gli appunti si riferiscono al corso tenuto nell'anno accademico 2010-2011, e sono opera di:
 * Andrea Cimino
-* Marco Cornolti
+* [Marco Cornolti](https://github.com/marcocor)
 * Emmanuel Marzini
 * Davide Mascitti
-* Lorenzo Muti
-* Marco Stronati
+* [Lorenzo Muti](https://github.com/il-lore-)
+* [Marco Stronati](https://github.com/paracetamolo)
 
 Sono stati corretti nel 2015 a cura di 
-* Nicola Corti
+* [Nicola Corti](https://github.com/cortinico)
 
 Gli appunti hanno ancora bisogno di essere corretti ed ampliati, se vuoi aiutarci pure tu, consulta la sezione **Come contribuire**.
 
@@ -36,10 +36,9 @@ Clonare il repository
 git clone https://github.com/cortinico/mno-notes.git
 ```
 
-Spostarsi nella cartella `src` ed invocare il target `all`
+Invocare lo script `compile.sh`
 ```
-cd src
-make all
+bash compile.sh
 ```
 
 ### Come contribuire
