@@ -1082,7 +1082,7 @@ $$
 0 =  \nabla p_r(x^{k}) = 
 \nabla f(x^{k}) +
 \displaystyle \sum_{i=1}^{n} 2r_k g_i^{+}(x^{k})
-\nabla g_i(x^{k}) + \displaystyle \sum_{j=1}^{p} 2r_k h_j(x^{k})
+\nabla g_i^{+}(x^{k}) + \displaystyle \sum_{j=1}^{p} 2r_k h_j(x^{k})
 \nabla h_j(x^{k})
 \end{array}
 $$
@@ -1093,7 +1093,7 @@ $$ \lambda_i^{k} =  2r_{k}g_i^{+}(x^{k}) \; i=1\ldots m
 a $x^{k}$ per il problema $(P)$ \\
  (Attenzione, le altri condizioni
 KKT, cio\`e ammisiblit\`a e complementarit\`a in genere
-non sono soddisfatte $[g_i(x^{k}) > 0 \Rightarrow \lambda_i^{k} > 0 ]$
+non sono soddisfatte $[g_i^{+}(x^{k}) > 0 \Rightarrow \lambda_i^{k} > 0 ]$
 )
 \begin{theo}
 Supponiamo che $f, g_i, h_j$ siano differenziabili
@@ -1743,7 +1743,7 @@ $$
 }
 \end{center}
 
-Condizioni KKT approssimate:  sostiusce lo 0 del complementarit\`a con 
+Condizioni KKT approssimate:  sostituisce lo 0 del complementarit\`a con 
 un $\varepsilon$.
 \begin{center}
 \fbox
@@ -1797,7 +1797,7 @@ $$
 \end{pmatrix}\; : \; \lambda, s \geq 0
 $$
 Il metodo di Newton-Raphson per la risoluzione di $F(x, S, \lambda) = 0$
-fornisce la direzione $d = (d_x, d_s, d_{\Lambda})$ che risolve il sistema
+fornisce la direzione $d = (d_x, d_s, d_{\lambda})$ che risolve il sistema
 $$(N_d) \qquad JF( x, S, \lambda) d = - F(x, S , \lambda)$$
 Se $(x,s)$ \`e ammisible per $\overline{(Primale)}$ con $s_i > 0 \; i=1\ldots n$
 e $\lambda$ \`e ammissibile per (Duale) con $\lambda_i > 0 \; i = 1\ldots n$,
@@ -1844,7 +1844,7 @@ $
 \begin{pmatrix}
   d_x \\
  d_s \\
- d_{\Lambda}
+ d_{\lambda}
 \end{pmatrix}
 $
 soddisfi la richiesta $\lambda_i' > 0, s_i' > 0 \;
@@ -1878,8 +1878,8 @@ $$
 \end{pmatrix}
 \begin{pmatrix}
  d_{x}^{k} \\
- d_{S}^{k} \\
- d_{\Lambda}^{k}
+ d_{s}^{k} \\
+ d_{\lambda}^{k}
 \end{pmatrix}
 =
 \begin{pmatrix}
