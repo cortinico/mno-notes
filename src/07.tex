@@ -378,7 +378,7 @@ $$
 dove $|| \; . \; ||'$ e $|| \; . \; ||''$ sono norme vettoriali
 rispettivamente su $\mathbb{C}^{n}$ e $\mathbb{C}^{m}$. \\ Estendiamo
 questo concetto sulla matrici $m \times n$, usando la norma 2,
-usandola in $|| \; . \; ||$ e $|| \; . \; ||''$.  Si dimostra che:
+usandola in $|| \; . \; ||'$ e $|| \; . \; ||''$.  Si dimostra che:
 $$ || A||_{2} = \sqrt{\rho(A^{H}A)}
 \qquad \text{($\rho$: raggio spettrale)}
 $$
@@ -606,7 +606,7 @@ $$
  \item $A^{H}A$: $O(n^{3})$
  \item  Fattorizzazione $QR$, costo : $mn^{2}$
 \end{itemize}
-Normalmente costa $\frac{1}{2} mn^{2}$, usando Golum costa $2mn^{2}$
+Normalmente costa $\frac{1}{2} mn^{2}$, usando Golub-Reinsch costa $2mn^{2}$
 ma \`e più stabile. (Ricontrollare tutto)  
 \end{workinprogress}
 
@@ -781,7 +781,7 @@ O
 \end{equation}
 dove $\Pi \in \mathbb{R}^{n \times n}$ \`e una matrice di
 permutazione, $U \in C^{m \times m}$ \`e una matrice unitaria ed $R_1
-\in \mathbb{C}^{m \times m}$ \`e una matrice triangolare superiore con
+\in \mathbb{C}^{n \times ndu}$ \`e una matrice triangolare superiore con
 gli elementi principali reali non negativi e ordinati in modo non
 crescente. Le condizioni imposte sull'ordinamento degli elementi
 principali di $R_1$ rendono unica questa fattorizzazione se gli
@@ -989,7 +989,7 @@ il seguente:
 \item altrimenti si calcoli
   \begin{itemize}
   \item $s_k = A^Tr_k$
-  \item $\beta_k = \dfrac{||s_k||^2}{||s_{k-1}||_2^2} \quad
+  \item $\beta_k = \dfrac{||s_k||_2^2}{||s_{k-1}||_2^2} \quad
 (\beta_0 = 0, \text{ per } k=0)$
 \item $p_k = s_k + \beta_k p_{k-1} \quad (p_0 = s_0, \text{ per } k=0)$
 \item $\alpha_k = \dfrac{||s_k||_2^2}{||Ap_k||_2^2} $
@@ -1756,7 +1756,7 @@ per il punto 1) del teorema
 A\mathbf{z} = 
 \displaystyle \sum_{i=1}^{k}
 \sigma_i \mathbf{u}_{i}(\mathbf{v}^{H}_i \mathbf{z})
-= \displaystyle \sum_{i=1}^{r+1} \sigma_i \mathbf{u_i}
+= \displaystyle \sum_{i=1}^{r+1} \sigma_i \mathbf{u}_{i}
 (\mathbf{v}_{i}^{H}\mathbf{z})
 \end{equation}
 
@@ -1799,7 +1799,7 @@ $$
 = \displaystyle \sum_{i=1}^{r+1}
 \left|
 \displaystyle \sum_{j=1}^{r+1} \alpha_j
-\mathbf{v_i}^{H} 
+\mathbf{v}_{i}^{H} 
  \mathbf{v}_{j}
 \right|^{2}
 =
