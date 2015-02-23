@@ -13,7 +13,7 @@ Analizzeremo il problema dei minimi quadrati lineari dal punto di vista
 dell'ottimizzazione. Siamo nel caso continuo non vincolato:
 è un problema quindi che rientra nella classe di problemi
 che abbiamo studiato. Analizziamone la forma:
-$$ A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^{n} \qquad
+$$ A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^{m} \qquad
  \min \{ || Ax -b ||_{2} : x \in \mathbb{R}^{n} \} $$
 Per trattare il problema, riscriviamo la funzione obiettivo:
 possiamo fare la seguente equivalenza che  agevoler\`a
@@ -260,7 +260,7 @@ una ricerca inesatta del passo.
 \item se $\nabla f(x)=0$ (il punto trovato è stazionario),
       allora STOP.
 \item altrimenti dobbiamo calcolare $d^{k}_{GN} \in \mathbb{R}^{n}$ soluzione
-      di $J_{k}^{T}J_{k}d = -J_{k}R_{k}$
+      di $J_{k}^{T}J_{k}d = -J_{k}r_{k}$
 \item calcolare $t_k > 0 $ che soddisfi le condizioni di Wolfe
 \item $x^{k+1} = x^{k} + t_k d_{GN}^{k}$
 \item $k = k+1$ e tornare a 2)
