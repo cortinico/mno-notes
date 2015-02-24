@@ -767,8 +767,8 @@ essere indicato per matrici sparse.
 %% TO REVIEW FROM HERE
 \section{Riduzione di una matrice hermitiana in forma
 tridiagonale: il metodo di Householder}
-Il metodo delle potenze \`e adatto per matrici sparse e
-si vogliono pochi autovalori. \\
+Il metodo delle potenze \`e adatto per matrici sparse e se
+si vogliono solamente pochi autovalori. \\
 Nel caso si vogliano ottenere tutti, o quasi tutti, gli autovalori
 \begin{enumerate}
 \item si trasforma $A$ in una forma $B$ più condensata (cioè con più
@@ -1526,10 +1526,10 @@ esistono delle matrici di fase $S_k$ tali che
 \begin{equation}
 % (31)
  \label{eigenvalues:20}
-\lim_{k \to \infty} S_k^{H} R_k S_{k-1} = \lim_{k \to \infty} S_{k-1} A_k S_{k-1} =T
+\lim_{k \to \infty} S_k^{H} R_k S_{k-1} = \lim_{k \to \infty} S_{k-1}^{H} A_k S_{k-1} =T
 \end{equation}
 e
-$$\lim_{k \to \infty} S_{k-1} Q_k S_k = I$$
+$$\lim_{k \to \infty} S_{k-1}^{H} Q_k S_k = I$$
 dove $T$ \`e triangolare superiore con gli elementi principali uguali a
 $\lambda_1 , \lambda_2 , \ldots,  \lambda_n$ .
  Quindi gli elementi principali di $A_k$ tendono agli autovalori di $A$. Se $A$
