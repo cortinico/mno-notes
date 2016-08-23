@@ -796,7 +796,7 @@ Le condizioni (AJO) e (CUR) unite formano le
 \begin{defn}[Condizioni di Wolfe]
 \label{defn:condizioni-wolfe} (AJO) e (CUR) rispettate entrambe:
 $$  \text{(AJO)} \qquad  f(x^{k}+ td^{k}) \leq  f(x^{k}) + c_1 t \nabla f(x^{k})^{T} d^{k}\qquad c_1\in (0,1)$$
-$$  \text{(CUR)} \qquad \quad \nabla f(x^{k} + td^{k})^{T} d^{k} \geq c_2 \nabla f(x^{k})^{T} d^{K} \qquad c_2 \in (c_1, 1)$$
+$$  \text{(CUR)} \qquad \quad \nabla f(x^{k} + td^{k})^{T} d^{k} \geq c_2 \nabla f(x^{k})^{T} d^{k} \qquad c_2 \in (c_1, 1)$$
 \end{defn}
 
 D'ora in poi quindi cercheremo un passo $t_k$ che rispetti le
@@ -1185,7 +1185,7 @@ stazionario.
 Abbiamo visto nel Teorema di convergenza del metodo Newton-Raphson
 \ref{theo:convergenza-newton-raphson} (pag. \pageref{theo:convergenza-newton-raphson}) che se $F$ (ovvero ognuna delle
 sue componenti) \`e differenziabile 2 volte con continuit\`a e data una
-soluzione $x^*$ tale che $f(x^*) =0$, allora se $JF(x^{*})$
+soluzione $x^*$ tale che $F(x^*) =0$, allora se $JF(x^{*})$
 \`e invertibile e il metodo parte da un punto $x^0$
 sufficientemente vicino alla soluzione, il metodo converge.
 
@@ -1227,7 +1227,7 @@ maniera diversa, nel contesto dell'ottimizzazione.
 $\nabla^{2} f(x^{*})$ \`e definita positiva.
 \end{enumerate} Allora, per il Teorema
 \ref{theo:convergenza-newton-raphson},
-$$\exists~ \delta > 0 \quad \text{t.c.}\quad \forall x^{0} \in B(x^{*},\delta), x^{k} \rightarrow x^{*}$$
+$$\exists~ \delta > 0 \quad \text{t.c.}\quad \forall x^{0} \in B(x^{*},\delta), x^{0} \rightarrow x^{*}$$
 (il metodo converge) e inoltre
 
 $\exists M > 0 $ per cui:
@@ -1247,7 +1247,7 @@ differenziabile 3 volte con continuit\`a.
 
 \paragraph{Propriet\`a del metodo} Facciamo alcune osservazioni su
 questo metodo, cominciando dal punto stazionario $x^*$.
-\begin{observation} Abbiamo chiesto che $f(x^*)=0$ e che $\nabla^2 f
+\begin{observation} Abbiamo chiesto che $F(x^*)=0$ e che $\nabla^2 f
 (x^*)$ sia definita positiva. Dal Teorema
 \ref{theo:punto-stazionario-minimo-locale} sappiamo che queste sono le
 condizioni sufficienti affinché $x^*$ sia un punto di minimo locale.

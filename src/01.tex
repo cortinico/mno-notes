@@ -87,14 +87,14 @@ Il determinante di una matrice triangolare A può essere calcolato come il
 prodotto dei sui elementi pricipali.
 $$ \det(A) = \Pi_{i=1}^{n} a_{ii} $$ \label{triangolari}
 
-\begin{defn}[Matrice Hessemberg]
-\label{def:hessemberg}
+\begin{defn}[Matrice Hessenberg]
+\label{def:hessenberg}
 Una matrice di Hessenberg \`e una matrice ``quasi'' triangolare. In
 particolare \`e detta \emph{superiore} se ha valori pari a zero sotto la prima
 sottodiagonale, viceversa nel caso \emph{inferiore}.
 \end{defn}
 
-\begin{example}[Hessemberg superiore e inferiore]
+\begin{example}[Hessenberg superiore e inferiore]
 \[\begin{pmatrix}
   1 & 4 & 2 & 3 \\
   3 & 4 & 1 & 7 \\
@@ -285,7 +285,7 @@ Il prodotto scalare $f(u,v)=\langle u,v \rangle$ su $\mathbb{C}^{n}$ gode
  delle seguenti proprietà:
 \begin{itemize}
 \item $f(au + bv, w) = af(u,w) + bf(v,w)$
-\item $f(u,av + bw) = af(u,w)$
+\item $f(u,av + bw) = af(u,v) + bf(u,w)$
 \item $f(u,v) = \overline{f(v,u)}$
 \item $f(u,u) \geq 0$ \quad e 
        \quad  $f(u,u) = 0 \; \Longleftrightarrow \; u = 0$
@@ -544,7 +544,7 @@ Esiste uno sviluppo analogo anche lungo la j-esima colonna.
 
 \paragraph{Matrici Hermitiane}
 \begin{property}
-Se $A$ Hermitiana allora gli autovalori sono reali $(\lambda \in \mathbb{R})$. 
+Sia $A$ Hermitiana allora gli autovalori sono reali $(\lambda \in \mathbb{R})$. 
 \end{property}
 
 \begin{thproof}
