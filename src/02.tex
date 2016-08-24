@@ -686,7 +686,7 @@ Dati $\overline{x}, h \in \mathbb{R}^n$, esiste $t \in (0,1)$ t.c.
 Notare che $x + th$ appartiene al segmento di estremi $x$ e $x+h$.
 Ricordare inoltre il caso
 $$  \Phi : \mathbb{R} \rightarrow \mathbb{R}\; : \;
-\Phi(t_1) = \Phi(t_0) +   \Phi'(\xi)(t_1 -t_1)
+\Phi(t_1) = \Phi(t_0) +   \Phi'(\xi)(t_1 -t_0)
 \text{ per un opportuno } \xi
 \in (t_1, t_0)
 (t_0,t_1) 
@@ -708,7 +708,7 @@ alla luce della propriet\`a (\ref{richiamibigi:diffimpliesderivatives})
 \begin{defn}[Iperpiano tangente]
 $h = x - \overline{x}$, $h \approx 0  
 \rightarrow f(x) \approx f(\overline{x})
- + \nabla f(\overline{x}^{T}(x - \overline{x})$
+ + \nabla f(\overline{x})^{T}(x - \overline{x})$
 \\
 Equazione iperpiano tangente al grafico di $f$ nel punto
  $(\overline{x}, f(\overline{x}))$
@@ -854,7 +854,7 @@ $$\mathbf{h}^{T} \nabla^{2} f(\overline{\mathbf{x}}) \mathbf{h} =
 {{\partial} x_i {\partial} x_j}
 (\overline{\mathbf{x}}) h_i h_j$$
 \end{defn}
-Questa formula è interssante quando $h$ è piccolo, infatti
+Questa formula è interessante quando $h$ è piccolo, infatti
 $$ 
 \mathbf{h} = \mathbf{x} - \overline{\mathbf{x}} \approx 0
 \; : \;
@@ -862,7 +862,7 @@ f(\mathbf{x}) \approx
 \underbracket{ f(\overline{\mathbf{x}}) + \nabla f(\overline{\mathbf{x}})^{T} (\mathbf{x}-\overline{\mathbf{x}}) + 
  \underbracket{\frac{1}{2}(\mathbf{x}- \overline{\mathbf{x}})^{T}\nabla^{2} f(\overline{\mathbf{x}})(\mathbf{x}-\overline{\mathbf{x}})}_{\text{funzione non lineare}}}_{\text{approssimazione quadratica di} f  \text{ vicino a } \mathbf{x}} $$
 
-Funzioni alle quali saremo molto interessanti sono le funzioni quadratiche
+Funzioni alle quali saremo molto interessati sono le funzioni quadratiche
 \begin{defn}[Funzione Quadratica]
 Siano $ Q \in \mathbb{R}^{n \times n}, b \in \mathbb{R}^{n}, c \in \mathbb{R} $.
 La funzione: $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ \`e detta
@@ -1132,7 +1132,7 @@ minimo globale.
  Sia $\overline{x} \in D$ un minimo locale. Supponiamo, per assurdo,
 che non sia un punto di minimo globale. Allora $\exists x$ tale 
 che $f(x) < f(\overline{x})$. \\
-Consideriamo il punto $x_{\lambda} = \lambda x + (1-\lambda)\hat{x}$
+Consideriamo il punto $x_{\lambda} = \lambda x + (1-\lambda)\overline{x}$
 con $\lambda \in [0,1],  x_{\lambda} \in D$\\
 Quanto vale la funzione in $x_{\lambda}$?
  $$f(x_{\lambda}) \underbracket{\leq}_{\text{convessit\`a}}  \lambda f(x) +
