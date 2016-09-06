@@ -214,7 +214,7 @@ sceglie $d^k$ t.c. $\Vert d^k \Vert = 1$.
 \centerline{\includegraphics[width=0.40\textwidth]{imgs/ricerca-monodimensionale-passo.png}}
 
 In formule:
-$$ x^{k+1} = x^{k} + t_k d^{k} \quad t_k \in \mathbb{R}^{n} \quad
+$$ x^{k+1} = x^{k} + t_k d^{k} \quad
   \begin{array}{l} t_k \in \mathbb{R}\text{ passo di spostamento} \\
 d^{k} \in \mathbb{R}^n \text{ direzione}
   \end{array}
@@ -239,7 +239,7 @@ f(\overline{x}) \neq 0$, altrimenti abbiamo gi\`a la soluzione).
 Dato che $f$ \`e differenziabile, abbiamo lo sviluppo di Taylor:
 $$f(\overline{x} +t \cdot d) -f(\overline{x}) = t \cdot \nabla f(\overline{x})^{T} \cdot d + r(td)$$
 
-Dove $r(td)$ \`e un resto tale che $\frac{r(td)}{t}$ va a $0$ per $||t|| \longrightarrow 0$. Inoltre
+Dove $r(td)$ \`e un resto tale che $\frac{r(td)}{t}$ va a $0$ per $|t| \longrightarrow 0$. Inoltre
 sappiamo che
 
 $$ \lim_{t \to 0} \frac{f(\overline{x}+td)- f(\overline{x})}{t} = \nabla f(\overline{x})^{T} \cdot d $$
@@ -972,7 +972,7 @@ $\nabla f(x^{k})$ e la direzione $d^{k}$
 
 Le tre grandezze sono legate dalla seguente equazione, che avevamo gi\`a
 incontrato in \ref{subsection:massima-decrescita}:
-$$ \nabla f(x^{k})^{T} d^{K} = || \nabla f(x^{k}) ||_2 ||d^{k}||_2 \cos \theta_{k}$$
+$$ \nabla f(x^{k})^{T} d^{k} = || \nabla f(x^{k}) ||_2 ||d^{k}||_2 \cos \theta_{k}$$
 
 Vediamo innanzi tutto un lemma (che non dimostriamo)
 \begin{lemma}
