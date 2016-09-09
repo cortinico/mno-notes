@@ -191,7 +191,7 @@ Consideriamo la relazione che lega la norma del vettore di errore al
 passo $k$ con quello al passo $k+1$ (non dimostrata)
 $$ || e_{k+1} ||_{A} \leq 
 \left( \frac{\lambda_{\max} - \lambda_{\min}}{\lambda_{\max}+
-\lambda_{\min}}\right) ||{e_{k}}||_{a}$$ dove $\lambda_{\max}$ \`e il
+\lambda_{\min}}\right) ||{e_{k}}||_{A}$$ dove $\lambda_{\max}$ \`e il
 massimo autovalore di $A$, mentre $\lambda_{\min}$ \`e l'autovalore
 minimo di $A$.  Componendo i vari errori nei singoli passi
 dell'algoritmo, arriviamo ad ottenere
@@ -368,11 +368,12 @@ e quindi, tornando alla formulazione precedente abbiamo
 $$
 -\alpha_{h}p_{h}^{T}Ar_{j}=r_{h+1}^{T} r_{j} = 0
 $$
-Ora, per quanto riguarda le direzioni, sappiamo che per $j=0..h-1$
+Ora, per quanto riguarda le direzioni, dalla formula di aggiornamento del residuo possiamo ricavare che per $j=0..h-1$
 abbiamo
 $$Ap_{j}=\frac{1}{\alpha_{j}}(r_{j} - r_{j-1})$$
 e quindi sostituendo nella nostra tesi da valutare
-$$p_{h+1}^{T}Ap_{j}=r_{h+1}^{T}Ap_{j}=-\frac{1}{\alpha_{j}}(r_{h+1}^{T}r_{j}-r_{h+1}^{T}r_{j+1})=-\frac{1}{\alpha_{j}}r_{h+1}^{T}r_{j+1}$$
+$$p_{h+1}^{T}Ap_{j}=r_{h+1}^{T}Ap_{j}+\beta_{h+1}p_{h}^{T}Ap_{j}=r_{h+1}^{T}Ap_{j}=
+\frac{1}{\alpha_{j}}(r_{h+1}^{T}r_{j}-r_{h+1}^{T}r_{j+1})=-\frac{1}{\alpha_{j}}r_{h+1}^{T}r_{j+1}$$
 Quest'ultimo passaggio vale 0 per $j=0..h-2$ per quanto ricavato
 dall'ipotesi induttiva, mentre per $j=h-1$ vale per l'ortogonalità dei
 residui successivi
@@ -407,7 +408,7 @@ modo da renderne più veloce la convergenza.
  
 \section{Metodo del gradiente coniugato con precondizionamento} Migliorare il
 condizionamento della matrice $A$ nel problema $Ax=b$ richiede
-trasformarla in una matrice più "vicina" alla matrice identità. Una
+di trasformarla in una matrice più "vicina" alla matrice identità. Una
 possibile soluzione consiste nell'usare una matrice invertibile $C$
 per trasformare il sistema come segue:
 $$
@@ -431,7 +432,7 @@ che, avendo una matrice meglio condizionata, si arrivi ad una
 soluzione del sistema $By=c$ in un numero di passi minori del problema
 iniziale malcondizionato.
 
-\chapter{Metodo del Gradiente coniugato non lineare}
+\chapter{Metodo del gradiente coniugato non lineare}
 
 \section{Considerazioni preliminari} Generalizzare il metodo del
 gradiente coniugato ai casi non lineari implica perdere tutte le
